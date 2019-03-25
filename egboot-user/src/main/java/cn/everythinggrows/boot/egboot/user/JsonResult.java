@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonResult {
-    private int code;   //返回码 非0即失败
-    private String msg; //消息提示
-    private Map<String, Object> data; //返回的数据
+    private int code;
+    //返回码 非0即失败
+    private String msg;
+    //消息提示
+    private Map<String, Object> data;
+    //返回的数据
 
     public JsonResult(){};
 
@@ -22,11 +25,11 @@ public class JsonResult {
         return success(new HashMap<>(0));
     }
     public static String success(Map<String, Object> data) {
-        return JSON.toJSONString(new JsonResult(0, "解析成功", data));
+        return JSON.toJSONString(new JsonResult(0, "success", data));
     }
 
     public static String failed() {
-        return failed("解析失败");
+        return failed("failed");
     }
     public static String failed(String msg) {
         return failed(-1, msg);
