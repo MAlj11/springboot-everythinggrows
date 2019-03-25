@@ -3,10 +3,14 @@ package cn.everythinggrows.boot.egboot.user.controller;
 
 import cn.everythinggrows.boot.egboot.user.JsonResult;
 import cn.everythinggrows.boot.egboot.user.MyException;
+import cn.everythinggrows.boot.egboot.user.dao.UserTestDao;
+import cn.everythinggrows.boot.egboot.user.model.egUser;
 import cn.everythinggrows.boot.egboot.user.service.RedisClientTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -16,12 +20,15 @@ public class TestController {
     @Autowired
     private RedisClientTemplate redisClientTemplate;
 
+    @Autowired
+    private UserTestDao userTestDao;
+
     @RequestMapping("/logtest")
     public JsonResult test(@RequestParam("extest") int extest) throws MyException {
         if(extest<5){
             throw new MyException("999","ex");
         }
-        return new JsonResult(200,"ok",new HashMap<>());
+        return new JsonResult(200,"ok",new HashMap<>(0));
     }
 
     @RequestMapping("/redistest")
@@ -34,4 +41,18 @@ public class TestController {
             return JsonResult.failed();
         }
         }
+
+    @RequestMapping("/usertest")
+    public String usertest(@RequestParam("email") String email,
+                               @RequestParam("password") String password){
+        egUser user = new egUser();
+        long uid = redisClientTemplate.incrUid();
+        user.setUid(uid);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPortrait("111.com/aaaaa");
+        user.setUsername(email);
+        int i = userTestDao.insertUser(user);
+        return JsonResult.success();
+    }
 }

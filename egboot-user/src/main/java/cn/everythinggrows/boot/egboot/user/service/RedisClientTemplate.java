@@ -7,10 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class RedisClientTemplate {
 
     private static final Logger log=LoggerFactory.getLogger(RedisClientTemplate.class);
+    public static String EG_UID_PREFIX = "eg/uid/generation";
 
     @Autowired
     private JedisClusterConfig jedisClusterConfig;
@@ -34,5 +37,37 @@ public class RedisClientTemplate {
             log.error("getRedis:{Key:"+key+"}",ex);
         }
         return str;
+    }
+
+    public boolean setex(String key,int seconds,String value){
+        String ret = jedisClusterConfig.getJedisCluster().setex(key,seconds,value);
+        if("OK".equals(ret)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Map<String,String> hgetAll(String key){
+        Map<String,String> ret = jedisClusterConfig.getJedisCluster().hgetAll(key);
+        return ret;
+    }
+
+    public boolean expire(String key,int seconds){
+        Long str = jedisClusterConfig.getJedisCluster().expire(key,seconds);
+        if(str.equals("0") || str==null)
+            return true;
+        return false;
+    }
+    public boolean hmset(String key,Map<String,String> map){
+        String str = jedisClusterConfig.getJedisCluster().hmset(key,map);
+        if("OK".equals(str))
+            return true;
+        return false;
+    }
+    public long incrUid(){
+        long uid = 0;
+        uid = jedisClusterConfig.getJedisCluster().incr(EG_UID_PREFIX);
+        return uid;
     }
 }
