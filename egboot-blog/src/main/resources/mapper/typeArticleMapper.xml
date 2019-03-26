@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TypeArticleDao">
+    <resultMap id="ResultMap" type="cn.everythinggrows.boot.egboot.blog.model.EgTypeArticle">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="articleName" property="articleName" jdbcType="VARCHAR"/>
+        <result column="coverPic" property="coverPic" jdbcType="VARCHAR"/>
+        <result column="aid" property="aid" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertArticle" parameterType="java.util.Map">
+        INSERT INTO
+        ${tableName}
+        (
+        type,articleName,coverPic,aid,uid,title
+        )
+        VALUES
+        (
+        #{type,jdbcType=INTEGER},
+        #{articleName,jdbcType=VARCHAR},
+        #{coverPic,jdbcType=VARCHAR},
+        #{aid,jdbcType=BIGINT},
+        #{uid,jdbcType=BIGINT},
+        #{title,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectArticle" parameterType="java.util.Map" resultMap="ResultMap">
+        SELECT
+        type,articleName,coverPic,aid,uid,title
+        FROM
+        ${tableName}
+    </select>
+</mapper>

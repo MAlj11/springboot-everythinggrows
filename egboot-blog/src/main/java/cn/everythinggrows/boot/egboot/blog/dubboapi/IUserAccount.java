@@ -1,7 +1,7 @@
-package cn.everythinggrows.boot.egboot.user.service;
+package cn.everythinggrows.boot.egboot.blog.dubboapi;
 
 
-import cn.everythinggrows.boot.egboot.user.model.egUser;
+import cn.everythinggrows.boot.egboot.blog.model.egUser;
 
 public interface IUserAccount {
     public String getMailVerifyAndSend(String toMail);

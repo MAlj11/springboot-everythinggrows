@@ -3,12 +3,14 @@ package cn.everythinggrows.boot.egboot.user.service;
 import cn.everythinggrows.boot.egboot.user.dao.CreateAtDao;
 import cn.everythinggrows.boot.egboot.user.dao.EmailToUidDao;
 import cn.everythinggrows.boot.egboot.user.dao.UserDao;
+import cn.everythinggrows.boot.egboot.user.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.user.model.egUser;
 import cn.everythinggrows.boot.egboot.user.model.emailUid;
 import cn.everythinggrows.boot.egboot.user.utils.UserUtils;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,7 +20,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
 
-@Service
+@Component
+@Service(version = "1.0.0")
 public class UserAccountImpl implements IUserAccount {
     public static final String EMAIL_VERIFY = "eg/email/verify/";
     public static final String UID_TOKEN = "eg/uid/token/";

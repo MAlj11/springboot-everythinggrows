@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommentDao">
+    <resultMap id="ResultMap" type="cn.everythinggrows.boot.egboot.blog.model.Comment">
+        <id column="aid" property="aid" jdbcType="BIGINT"/>
+        <result column="cid" property="cid" jdbcType="BIGINT"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="portrait" property="portrait" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="createAt" property="createAt" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insertComment" parameterType="java.util.Map">
+        INSERT INTO
+        ${tableName}
+        (
+        aid,cid,content,uid,portrait,username,createAt
+        )
+        VALUES
+        (
+        #{aid,jdbcType=BIGINT},
+        #{cid,jdbcType=BIGINT},
+        #{content,jdbcType=VARCHAR}
+        #{uid,jdbcType=BIGINT},
+        #{portrait,jdbcType=VARCHAR},
+        #{username,jdbcType=VARCHAR},
+        #{createAt,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <select id="selectComment" parameterType="java.util.Map" resultMap="ResultMap">
+        SELECT
+        aid,cid,content,uid,portrait,username,createAt
+        FROM
+         ${tableName}
+        WHERE aid = #{aid}
+    </select>
+</mapper>

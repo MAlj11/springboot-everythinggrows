@@ -1,4 +1,4 @@
-package cn.everythinggrows.boot.egboot.user.model;
+package cn.everythinggrows.boot.egboot.blog.model;
 
 import java.io.Serializable;
 

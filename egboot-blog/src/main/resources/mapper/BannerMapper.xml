@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BannerDao">
+    <resultMap id="ResultMap" type="cn.everythinggrows.boot.egboot.blog.model.Banner">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bannerPic" property="bannerPic" jdbcType="VARCHAR"/>
+        <result column="bannerTitle" property="bannerTitle" jdbcType="VARCHAR"/>
+        <result column="bannerUrl" property="bannerUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertBanner" parameterType="java.util.Map">
+        INSERT INTO
+        eg_banner
+        (
+        id,bannerPic,bannerTitle,bannerUrl
+        )
+        VALUES
+        (
+        #{id,jdbcType=INTEGER},
+        #{bannerPic,jdbcType=VARCHAR},
+        #{bannerTitle,jdbcType=VARCHAR},
+        #{bannerUrl,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectBanner" resultMap="ResultMap">
+        SELECT
+        id,bannerPic,bannerTitle,bannerUrl
+        FROM
+        eg_banner
+    </select>
+</mapper>
