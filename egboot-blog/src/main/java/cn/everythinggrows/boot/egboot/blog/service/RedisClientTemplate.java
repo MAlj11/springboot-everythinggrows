@@ -73,6 +73,15 @@ public class RedisClientTemplate {
         Set<Tuple> set = jedisClusterConfig.getJedisCluster().zrangeWithScores(key,start,end);
         return set;
     }
+
+    public Double zscore(String key,String member){
+        Double score = jedisClusterConfig.getJedisCluster().zscore(key,member);
+        return score;
+    }
+
+    public void zadd(String key, double score,String member){
+        jedisClusterConfig.getJedisCluster().zadd(key,score,member);
+    }
     public long incrUid(){
         long uid = 0;
         uid = jedisClusterConfig.getJedisCluster().incr(EG_UID_PREFIX);

@@ -2,7 +2,7 @@ package cn.everythinggrows.boot.egboot.blog.controller;
 
 
 import cn.everythinggrows.boot.egboot.blog.Utils.EgResult;
-import cn.everythinggrows.boot.egboot.blog.aop.loginRequired;
+import cn.everythinggrows.boot.egboot.blog.aop.NeedSession;
 import cn.everythinggrows.boot.egboot.blog.dao.IndexDao;
 import cn.everythinggrows.boot.egboot.blog.dao.TypeArticleDao;
 import cn.everythinggrows.boot.egboot.blog.dao.UidArticleDao;
@@ -11,6 +11,8 @@ import cn.everythinggrows.boot.egboot.blog.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egUidArticle;
 import cn.everythinggrows.boot.egboot.blog.service.RedisClientTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.Calendar;
 
 @RestController
 public class ArticleController {
+    private static Logger log = LoggerFactory.getLogger(ArticleController.class);
 
     public static final String INDEX_ARTICLE_AID = "eg/index/article/aid/";
 
@@ -31,7 +34,7 @@ public class ArticleController {
     private RedisClientTemplate redisClientTemplate;
 
     @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
-    @loginRequired
+    @NeedSession
     public EgResult InsertArticle(@RequestParam(value = "articleName",defaultValue = "") String articleName,
                                   @RequestParam(value = "content",defaultValue = "") String content,
                                   @RequestParam(value = "coverPic",defaultValue = "") String coverPic,

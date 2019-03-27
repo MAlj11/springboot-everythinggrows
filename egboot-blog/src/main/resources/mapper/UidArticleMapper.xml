@@ -11,7 +11,7 @@
         <result column="createAt" property="createAt" jdbcType="INTEGER"/>
     </resultMap>
 
-    <insert id="insertUIdArticle" parameterType="java.util.Map">
+    <insert id="insertUidArticle" parameterType="java.util.Map">
         INSERT INTO
         ${tableName}
         (

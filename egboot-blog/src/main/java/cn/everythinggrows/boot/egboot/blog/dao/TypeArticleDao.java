@@ -21,7 +21,7 @@ public class TypeArticleDao {
     public int insertUidArticle(EgTypeArticle egTypeArticle){
         Map<String,Object> dataMap = beanUtils.bean2map(egTypeArticle);
         long id = egTypeArticle.getType();
-        dataMap.put("tableName", "eg_type_article" + String.valueOf(id));
+        dataMap.put("tableName", "eg_type_article_" + String.valueOf(id));
         DatabaseType type = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(type);
         int i = blogSqlSession.insert("TypeArticleDao.insertArticle", dataMap);

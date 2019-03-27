@@ -25,7 +25,7 @@ public class UidArticleDao {
             int DBkey = DBUtils.getDBKey(id);
             DatabaseType type = DatabaseType.getType(DBkey);
             DatabaseContextHolder.setDatabaseType(type);
-            int i = blogSqlSession.insert("UidArticleDao.selectArticle", dataMap);
+            int i = blogSqlSession.insert("UidArticleDao.insertUidArticle", dataMap);
             DatabaseContextHolder.clearDatabaseType();
             return i;
     }

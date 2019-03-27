@@ -1,11 +1,14 @@
 package cn.everythinggrows.boot.egboot.blog.config;
 
+import cn.everythinggrows.boot.egboot.blog.aop.SessionAOP;
 import cn.everythinggrows.boot.egboot.blog.datasource.DatabaseType;
 import cn.everythinggrows.boot.egboot.blog.datasource.DynamicDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +26,7 @@ import java.util.Properties;
 
 @Configuration
 public class MyBatisConfig {
+    private static Logger log = LoggerFactory.getLogger(MyBatisConfig.class);
      @Autowired
      private Environment env;
 
@@ -117,6 +121,27 @@ public class MyBatisConfig {
         */
       @Bean
      @Primary
+//      public DynamicDataSource dataSource()  throws Exception {
+//
+//          Map<Object, Object> targetDataSources = new HashMap<>();
+//          String jdbcNames=env.getProperty("jdbc.names");
+//          for (String s:jdbcNames.split(",")) {
+//              log.info("进行数据源配置：{}============================",s);
+//              Properties props = new Properties();
+//              props.put("driverClassName", env.getProperty("jdbc"+s+".driverClassName"));
+//              props.put("url", env.getProperty("jdbc"+s+".url"));
+//              props.put("username", env.getProperty("jdbc"+s+".username"));
+//              props.put("password", env.getProperty("jdbc"+s+".password"));
+//              targetDataSources.put(s,DruidDataSourceFactory.createDataSource(props) );
+//          }
+//          DynamicDataSource dataSource = new DynamicDataSource();
+//          dataSource.setTargetDataSources(targetDataSources);
+//          // 该方法是AbstractRoutingDataSource的方法
+//          dataSource.setDefaultTargetDataSource(targetDataSources.get("1"));
+//          // 默认的datasource设置为myTestDbDataSource
+//          return  dataSource;
+//      }
+
       public DynamicDataSource dataSource(@Qualifier("everythinggrow0DataSource") DataSource everythinggrow0DataSource,
                                           @Qualifier("everythinggrow1DataSource") DataSource everythinggrow1DataSource,
                                           @Qualifier("everythinggrow2DataSource") DataSource everythinggrow2DataSource,

@@ -2,7 +2,7 @@ package cn.everythinggrows.boot.egboot.blog.controller;
 
 
 import cn.everythinggrows.boot.egboot.blog.Utils.EgResult;
-import cn.everythinggrows.boot.egboot.blog.aop.loginRequired;
+import cn.everythinggrows.boot.egboot.blog.aop.NeedSession;
 import cn.everythinggrows.boot.egboot.blog.model.Comment;
 import cn.everythinggrows.boot.egboot.blog.service.CommentService;
 import com.google.common.collect.Maps;
@@ -25,7 +25,7 @@ public class CommentController {
         return EgResult.ok(ret);
     }
 
-    @loginRequired
+    @NeedSession
     @RequestMapping(value = "/blog/comment/insert")
     public EgResult insertComment(@RequestParam(value = "aid") long aid,
                                                             @RequestParam(value = "contnet")String content,
