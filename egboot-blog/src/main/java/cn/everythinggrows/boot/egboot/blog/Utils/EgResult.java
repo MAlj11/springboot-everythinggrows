@@ -40,6 +40,10 @@ public class EgResult {
         return new EgResult(status,msg,null);
     }
 
+    public static EgResult systemError(){
+        return EgResult.error(100000,"system error");
+    }
+
     public EgResult(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;

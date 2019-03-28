@@ -1,6 +1,8 @@
 package cn.everythinggrows.boot.egboot.blog.model;
 
-public class Banner {
+import java.io.Serializable;
+
+public class Banner implements Serializable {
     private Integer id;
     private String bannerPic;
     private String bannerTitle;

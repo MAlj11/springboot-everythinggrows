@@ -1,6 +1,8 @@
 package cn.everythinggrows.boot.egboot.blog.model;
 
-public class egArticle {
+import java.io.Serializable;
+
+public class egArticle implements Serializable {
     private Long id;
     private String articleName;
     private Long uid;

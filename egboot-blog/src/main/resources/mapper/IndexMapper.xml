@@ -38,4 +38,11 @@
         ${tableName}
         WHERE id=${id};
     </select>
+
+    <delete id="deleteArticle" parameterType="java.util.Map">
+        DELETE FROM
+        ${tableName}
+        WHERE
+        id = ${id};
+    </delete>
 </mapper>

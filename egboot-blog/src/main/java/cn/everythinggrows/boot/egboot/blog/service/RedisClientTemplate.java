@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Tuple;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class RedisClientTemplate {
         return false;
     }
 
-    public Object getRedis(String key){
+    public String getRedis(String key){
         String str=null;
         try {
             str=jedisClusterConfig.getJedisCluster().get(key);
@@ -40,6 +41,19 @@ public class RedisClientTemplate {
             log.error("getRedis:{Key:"+key+"}",ex);
         }
         return str;
+    }
+
+    public byte[] getRedisByte(byte[] key){
+        byte[] ret = jedisClusterConfig.getJedisCluster().get(key);
+        return ret;
+    }
+
+    public void setRedisByte(byte[] key,byte[] value){
+        jedisClusterConfig.getJedisCluster().set(key,value);
+    }
+
+    public void delRedisByte(byte[] key){
+        jedisClusterConfig.getJedisCluster().del(key);
     }
 
     public boolean setex(String key,int seconds,String value){
@@ -82,6 +96,25 @@ public class RedisClientTemplate {
     public void zadd(String key, double score,String member){
         jedisClusterConfig.getJedisCluster().zadd(key,score,member);
     }
+
+    public void lpush(String key,String value){
+        jedisClusterConfig.getJedisCluster().lpush(key,value);
+    }
+
+    public List<String> lrange(String key,long start,long end){
+        List<String> list = jedisClusterConfig.getJedisCluster().lrange(key,start,end);
+        return list;
+    }
+
+    public void lrem(String key,long count,String value){
+        jedisClusterConfig.getJedisCluster().lrem(key,count,value);
+    }
+
+
+    /**
+     * id生成
+     * @return
+     */
     public long incrUid(){
         long uid = 0;
         uid = jedisClusterConfig.getJedisCluster().incr(EG_UID_PREFIX);

@@ -28,8 +28,8 @@ public class CommentController {
     @NeedSession
     @RequestMapping(value = "/blog/comment/insert")
     public EgResult insertComment(@RequestParam(value = "aid") long aid,
-                                                            @RequestParam(value = "contnet")String content,
-                                                            @RequestHeader(value = "x-eg-session") String session){
+                                   @RequestParam(value = "contnet")String content,
+                                    @RequestHeader(value = "x-eg-session") String session){
         long uid = getUid(session);
         int i = commentService.insertComment(aid,uid,content);
         if(i>0){

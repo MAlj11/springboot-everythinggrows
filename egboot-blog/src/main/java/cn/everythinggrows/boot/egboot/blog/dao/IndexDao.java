@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Repository
@@ -35,7 +36,6 @@ public class IndexDao {
 
     public int insertArticle(egArticle egArticle){
         Map<String,Object> dataMap = beanUtils.bean2map(egArticle);
-        log.info("dataMap:{}==================================",dataMap);
         long id = egArticle.getId();
         dataMap.put("tableName", "eg_article_" + DBUtils.getTableKey(id));
         int DBkey = DBUtils.getDBKey(id);
@@ -44,6 +44,18 @@ public class IndexDao {
         log.info("tableName:{}============================================",dataMap.get("tableName"));
         log.info("databaseType:{}=====================================================",type);
         int i = blogSqlSession.insert("blogIndexDao.insertArticle", dataMap);
+        DatabaseContextHolder.clearDatabaseType();
+        return i;
+    }
+
+    public int deleteArticle(long aid){
+        Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("tableName", "eg_article_" + DBUtils.getTableKey(aid));
+        dataMap.put("id",aid);
+        int dbKey = DBUtils.getDBKey(aid);
+        DatabaseType type = DatabaseType.getType(dbKey);
+        DatabaseContextHolder.setDatabaseType(type);
+        int i = blogSqlSession.delete("blogIndexDao.deleteArticle",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

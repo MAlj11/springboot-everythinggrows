@@ -1,6 +1,8 @@
 package cn.everythinggrows.boot.egboot.blog.model;
 
-public class EgTypeArticle {
+import java.io.Serializable;
+
+public class EgTypeArticle implements Serializable {
     private Long id;
     private Integer type;
     private String articleName;
@@ -76,5 +78,17 @@ public class EgTypeArticle {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "EgTypeArticle{" +
+                "id=" + id +
+                ", type=" + type +
+                ", articleName='" + articleName + '\'' +
+                ", coverPic='" + coverPic + '\'' +
+                ", aid=" + aid +
+                ", uid=" + uid +
+                ", title='" + title + '\'' +
+                ", typeString='" + typeString + '\'' +
+                '}';
+    }
 }

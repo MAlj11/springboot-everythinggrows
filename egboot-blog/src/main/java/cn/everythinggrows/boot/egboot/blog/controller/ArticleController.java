@@ -6,10 +6,11 @@ import cn.everythinggrows.boot.egboot.blog.aop.NeedSession;
 import cn.everythinggrows.boot.egboot.blog.dao.IndexDao;
 import cn.everythinggrows.boot.egboot.blog.dao.TypeArticleDao;
 import cn.everythinggrows.boot.egboot.blog.dao.UidArticleDao;
-import cn.everythinggrows.boot.egboot.blog.event.IndexArticleEvent;
+import cn.everythinggrows.boot.egboot.blog.event.ArticleList;
 import cn.everythinggrows.boot.egboot.blog.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egUidArticle;
+import cn.everythinggrows.boot.egboot.blog.service.IndexService;
 import cn.everythinggrows.boot.egboot.blog.service.RedisClientTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,6 @@ import java.util.Calendar;
 public class ArticleController {
     private static Logger log = LoggerFactory.getLogger(ArticleController.class);
 
-    public static final String INDEX_ARTICLE_AID = "eg/index/article/aid/";
-
     @Autowired
     private IndexDao indexDao;
     @Autowired
@@ -32,6 +31,8 @@ public class ArticleController {
     private TypeArticleDao typeArticleDao;
     @Autowired
     private RedisClientTemplate redisClientTemplate;
+    @Autowired
+    private ArticleList articleList;
 
     @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
     @NeedSession
@@ -79,9 +80,28 @@ public class ArticleController {
         egTypeArticle.setTitle(title);
         typeArticleDao.insertUidArticle(egTypeArticle);
 
-        //增加文章事件
-        IndexArticleEvent.IndexArticleScore(aid,1);
+        //将文章id插入redis
+        articleList.insertArtilceListRedis(String.valueOf(aid));
+        redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
+        redisClientTemplate.delRedisByte(IndexService.TYPE_ARTICLE_CACHE.getBytes());
         return EgResult.ok();
+    }
+
+
+
+    @RequestMapping(value = "/blog/article/delete/{aid}")
+    @NeedSession
+    public EgResult deleteArticle(@PathVariable(value = "aid") long aid){
+       int i = indexDao.deleteArticle(aid);
+       if(i>0){
+           articleList.deleteArticle(aid);
+           redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
+           redisClientTemplate.delRedisByte(IndexService.TYPE_ARTICLE_CACHE.getBytes());
+           return EgResult.ok();
+       }else{
+           return EgResult.systemError();
+       }
+
     }
 
     public long getUid(String session){
