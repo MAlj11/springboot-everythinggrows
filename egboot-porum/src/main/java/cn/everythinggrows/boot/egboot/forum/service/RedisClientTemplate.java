@@ -2,6 +2,7 @@ package cn.everythinggrows.boot.egboot.forum.service;
 
 
 import cn.everythinggrows.boot.egboot.forum.config.JedisClusterConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class RedisClientTemplate {
     private static final Logger log=LoggerFactory.getLogger(RedisClientTemplate.class);
     public static String EG_UID_PREFIX = "eg/uid/generation";
     public static String EG_AID_PREFIX = "eg/aid/generation";
+    public static final String EG_TID_PREFIX = "eg/tid/generation";
 
     @Autowired
     private JedisClusterConfig jedisClusterConfig;
@@ -135,5 +137,20 @@ public class RedisClientTemplate {
         long aid = 0;
         aid = jedisClusterConfig.getJedisCluster().incr(EG_AID_PREFIX);
         return aid;
+    }
+
+    public long tidGeneration(){
+        long tid = 0;
+        tid = jedisClusterConfig.getJedisCluster().incr(EG_TID_PREFIX);
+        return tid;
+    }
+
+    public long getTidNotIncr(){
+        long tid = 0;
+        String tidStr = jedisClusterConfig.getJedisCluster().get(EG_TID_PREFIX);
+        if(!StringUtils.isEmpty(tidStr)) {
+            tid = Long.parseLong(tidStr);
+        }
+        return tid;
     }
 }

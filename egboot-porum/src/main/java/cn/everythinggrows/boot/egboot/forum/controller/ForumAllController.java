@@ -5,6 +5,7 @@ import cn.everythinggrows.boot.egboot.forum.aop.NeedSession;
 import cn.everythinggrows.boot.egboot.forum.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.forum.model.egUser;
 import cn.everythinggrows.boot.egboot.forum.service.ForumAllService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ForumAllController {
     @Autowired
     private ForumAllService forumAllService;
-    @Autowired
+    @Reference(version = "1.0.0")
     private IUserAccount iUserAccount;
 
     @Value("BASE_URL_SEARCH")
@@ -58,7 +59,7 @@ public class ForumAllController {
     @NeedSession
     @RequestMapping(value = "/forum/index/insert")
     public EgResult insertTopic(@RequestParam(value = "content") String content,
-                           @RequestHeader(value = "EG-SESSION") String session){
+                           @RequestHeader(value = "x-eg-session") String session){
         egUser user = iUserAccount.getUser(getUid(session));
         int i = forumAllService.insertTopic(user,content);
         if(i<=0){

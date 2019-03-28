@@ -2,7 +2,6 @@ package cn.everythinggrows.boot.egboot.forum.service;
 
 
 import cn.everythinggrows.boot.egboot.forum.Utils.EgResult;
-import cn.everythinggrows.boot.egboot.forum.Utils.idGeneration;
 import cn.everythinggrows.boot.egboot.forum.dao.ForumAllDao;
 import cn.everythinggrows.boot.egboot.forum.model.Topic;
 import cn.everythinggrows.boot.egboot.forum.model.TopicIndex;
@@ -12,7 +11,6 @@ import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.Calendar;
 import java.util.List;
@@ -31,12 +29,12 @@ public class ForumAllService {
 
 
     public EgResult getForumAll(int perPage, int PageSize){
-      long tid = idGeneration.getTidNotIncr();
+      long tid = redisClientTemplate.getTidNotIncr();
       long minId = tid - (perPage - 1) * PageSize;
       long maxId = tid - (PageSize - 1);
       List<TopicIndex> topicIndices = Lists.newArrayList();
       TopicIndex topicIndex = new TopicIndex();
-      for(long i=minId;i<=maxId;i++){
+      for(long i=maxId;i>=minId;i--){
           String key = FORUM_TOPIC_INDEX + "/" + String.valueOf(i);
           String content = redisClientTemplate.hget(key,"content");
           String createAt = redisClientTemplate.hget(key,"createAt");
@@ -63,7 +61,7 @@ public class ForumAllService {
 
 
     public int insertTopic(egUser user, String content){
-       long tid = idGeneration.getTid();
+       long tid = redisClientTemplate.tidGeneration();
         Topic topic = new Topic();
         topic.setTid(tid);
         topic.setContent(content);
