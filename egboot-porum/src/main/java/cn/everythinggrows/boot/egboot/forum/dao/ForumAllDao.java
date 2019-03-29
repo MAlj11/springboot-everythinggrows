@@ -9,6 +9,7 @@ import cn.everythinggrows.boot.egboot.forum.model.Topic;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +18,9 @@ import java.util.Map;
 
 @Repository
 public class ForumAllDao {
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(ForumAllDao.class);
     @Autowired
     private SqlSessionTemplate forumSqlSession;
-
-
     /**
      * 分库分表查表（暂废）
      * @param limit
@@ -38,11 +38,12 @@ public class ForumAllDao {
     public int insertTopic(Topic topic){
         Map<String,Object> dataMap = beanUtils.bean2map(topic);
         dataMap.put("tableName", "eg_topic_" + DBUtils.getTableKey(topic.getTid()));
-        dataMap.put("id",topic.getTid());
         int DBkey = DBUtils.getDBKey(topic.getTid());
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = forumSqlSession.insert("ForumAllDao.insertTopic");
+        log.info("tablename:{}",dataMap.get("tableName"));
+        log.info("database:{}",type);
+        int i = forumSqlSession.insert("ForumAllDao.insertTopic",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

@@ -11,6 +11,7 @@
         <result column="createAt" property="createAt" jdbcType="INTEGER"/>
     </resultMap>
 
+    <!--{extend=, uid=12, portrait=portrait, content=topic1, createAt=2019320, tid=3, username=MA}-->
     <insert id="insertTopic" parameterType="java.util.Map">
         INSERT INTO
         ${tableName}
@@ -20,7 +21,7 @@
         VALUES
         (
         #{tid,jdbcType=BIGINT},
-        #{content,jdbcType=VARCHAR}
+        #{content,jdbcType=VARCHAR},
         #{uid,jdbcType=BIGINT},
         #{username,jdbcType=VARCHAR},
         #{portrait,jdbcType=VARCHAR},

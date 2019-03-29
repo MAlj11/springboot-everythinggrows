@@ -7,6 +7,7 @@ import cn.everythinggrows.boot.egboot.forum.datasource.DatabaseType;
 import cn.everythinggrows.boot.egboot.forum.model.TopicDetail;
 import com.google.common.collect.Maps;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Repository
 public class Topicdao {
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(Topicdao.class);
       @Autowired
       private SqlSessionTemplate topicSqlSession;
 
@@ -25,6 +27,8 @@ public class Topicdao {
         int DBkey = DBUtils.getDBKey(tid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
+        log.info("tablename:{}",dataMap.get("tableName"));
+        log.info("database:{}",type);
         int i = topicSqlSession.update("TopicDetailDao.createTable",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;

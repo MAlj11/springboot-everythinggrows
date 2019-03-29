@@ -11,5 +11,7 @@ public interface IUserAccount {
     public String login(egUser user);
 
     public egUser getUser(long uid);
+
+    public String dubbotest(String str);
 }
 

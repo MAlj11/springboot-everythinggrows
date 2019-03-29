@@ -2,24 +2,18 @@ package cn.everythinggrows.boot.egboot.forum.controller;
 
 import cn.everythinggrows.boot.egboot.forum.Utils.EgResult;
 import cn.everythinggrows.boot.egboot.forum.aop.NeedSession;
-import cn.everythinggrows.boot.egboot.forum.dubboapi.IUserAccount;
-import cn.everythinggrows.boot.egboot.forum.model.egUser;
 import cn.everythinggrows.boot.egboot.forum.service.ForumAllService;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class ForumAllController {
+    private static Logger log = LoggerFactory.getLogger(ForumAllController.class);
     @Autowired
     private ForumAllService forumAllService;
-    @Reference(version = "1.0.0")
-    private IUserAccount iUserAccount;
-
-    @Value("BASE_URL_SEARCH")
-    String BASE_URL_SEARCH;
 
     /**
      * 查询论坛所有话题
@@ -60,8 +54,8 @@ public class ForumAllController {
     @RequestMapping(value = "/forum/index/insert")
     public EgResult insertTopic(@RequestParam(value = "content") String content,
                            @RequestHeader(value = "x-eg-session") String session){
-        egUser user = iUserAccount.getUser(getUid(session));
-        int i = forumAllService.insertTopic(user,content);
+        long uid = getUid(session);
+        int i = forumAllService.insertTopic(uid,content);
         if(i<=0){
             return EgResult.systemError();
         }

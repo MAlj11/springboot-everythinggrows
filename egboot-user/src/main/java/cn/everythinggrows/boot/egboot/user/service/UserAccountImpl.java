@@ -1,13 +1,13 @@
 package cn.everythinggrows.boot.egboot.user.service;
 
-import cn.everythinggrows.boot.egboot.user.dao.CreateAtDao;
-import cn.everythinggrows.boot.egboot.user.dao.EmailToUidDao;
 import cn.everythinggrows.boot.egboot.user.dao.UserDao;
 import cn.everythinggrows.boot.egboot.user.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.user.model.egUser;
-import cn.everythinggrows.boot.egboot.user.model.emailUid;
+import cn.everythinggrows.boot.egboot.user.utils.EgResult;
 import cn.everythinggrows.boot.egboot.user.utils.UserUtils;
 import com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
@@ -20,9 +20,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
 
-@Component
 @Service(version = "1.0.0")
+@Component
 public class UserAccountImpl implements IUserAccount {
+    private static Logger log = LoggerFactory.getLogger(UserAccountImpl.class);
+
     public static final String EMAIL_VERIFY = "eg/email/verify/";
     public static final String UID_TOKEN = "eg/uid/token/";
     public static final String USER_DETAIL = "eg/user/detail/uid/";
@@ -30,10 +32,6 @@ public class UserAccountImpl implements IUserAccount {
     private RedisClientTemplate redisClientTemplate;
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private CreateAtDao createAtDao;
-    @Autowired
-    private EmailToUidDao emailToUidDao;
 
 //    @Value("${portraitList}")
 //    String portraitList;
@@ -85,7 +83,7 @@ public class UserAccountImpl implements IUserAccount {
     }
 
     @Override
-    public String ICreateUser(egUser user, String verfity) {
+    public EgResult ICreateUser(egUser user, String verfity) {
         long uid = redisClientTemplate.incrUid();
         if(UserUtils.isOffcialUid(uid)){
             uid = redisClientTemplate.incrUid();
@@ -98,42 +96,37 @@ public class UserAccountImpl implements IUserAccount {
             redisVerify = "";
         }
         if(!redisVerify.equals(verfity)){
-            return "10002";
+            return EgResult.error(10002,"vertify is error");
         }
-        int hashEmail = user.getEmail().hashCode();
-        emailUid emailUid = new emailUid();
-        emailUid.setHashid((long) hashEmail);
-        emailUid.setEmail(user.getEmail());
-        emailUid.setUid(uid);
         int time = (int)System.currentTimeMillis()/1000;
+        user.setCreateAt(String.valueOf(time));
         int i = userDao.insertUser(user);
-        int j = createAtDao.insertCreateAt(user.getUid(),time);
-        int m = emailToUidDao.insertEmailUid(emailUid);
-        if(i > 0 && j > 0 && m > 0){
+        Map<String,String> redisData = new HashMap<>();
+        redisData.put("password",user.getPassword());
+        redisData.put("uid",String.valueOf(uid));
+        redisClientTemplate.hmset(user.getEmail(),redisData);
+        if(i > 0){
             String loRet = login(user);
-            return loRet;
+            Map<String,Object> data = new HashMap<>();
+            data.put("token",loRet);
+            return EgResult.ok(data);
         }else {
-            return "10003";
+            return EgResult.systemError();
         }
     }
 
     @Override
     public String login(egUser user) {
-        Long uid = user.getUid();
-        if(uid == null || uid.equals(0L)){
-            String email = user.getEmail();
-            long hashEmail = (long)email.hashCode();
-            emailUid emailUid = emailToUidDao.selectEmailUid(hashEmail);
-            uid = emailUid.getUid();
-        }
-        egUser user1 = userDao.selectEgUser(uid);
-        String password = user1.getPassword();
-        if(!password.equals(user.getPassword())){
-            return "100001";
+        String email = user.getEmail();
+        Map<String,String> dataMap = redisClientTemplate.hgetAll(email);
+        String redisPassword = dataMap.get("password");
+        long uid = Long.parseLong(dataMap.get("uid"));
+        if(!user.getPassword().equals(redisPassword)){
+            return "100004";
         }
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String token = String.valueOf(uid) + ";" + uuid;
-        String key = UID_TOKEN + user1.getEmail();
+        String key = UID_TOKEN + email;
         redisClientTemplate.setex(key,7*24*60*60,token);
         return token;
     }
@@ -151,25 +144,38 @@ public class UserAccountImpl implements IUserAccount {
     public egUser getUser(long uid){
         String key = USER_DETAIL + String.valueOf(uid);
         Map<String,String> value = redisClientTemplate.hgetAll(key);
-        egUser user = null;
-        if(value == null) {
+        log.info("value:{}..............................................................",value);
+        egUser user = new egUser();
+        if(value == null || value.isEmpty()) {
            user = userDao.selectEgUser(uid);
-           Map<String,String> redis = Maps.newHashMap();
-           redis.put("uid",String.valueOf(user.getUid()));
-           redis.put("username",user.getUsername());
-           redis.put("password",user.getPassword());
-           redis.put("email",user.getEmail());
-           redis.put("portrait",user.getPortrait());
-           redisClientTemplate.hmset(key,redis);
-           redisClientTemplate.expire(key,5*60);
+           log.info("user:{}",user);
+           if(user != null) {
+               Map<String, String> redis = Maps.newHashMap();
+               redis.put("uid", String.valueOf(user.getUid()));
+               redis.put("username", user.getUsername()==null?"":user.getUsername());
+               redis.put("password", user.getPassword()==null?"":user.getPassword());
+               redis.put("email", user.getEmail()==null?"":user.getEmail());
+               redis.put("portrait", user.getPortrait()==null?"":user.getPortrait());
+               redis.put("createAt", user.getCreateAt()==null?"":user.getCreateAt());
+               redis.put("extend", user.getExtend()==null?"":user.getExtend());
+               redisClientTemplate.hmset(key, redis);
+               redisClientTemplate.expire(key, 5 * 60);
+           }
            return user;
         }
         user.setUid(uid);
-        user.setUsername(value.get("uid"));
         user.setUsername(value.get("username"));
         user.setPassword(value.get("password"));
         user.setEmail(value.get("email"));
         user.setPortrait(value.get("portrait"));
+        user.setCreateAt(value.get("createAt"));
+        user.setExtend(value.get("extend"));
         return user;
+    }
+
+    @Override
+    public String dubbotest(String str) {
+        log.info("dubboTest:{}=======================================================================",str);
+        return "ok";
     }
 }

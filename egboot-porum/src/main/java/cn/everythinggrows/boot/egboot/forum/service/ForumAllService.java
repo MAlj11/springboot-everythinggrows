@@ -9,6 +9,7 @@ import cn.everythinggrows.boot.egboot.forum.model.egUser;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @Service
 public class ForumAllService {
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(ForumAllService.class);
     public static final String FORUM_TOPIC_INDEX = "eg/forum/topic/index/tid";
 
     @Autowired
@@ -26,6 +28,8 @@ public class ForumAllService {
     private TopicService topicService;
     @Autowired
     private RedisClientTemplate redisClientTemplate;
+    @Autowired
+    private HttpRequestToUser httpRequestToUser;
 
 
     public EgResult getForumAll(int perPage, int PageSize){
@@ -60,8 +64,9 @@ public class ForumAllService {
     }
 
 
-    public int insertTopic(egUser user, String content){
-       long tid = redisClientTemplate.tidGeneration();
+    public int insertTopic(long uid, String content){
+        egUser user = httpRequestToUser.getUser(uid);
+        long tid = redisClientTemplate.tidGeneration();
         Topic topic = new Topic();
         topic.setTid(tid);
         topic.setContent(content);
@@ -79,6 +84,7 @@ public class ForumAllService {
         topic.setCreateAt(createAt);
         int i = forumAllDao.insertTopic(topic);
         int j = topicService.createTable(tid);
+        log.info("i:{},j:{}=============================================>",i,j);
         int ret = 0;
         if(i > 0 && j > 0){
             ret = 1;
