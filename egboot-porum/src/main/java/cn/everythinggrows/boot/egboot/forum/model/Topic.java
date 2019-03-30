@@ -64,4 +64,17 @@ public class Topic {
     public void setCreateAt(Integer createAt) {
         this.createAt = createAt;
     }
+
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "tid=" + tid +
+                ", content='" + content + '\'' +
+                ", uid=" + uid +
+                ", username='" + username + '\'' +
+                ", portrait='" + portrait + '\'' +
+                ", extend='" + extend + '\'' +
+                ", createAt=" + createAt +
+                '}';
+    }
 }

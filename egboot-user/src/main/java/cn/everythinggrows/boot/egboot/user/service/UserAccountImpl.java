@@ -98,7 +98,7 @@ public class UserAccountImpl implements IUserAccount {
         if(!redisVerify.equals(verfity)){
             return EgResult.error(10002,"vertify is error");
         }
-        int time = (int)System.currentTimeMillis()/1000;
+        int time = (int)(System.currentTimeMillis()/1000);
         user.setCreateAt(String.valueOf(time));
         int i = userDao.insertUser(user);
         Map<String,String> redisData = new HashMap<>();

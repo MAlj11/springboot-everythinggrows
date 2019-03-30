@@ -23,12 +23,12 @@ public class Topicdao {
     public int createTopicDetailTable(long tid){
         Map<String,Object> dataMap = Maps.newHashMap();
         dataMap.put("tid",tid);
-        dataMap.put("tableName", "eg_topic_detail_" + DBUtils.getTableKey(tid));
+        dataMap.put("tableName", "eg_topic_detail_" + String.valueOf(tid));
         int DBkey = DBUtils.getDBKey(tid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        log.info("tablename:{}",dataMap.get("tableName"));
-        log.info("database:{}",type);
+        log.info("eg_topic_detail_tablename:{}",dataMap.get("tableName"));
+        log.info("eg_topic_detail_database:{}",type);
         int i = topicSqlSession.update("TopicDetailDao.createTable",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
@@ -65,7 +65,7 @@ public class Topicdao {
         int DBkey = DBUtils.getDBKey(topicDetail.getTid());
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = topicSqlSession.insert("TopicDetailDao.insertTopicDetail");
+        int i = topicSqlSession.insert("TopicDetailDao.insertTopicDetail",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }
@@ -77,7 +77,7 @@ public class Topicdao {
         int DBkey = DBUtils.getDBKey(tid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = topicSqlSession.delete("TopicDetailDao.deleteTopicDetail");
+        int i = topicSqlSession.delete("TopicDetailDao.deleteTopicDetail",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

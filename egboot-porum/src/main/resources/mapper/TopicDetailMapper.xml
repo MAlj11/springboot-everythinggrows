@@ -16,20 +16,20 @@
     </resultMap>
 
     <update id="createTable" parameterType="java.util.Map">
-        CREATE TABLE ${tableName} (
-            `id` bigint(20) NOT NULL AUTO_INCREMENT,
-            `tid` bigint(20) DEFAULT NULL,
-            `content` varchar(500) DEFAULT NULL,
-            `toUid` bigint(20) DEFAULT NULL,
-            `toUsername` varchar(50) DEFAULT NULL,
-            `toPortrait` varchar(50) DEFAULT NULL,
-            `uid` bigint(20) DEFAULT NULL,
-            `username` varchar(50) DEFAULT NULL,
-            `portrait` varchar(50) DEFAULT NULL,
-            `extend` varchar(100) DEFAULT NULL,
-            `createAt` int(11) DEFAULT NULL,
-            PRIMARY KEY (`id`)
-             )
+          CREATE TABLE ${tableName} (
+         `id` bigint(20) NOT NULL AUTO_INCREMENT,
+         `tid` bigint(20) DEFAULT NULL,
+         `content` varchar(500) DEFAULT NULL,
+         `toUid` bigint(20) DEFAULT NULL,
+         `toUsername` varchar(50) DEFAULT NULL,
+         `toPortrait` varchar(50) DEFAULT NULL,
+         `uid` bigint(20) DEFAULT NULL,
+         `username` varchar(50) DEFAULT NULL,
+         `portrait` varchar(50) DEFAULT NULL,
+         `extend` varchar(100) DEFAULT NULL,
+         `createAt` int(11) DEFAULT NULL,
+          PRIMARY KEY (`id`)
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
     </update>
 
     <update id="dropTable" parameterType="java.util.Map">
@@ -47,7 +47,7 @@
         (
         #{id,jdbcType=BIGINT},
         #{tid,jdbcType=BIGINT},
-        #{content,jdbcType=VARCHAR}
+        #{content,jdbcType=VARCHAR},
         #{toUid,jdbcType=BIGINT},
         #{toUsername,jdbcType=VARCHAR},
         #{toPortrait,jdbcType=VARCHAR},

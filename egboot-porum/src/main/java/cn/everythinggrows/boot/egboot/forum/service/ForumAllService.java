@@ -1,6 +1,7 @@
 package cn.everythinggrows.boot.egboot.forum.service;
 
 
+import cn.everythinggrows.boot.egboot.forum.Utils.DateUtils;
 import cn.everythinggrows.boot.egboot.forum.Utils.EgResult;
 import cn.everythinggrows.boot.egboot.forum.dao.ForumAllDao;
 import cn.everythinggrows.boot.egboot.forum.model.Topic;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,23 +35,31 @@ public class ForumAllService {
 
     public EgResult getForumAll(int perPage, int PageSize){
       long tid = redisClientTemplate.getTidNotIncr();
-      long minId = tid - (perPage - 1) * PageSize;
-      long maxId = tid - (PageSize - 1);
-      List<TopicIndex> topicIndices = Lists.newArrayList();
-      TopicIndex topicIndex = new TopicIndex();
+      long maxId = tid - (perPage - 1) * PageSize;
+      long minId = tid - (PageSize - 1);
+      log.info("max{},min{}",maxId,minId);
+      List<TopicIndex> topicIndices = new ArrayList<>();
       for(long i=maxId;i>=minId;i--){
+          log.info("i:{}",i);
+          TopicIndex topicIndex = new TopicIndex();
           String key = FORUM_TOPIC_INDEX + "/" + String.valueOf(i);
+          log.info("key:{}",key);
           String content = redisClientTemplate.hget(key,"content");
           String createAt = redisClientTemplate.hget(key,"createAt");
+          log.info("content:{},createAt:{}",content,createAt);
           if(StringUtils.isEmpty(content) || StringUtils.isEmpty(createAt)){
               Topic topic = forumAllDao.getTopicOne(i);
-              topicIndex.setTid(i);
-              topicIndex.setContent(topic.getContent());
-              topicIndex.setCreateAt(topic.getCreateAt());
-              topicIndices.add(topicIndex);
-              redisClientTemplate.hset(key,"tid",String.valueOf(tid));
-              redisClientTemplate.hset(key,"content",content);
-              redisClientTemplate.hset(key,"createAt",String.valueOf(topic.getCreateAt()));
+              log.info("topic:{}",topic);
+              if(topic != null) {
+                  topicIndex.setTid(i);
+                  topicIndex.setContent(topic.getContent());
+                  topicIndex.setCreateAt(topic.getCreateAt());
+                  topicIndices.add(topicIndex);
+                  redisClientTemplate.hset(key, "tid", String.valueOf(i));
+                  redisClientTemplate.hset(key, "content", content==null?"":content);
+                  redisClientTemplate.hset(key, "createAt", String.valueOf(topic.getCreateAt())==null?"":String.valueOf(topic.getCreateAt()));
+                  redisClientTemplate.expire(key,5*60);
+              }
               continue;
           }
           topicIndex.setTid(i);
@@ -59,6 +68,7 @@ public class ForumAllService {
           topicIndices.add(topicIndex);
       }
         Map<String,Object> ret = Maps.newHashMap();
+      ret.put("count",tid);
       ret.put("topicIndices",topicIndices);
      return EgResult.ok(ret);
     }
@@ -74,25 +84,19 @@ public class ForumAllService {
         topic.setPortrait(user.getPortrait());
         topic.setUsername(user.getUsername());
         topic.setExtend("");
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH ) + 1;
-        //获取到0-11，与我们正常的月份差1
-        int day = cal.get(Calendar.HOUR_OF_DAY);
-        String createAtStr = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
-        int createAt = Integer.parseInt(createAtStr);
+        int createAt = (int)(System.currentTimeMillis() / 1000);
         topic.setCreateAt(createAt);
         int i = forumAllDao.insertTopic(topic);
         int j = topicService.createTable(tid);
-        log.info("i:{},j:{}=============================================>",i,j);
         int ret = 0;
-        if(i > 0 && j > 0){
+        if(i > 0 && j == 0){
             ret = 1;
         }
         String key = FORUM_TOPIC_INDEX + "/" + String.valueOf(tid);
         redisClientTemplate.hset(key,"tid",String.valueOf(tid));
         redisClientTemplate.hset(key,"content",content);
-        redisClientTemplate.hset(key,"createAt",createAtStr);
+        redisClientTemplate.hset(key,"createAt",String.valueOf(createAt));
+        redisClientTemplate.expire(key,5*60);
         return ret;
     }
 
@@ -106,7 +110,8 @@ public class ForumAllService {
         int i = forumAllDao.deleteTopic(tid);
         int j = topicService.deleteTable(tid);
         int ret = 0;
-        if(i>0 && j>0){
+        if(i>0 && j==0){
+            redisClientTemplate.hdel(FORUM_TOPIC_INDEX + String.valueOf(tid),"tid","content","createAt");
             ret = 1;
         }
         return ret;

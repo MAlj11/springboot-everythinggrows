@@ -7,29 +7,26 @@ import cn.everythinggrows.boot.egboot.forum.dao.Topicdao;
 import cn.everythinggrows.boot.egboot.forum.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.forum.model.TopicDetail;
 import cn.everythinggrows.boot.egboot.forum.model.egUser;
+import cn.everythinggrows.boot.egboot.forum.service.HttpRequestToUser;
 import cn.everythinggrows.boot.egboot.forum.service.TopicService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class TopicDetailController {
 
     @Autowired
     private Topicdao topicdao;
-    @Reference(version = "1.0.0")
-    private IUserAccount iUserAccount;
     @Autowired
     private TopicService topicService;
+    @Autowired
+    HttpRequestToUser httpRequestToUser;
 
 
     /**
@@ -62,7 +59,7 @@ public class TopicDetailController {
 
 //        String token = String.valueOf(uid) + ";" + uuid;
         long uid = getUid(session);
-        egUser user = iUserAccount.getUser(uid);
+        egUser user = httpRequestToUser.getUser(uid);
         int i = topicService.insertTopicDetail(user,content,tid);
         if (i > 0){
             return EgResult.ok();

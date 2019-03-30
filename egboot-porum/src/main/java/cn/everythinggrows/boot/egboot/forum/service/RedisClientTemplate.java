@@ -122,6 +122,11 @@ public class RedisClientTemplate {
         jedisClusterConfig.getJedisCluster().lrem(key,count,value);
     }
 
+    public void hdel(String key,String... fields){
+        jedisClusterConfig.getJedisCluster().hdel(key,fields);
+    }
+
+
 
     /**
      * id生成
