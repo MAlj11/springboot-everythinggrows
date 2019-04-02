@@ -1,12 +1,10 @@
 package cn.everythinggrows.boot.egboot.blog.config;
 
-import cn.everythinggrows.boot.egboot.blog.aop.SessionAOP;
 import cn.everythinggrows.boot.egboot.blog.datasource.DatabaseType;
 import cn.everythinggrows.boot.egboot.blog.datasource.DynamicDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,11 +5,13 @@ import cn.everythinggrows.boot.egboot.user.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.user.model.egUser;
 import cn.everythinggrows.boot.egboot.user.utils.EgResult;
 import cn.everythinggrows.boot.egboot.user.utils.UserUtils;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.mail.Message;
@@ -33,8 +35,10 @@ public class UserAccountImpl implements IUserAccount {
     @Autowired
     private UserDao userDao;
 
-//    @Value("${portraitList}")
-//    String portraitList;
+    @Value("${portraitList}")
+    String portraitList;
+    @Value("${portrait_dns}")
+    String portrait_dns;
 
     @Override
     public String getMailVerifyAndSend(String toMail) {
@@ -127,16 +131,16 @@ public class UserAccountImpl implements IUserAccount {
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String token = String.valueOf(uid) + ";" + uuid;
         String key = UID_TOKEN + email;
+        String uKey = UID_TOKEN + String.valueOf(uid);
+        redisClientTemplate.setex(uKey,7*24*60*60,token);
         redisClientTemplate.setex(key,7*24*60*60,token);
         return token;
     }
 
     public String getRandomPortrait(){
-//        List<String> list = JSONObject.parseArray(portraitList, String.class);
-//        int random = new Random().nextInt(list.size()-1);
-//        String portrait = list.get(random);
-
-        String portrait = "portrait";
+        List<String> list = JSONObject.parseArray(portraitList, String.class);
+        int random = new Random().nextInt(list.size()-1);
+        String portrait = list.get(random);
         return portrait;
     }
 
@@ -148,8 +152,14 @@ public class UserAccountImpl implements IUserAccount {
         egUser user = new egUser();
         if(value == null || value.isEmpty()) {
            user = userDao.selectEgUser(uid);
+           String userdns = portrait_dns + user.getPortrait();
+           user.setPortrait(userdns);
            log.info("user:{}",user);
            if(user != null) {
+               if(user.getPortrait() != null) {
+                   String pordns = portrait_dns = user.getPortrait();
+                   user.setPortrait(pordns);
+               }
                Map<String, String> redis = Maps.newHashMap();
                redis.put("uid", String.valueOf(user.getUid()));
                redis.put("username", user.getUsername()==null?"":user.getUsername());

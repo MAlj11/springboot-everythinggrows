@@ -22,10 +22,5 @@ public class ArticleUtils {
         }
     }
 
-    public static long getCommentId(){
-        //todo 生成commitid
-        long cid = jedisCluster.incr(COMMENT_ID);
-        return cid;
-    }
 
 }

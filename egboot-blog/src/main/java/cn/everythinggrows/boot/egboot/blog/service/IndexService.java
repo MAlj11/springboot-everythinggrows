@@ -12,16 +12,14 @@ import cn.everythinggrows.boot.egboot.blog.model.Banner;
 import cn.everythinggrows.boot.egboot.blog.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.blog.model.RecommendArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egArticle;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Tuple;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
 
 @Service
@@ -45,6 +43,9 @@ public class IndexService {
     @Autowired
     private RecommendArticleDao recommendArticleDao;
 
+    @Value("${blog_coverPic_dns}")
+    String blog_coverPic_dns;
+
 
     public EgResult getArticleList() throws IOException, ClassNotFoundException {
         byte[] data = redisClientTemplate.getRedisByte(INDEX_ARTICLE_CACHE.getBytes());
@@ -54,6 +55,8 @@ public class IndexService {
             for(String aid : aidlist){
                 egArticle egArticle = indexDao.getArtcleOne(Long.parseLong(aid));
                 egArticle.setTypeString(ArticleUtils.getTypeWithInt(egArticle.getType()));
+                String coverdns = blog_coverPic_dns + egArticle.getCoverPic();
+                egArticle.setCoverPic(coverdns);
                 articles.add(egArticle);
                 }
           redisClientTemplate.setRedisByte(INDEX_ARTICLE_CACHE.getBytes(),SerializeUtil.serialize(articles));
@@ -94,6 +97,11 @@ public class IndexService {
         List<Banner> bannerList = new ArrayList<>();
         if(data == null || data.length == 0){
             bannerList = bannerDao.getBanner();
+            for(Banner banner : bannerList){
+                String bannerdns = blog_coverPic_dns + banner.getBannerPic();
+                banner.setBannerPic(bannerdns);
+
+            }
             redisClientTemplate.setRedisByte(BANNER_CACHE.getBytes(),SerializeUtil.serialize(bannerList));
         }else{
             bannerList = (List<Banner>)SerializeUtil.deserialize(data);

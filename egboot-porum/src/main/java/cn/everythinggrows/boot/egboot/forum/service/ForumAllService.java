@@ -37,6 +37,9 @@ public class ForumAllService {
       long tid = redisClientTemplate.getTidNotIncr();
       long maxId = tid - (perPage - 1) * PageSize;
       long minId = tid - (PageSize - 1);
+      if(minId <= 0){
+          minId = 1L;
+      }
       log.info("max{},min{}",maxId,minId);
       List<TopicIndex> topicIndices = new ArrayList<>();
       for(long i=maxId;i>=minId;i--){

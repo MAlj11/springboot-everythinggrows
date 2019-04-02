@@ -12,12 +12,14 @@ import cn.everythinggrows.boot.egboot.blog.model.egArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egUidArticle;
 import cn.everythinggrows.boot.egboot.blog.service.IndexService;
 import cn.everythinggrows.boot.egboot.blog.service.RedisClientTemplate;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
+import java.util.*;
 
 @RestController
 public class ArticleController {
@@ -34,15 +36,19 @@ public class ArticleController {
     @Autowired
     private ArticleList articleList;
 
+    @Value("${blog_coverPic}")
+    String blog_coverPic;
+
+
     @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
     @NeedSession
     public EgResult InsertArticle(@RequestParam(value = "articleName",defaultValue = "") String articleName,
                                   @RequestParam(value = "content",defaultValue = "") String content,
-                                  @RequestParam(value = "coverPic",defaultValue = "") String coverPic,
                                   @RequestParam(value = "type",defaultValue = "1") int type,
                                   @RequestParam(value = "title",defaultValue = "") String title,
                                   @RequestHeader(value = "x-eg-session") String session){
         long uid = getUid(session);
+        String coverPic = getRandomCoverPic();
         egArticle egArticle = new egArticle();
         long aid = redisClientTemplate.aidGeneration();
         Calendar calendar=Calendar.getInstance();
@@ -87,6 +93,15 @@ public class ArticleController {
         return EgResult.ok();
     }
 
+    @RequestMapping(value = "/blog/article/get/{aid}")
+    public EgResult getArticle(@PathVariable(value = "aid") long aid){
+        egArticle article = indexDao.getArtcleOne(aid);
+        String coverdns = blog_coverPic + article.getCoverPic();
+        article.setCoverPic(coverdns);
+        Map<String,Object> data = new HashMap<>();
+        data.put("article",article);
+        return EgResult.ok(data);
+    }
 
 
     @RequestMapping(value = "/blog/article/delete/{aid}")
@@ -102,6 +117,13 @@ public class ArticleController {
            return EgResult.systemError();
        }
 
+    }
+
+    public String getRandomCoverPic(){
+        List<String> list = JSONObject.parseArray(blog_coverPic, String.class);
+        int random = new Random().nextInt(list.size()-1);
+        String coverPic = list.get(random);
+        return coverPic;
     }
 
     public long getUid(String session){

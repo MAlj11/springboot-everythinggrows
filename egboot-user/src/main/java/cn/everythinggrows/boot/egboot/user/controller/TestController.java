@@ -6,7 +6,9 @@ import cn.everythinggrows.boot.egboot.user.MyException;
 import cn.everythinggrows.boot.egboot.user.dao.UserTestDao;
 import cn.everythinggrows.boot.egboot.user.model.egUser;
 import cn.everythinggrows.boot.egboot.user.service.RedisClientTemplate;
+import cn.everythinggrows.boot.egboot.user.service.UserAccountImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,8 @@ public class TestController {
 
     @Autowired
     private UserTestDao userTestDao;
+    @Autowired
+    private UserAccountImpl userAccount;
 
     @RequestMapping("/logtest")
     public JsonResult test(@RequestParam("extest") int extest) throws MyException {
@@ -52,5 +56,11 @@ public class TestController {
         user.setUsername(email);
         int i = userTestDao.insertUser(user);
         return JsonResult.success();
+    }
+
+    @RequestMapping(value = "/image")
+    public String image(){
+        String str = userAccount.getRandomPortrait();
+        return str;
     }
 }

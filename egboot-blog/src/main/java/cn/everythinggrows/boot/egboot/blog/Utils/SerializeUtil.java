@@ -1,6 +1,5 @@
 package cn.everythinggrows.boot.egboot.blog.Utils;
 
-import cn.everythinggrows.boot.egboot.blog.service.RedisClientTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

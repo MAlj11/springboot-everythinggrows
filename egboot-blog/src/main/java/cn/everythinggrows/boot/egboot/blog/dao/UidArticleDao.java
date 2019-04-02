@@ -20,9 +20,9 @@ public class UidArticleDao {
 
     public int insertUidArticle(egUidArticle egUidArticle){
             Map<String,Object> dataMap = beanUtils.bean2map(egUidArticle);
-            long id = egUidArticle.getUid();
-            dataMap.put("tableName", "eg_uid_article_" + DBUtils.getTableKey(id));
-            int DBkey = DBUtils.getDBKey(id);
+            long uid = egUidArticle.getUid();
+            dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
+            int DBkey = DBUtils.getDBKey(uid);
             DatabaseType type = DatabaseType.getType(DBkey);
             DatabaseContextHolder.setDatabaseType(type);
             int i = blogSqlSession.insert("UidArticleDao.insertUidArticle", dataMap);

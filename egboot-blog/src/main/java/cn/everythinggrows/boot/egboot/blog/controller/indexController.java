@@ -6,6 +6,7 @@ import cn.everythinggrows.boot.egboot.blog.service.IndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,6 +20,8 @@ public class indexController {
     private static Logger log = LoggerFactory.getLogger(indexController.class);
     @Autowired
     private IndexService indexService;
+    @Value("${blog_coverPic_dns}")
+    String blog_coverPic_dns;
 
 
     /**首页文章

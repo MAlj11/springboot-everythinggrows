@@ -18,6 +18,7 @@ public class RedisClientTemplate {
     private static final Logger log=LoggerFactory.getLogger(RedisClientTemplate.class);
     public static String EG_UID_PREFIX = "eg/uid/generation";
     public static String EG_AID_PREFIX = "eg/aid/generation";
+    public static String EG_CID_PREFIX = "eg/cid/generation";
 
     @Autowired
     private JedisClusterConfig jedisClusterConfig;
@@ -125,5 +126,11 @@ public class RedisClientTemplate {
         long aid = 0;
         aid = jedisClusterConfig.getJedisCluster().incr(EG_AID_PREFIX);
         return aid;
+    }
+
+    public long cidGeneration(){
+        long cid = 0;
+        cid = jedisClusterConfig.getJedisCluster().incr(EG_CID_PREFIX);
+        return cid;
     }
 }

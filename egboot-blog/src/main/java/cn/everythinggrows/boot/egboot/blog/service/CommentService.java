@@ -16,8 +16,10 @@ public class CommentService {
 
     @Autowired
     private CommentDao commentDao;
-    @Reference(version = "1.0.0")
-    private IUserAccount iUserAccount;
+    @Autowired
+    private RedisClientTemplate redisClientTemplate;
+    @Autowired
+    private HttpRequestToUser httpRequestToUser;
 
 
     public List<Comment> getCommentWithAid(long aid){
@@ -26,9 +28,9 @@ public class CommentService {
     }
 
     public int insertComment(long aid, long uid,String content){
-        egUser user = iUserAccount.getUser(uid);
+        egUser user = httpRequestToUser.getUser(uid);
         Comment comment = new Comment();
-        long cid = ArticleUtils.getCommentId();
+        long cid = redisClientTemplate.cidGeneration();
         comment.setCid(cid);
         comment.setAid(aid);
         comment.setContent(content);

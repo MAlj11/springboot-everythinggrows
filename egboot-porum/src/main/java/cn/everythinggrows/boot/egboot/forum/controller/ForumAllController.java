@@ -22,7 +22,6 @@ public class ForumAllController {
     @RequestMapping("/forum/index/all")
     public EgResult getForumAll(@RequestParam(value = "perPage") int perPage,
                                 @RequestParam(value = "pageSize") int pageSize){
-     //todo 分库分表进行分页查询
        EgResult ret = forumAllService.getForumAll(perPage,pageSize);
        return ret;
     }
