@@ -132,6 +132,8 @@ public class IndexService {
              egTypeArticleList = typeArticleDao.getTypeArticleList(type);
              for(EgTypeArticle egTypeArticle : egTypeArticleList){
                  egTypeArticle.setTypeString(ArticleUtils.getTypeWithInt(type));
+                 String artidns = blog_coverPic_dns + egTypeArticle.getCoverPic();
+                 egTypeArticle.setCoverPic(artidns);
              }
              redisClientTemplate.setRedisByte(TYPE_ARTICLE_CACHE.getBytes(),SerializeUtil.serialize(egTypeArticleList));
          }else{

@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>枝丫</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="static/assets/i/favicon.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="枝丫"/>
-  <link rel="apple-touch-icon-precomposed" href="static/assets/i/favicon.png">
-  <meta name="msapplication-TileImage" content="static/assets/i/favicon.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="static/assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="static/assets/css/app.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>枝丫</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="static/assets/i/favicon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="枝丫"/>
+    <link rel="apple-touch-icon-precomposed" href="static/assets/i/favicon.png">
+    <meta name="msapplication-TileImage" content="static/assets/i/favicon.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <link rel="stylesheet" href="static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="static/assets/css/app.css">
 </head>
 
 <body id="blog">
@@ -37,15 +37,11 @@
 
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
-      <li class="am-active"><a href="lw-index.vmlw-index.html">首页      </a></li>
-        <li><a href="/type/Photography.html">摄影      </a></li>
-        <li><a href="/type/Internet.html">互联网      </a></li>
-        <li><a href="/type/media.html">影音      </a></li>
-        <li><a href="/type/feeling">感悟      </a></li>
-        <li><a href="/forum/index">论坛      </a></li>
-        <li><a href="/type/ganwu">      </a></li>
-        <li><a href="/type/ganwu">     </a></li>
-        <li><a href="/type/ganwu">      </a></li>
+      <li ><a href="/type.html">首页      </a></li>
+      <li><a href="/type/Photography.html">摄影      </a></li>
+      <li><a href="/type/Internet.html">互联网      </a></li>
+      <li><a href="/type/media.html">影音      </a></li>
+      <li class="am-active.html"><a href="/type/feeling">感悟      </a></li>
         <#if token?exists>
           <li class="am-active">
               <a href="/myArticle.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的文章</a>
@@ -56,7 +52,7 @@
           <li class="am-active">
               <a href="/logout.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">注销</a>
           </li>
-    <#else>
+        <#else>
           <li class="am-active">
               <a href="/loginPage.html" class="layout-user-downmenu-link">立即登录</a>
           </li>
@@ -64,8 +60,7 @@
               <a href="/registerPage.html" target="_blank" class="layout-user-downmenu-link"
                  data-mtype="wmz_public_grzx_register">立即注册</a>
           </li>
-    </#if>
-
+        </#if>
     </ul>
     <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
       <div class="am-form-group">
@@ -76,46 +71,25 @@
 </nav>
 <hr>
 <!-- nav end -->
-<!-- banner start -->
-<div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
-    <div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}' >
-    <ul class="am-slides">
-    <#list bannerList as banneritem>
-        <li>
-            <img src="${banneritem.bannerPic}">
-            <div class="blog-slider-desc am-slider-desc ">
-                <div class="blog-text-center blog-slider-con">
-                    <h1 class="blog-h-margin"><a href="${banneritem.bannerUrl}">${banneritem.bannerTitle}</a></h1>
-                    <br><br><br><br><br><br><br>                
-                </div>
-            </div>
-      </li>
-    </#list>
-    </ul>
-    </div>
-</div>
-<!-- banner end -->
-
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">
-<div class="am-u-md-8 am-u-sm-12">
- <#list articleList as item>
-      <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="${item.coverPic}" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">${item.typeString} &nbsp;</a></span>
-                <span> &nbsp;</span>
-                <span>${item.createAt}</span>
-                <h1><a href="/index/article/detail/${item.id}.html">${item.articleName}</a></h1>
-                <p>${item.title}
-                </p>
-                <p><a href="/index/article/detail/${item.id}.html" class="blog-continue">continue reading</a></p>
-            </div>
-        </article>
+    <div class="am-u-md-8 am-u-sm-12">
+ <#list feelingList as item>
+     <article class="am-g blog-entry-article">
+         <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+             <img src="${item.coverPic}" alt="" class="am-u-sm-12">
+         </div>
+         <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+             <span><a href="" class="blog-color">${item.typeString} &nbsp;</a></span>
+             <span> &nbsp;</span>
+             <h1><a href="/index/article/detail/${item.aid}.html">${item.articleName}</a></h1>
+             <p>${item.title}
+             </p>
+             <p><a href="/index/article/detail/${item.aid}.html" class="blog-continue">continue reading</a></p>
+         </div>
+     </article>
  </#list>
-</div>
+    </div>
     <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>枝丫</span></h2>
@@ -152,6 +126,9 @@
     </div>
 </div>
 <!-- content end -->
+
+
+
 
   <footer class="blog-footer">
     <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">

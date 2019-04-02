@@ -39,4 +39,14 @@ public class Banner implements Serializable {
     public void setBannerUrl(String bannerUrl) {
         this.bannerUrl = bannerUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Banner{" +
+                "id=" + id +
+                ", bannerPic='" + bannerPic + '\'' +
+                ", bannerTitle='" + bannerTitle + '\'' +
+                ", bannerUrl='" + bannerUrl + '\'' +
+                '}';
+    }
 }

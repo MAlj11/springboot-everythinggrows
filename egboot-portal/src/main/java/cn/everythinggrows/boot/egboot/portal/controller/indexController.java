@@ -1,19 +1,21 @@
 package cn.everythinggrows.boot.egboot.portal.controller;
 
 import cn.everythinggrows.boot.egboot.portal.Utils.HttpRequsetUtil;
-import cn.everythinggrows.boot.egboot.portal.model.Banner;
-import cn.everythinggrows.boot.egboot.portal.model.EgTypeArticle;
-import cn.everythinggrows.boot.egboot.portal.model.egArticle;
+import cn.everythinggrows.boot.egboot.portal.model.*;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author MA
@@ -38,23 +40,27 @@ public class indexController {
     @RequestMapping("/index.html")
     public String getInsexx(HttpServletRequest request,
                             ModelAndView modelAndView){
-
+        HttpSession session = request.getSession();
+        logger.info("进入index====================================");
         String url = BLOG_BASE_URL + "/index/article";
-        JSONObject json = HttpRequsetUtil.requestGet("articleList",url,null);
-        List<egArticle> articleList = JSONObject.toJavaObject(json, List.class);
-        modelAndView.addObject("articleList",articleList);
+        JSONObject json = HttpRequsetUtil.requestGet(url,null);
+        String artList = json.getString("articleList");
+        List<egArticle> articleList = JSONObject.parseArray(artList, egArticle.class);
+        session.setAttribute("articleList",articleList);
 
 
         String url2 = BLOG_BASE_URL + "/index/recommend/get";
-        JSONObject json2 = HttpRequsetUtil.requestGet("recommendList",url2,null);
-        List<egArticle> recommendList = JSONObject.toJavaObject(json2, List.class);
-        modelAndView.addObject("recommendList",recommendList);
+        JSONObject json2 = HttpRequsetUtil.requestGet(url2,null);
+        String recList = json2.getString("recommendList");
+        List<RecommendArticle> recommendList = JSONObject.parseArray(recList, RecommendArticle.class);
+        session.setAttribute("recommendList",recommendList);
 
 
         String url3 = BLOG_BASE_URL + "/index/banner/get";
-        JSONObject json3 = HttpRequsetUtil.requestGet("bannerList",url3,null);
-        List<Banner> bannerList =  JSONObject.toJavaObject(json3, List.class);
-        modelAndView.addObject("bannerList",bannerList);
+        JSONObject json3 = HttpRequsetUtil.requestGet(url3,null);
+        String banList = json3.getString("bannerList");
+        List<Banner> bannerList =  JSONObject.parseArray(banList, Banner.class);
+        session.setAttribute("bannerList",bannerList);
         return "lw-index";
     }
 
@@ -72,40 +78,48 @@ public class indexController {
     @RequestMapping(value = "/type/Photography.html")
     public String getPhotography(HttpServletRequest request,
                                  ModelAndView modelAndView){
+        HttpSession session = request.getSession();
         String typeUrl1 = BLOG_BASE_URL + "/type/1";
-        JSONObject typeJson1 = HttpRequsetUtil.requestGet("articleWithTypeList",typeUrl1,null);
-        List<EgTypeArticle> PhotographyList = JSONObject.toJavaObject(typeJson1, List.class);
-        modelAndView.addObject("PhotographyList",PhotographyList);
+        JSONObject typeJson1 = HttpRequsetUtil.requestGet(typeUrl1,null);
+        String phtList = typeJson1.getString("articleWithTypeList");
+        List<EgTypeArticle> PhotographyList = JSONObject.parseArray(phtList, EgTypeArticle.class);
+        session.setAttribute("PhotographyList",PhotographyList);
         return "lw-Photography";
     }
 
     @RequestMapping(value = "/type/Internet.html")
     public String getInternet(HttpServletRequest request,
                               ModelAndView modelAndView){
+        HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/2";
-        JSONObject typeJson = HttpRequsetUtil.requestGet("articleWithTypeList",typeUrl,null);
-        List<EgTypeArticle> InternetList = JSONObject.toJavaObject(typeJson, List.class);
-        modelAndView.addObject("InternetList",InternetList);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        String phtList = typeJson.getString("articleWithTypeList");
+        List<EgTypeArticle> InternetList = JSONObject.parseArray(phtList, EgTypeArticle.class);
+        session.setAttribute("InternetList",InternetList);
         return "lw-Internet";
     }
 
     @RequestMapping(value = "/type/media.html")
     public String getMedia(HttpServletRequest request,
                            ModelAndView modelAndView){
+        HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/3";
-        JSONObject typeJson = HttpRequsetUtil.requestGet("mediaList",typeUrl,null);
-        List<EgTypeArticle> mediaList = JSONObject.toJavaObject(typeJson, List.class);
-        modelAndView.addObject("mediaList",mediaList);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        String phtList = typeJson.getString("articleWithTypeList");
+        List<EgTypeArticle> mediaList = JSONObject.parseArray(phtList, EgTypeArticle.class);
+        session.setAttribute("mediaList",mediaList);
         return "lw-media";
     }
 
     @RequestMapping(value = "/type/feeling.html")
     public String getFeeling(HttpServletRequest request,
                              ModelAndView modelAndView){
+        HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/4";
-        JSONObject typeJson = HttpRequsetUtil.requestGet("feelingList",typeUrl,null);
-        List<EgTypeArticle> feelingList = JSONObject.toJavaObject(typeJson, List.class);
-        modelAndView.addObject("feelingList",feelingList);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        String phtList = typeJson.getString("articleWithTypeList");
+        List<EgTypeArticle> feelingList = JSONObject.parseArray(phtList, EgTypeArticle.class);
+        session.setAttribute("feelingList",feelingList);
         return "lw-feeling";
     }
 

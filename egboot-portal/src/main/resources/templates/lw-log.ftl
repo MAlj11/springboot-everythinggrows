@@ -57,14 +57,16 @@
       </div>      
       <br>
       <div class="am-input-group am-animation-slide-left log-animation-delay">       
-        <input type="text" class="am-form-field am-radius log-input" id="passwordLog" name="passwordLog" placeholder="密码">
+        <input type="password" class="am-form-field am-radius log-input" id="passwordLog" name="passwordLog" placeholder="密码">
         <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
       </div>      
       <br>
       <button type="submit" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay">登 录</button>
             <p class="am-animation-slide-bottom log-animation-delay"><a href="/forgetPassword.html">忘记密码?</a></p>
       <div class="am-btn-group  am-animation-slide-bottom log-animation-delay-b">
-          ${"loginError"}
+         <#if loginError?exists>
+         <span>${Session.loginError}</span>
+         </#if>
       </div>
     </form>
   </div>

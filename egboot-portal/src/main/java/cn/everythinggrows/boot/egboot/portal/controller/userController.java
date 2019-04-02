@@ -50,7 +50,7 @@ public class userController {
     @RequestMapping(value = "/register.html", method = RequestMethod.POST)
     public String Register(HttpServletRequest request,
                            ModelAndView modelAndView){
-
+        HttpSession session = request.getSession();
         String reEmail = request.getParameter("reEmail");
         String rePassword = request.getParameter("rePassword");
         String reVerify = request.getParameter( "reVerify" );
@@ -67,7 +67,7 @@ public class userController {
         String url = USER_BASE_URL + "/create";
         JSONObject json = HttpRequsetUtil.requestPost(url,paramMap);
         String token = json.getString("token");
-        modelAndView.addObject("token",token);
+        session.setAttribute("token",token);
         return "lw-index";
     }
 
@@ -75,6 +75,7 @@ public class userController {
     @RequestMapping(value = "/login.html", method = RequestMethod.POST)
     public  String Login(HttpServletRequest request,
                          ModelAndView modelAndView){
+        HttpSession session = request.getSession();
         String loEmail = request.getParameter("loEmail");
         String loPassword = request.getParameter("passwordLog");
         String password = EncryptHelper.encrypt( loPassword.trim() , EncryptType.SHA1 );
@@ -89,13 +90,13 @@ public class userController {
         if((Integer)dataMap.get("status")==200){
             JSONObject dataStr  = (JSONObject) dataMap.get("data");
             String token = dataStr.getString("token");
-            modelAndView.addObject("token",token);
+            session.setAttribute("token",token);
             return "lw-index";
         }else if ((Integer)dataMap.get("status")==100004){
-             modelAndView.addObject("loginError","password is error");
+            session.setAttribute("loginError","password is error");
              return "lw-log";
         }else{
-            modelAndView.addObject("loginError","other error");
+            session.setAttribute("loginError","other error");
             return "lw-log";
         }
 
