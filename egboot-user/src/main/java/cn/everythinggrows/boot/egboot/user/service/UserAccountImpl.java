@@ -77,6 +77,7 @@ public class UserAccountImpl implements IUserAccount {
         transport.sendMessage(msg, msg.getAllRecipients());
 
         System.out.println("邮件发送成功");
+        log.info("{}邮件发送成功============================",toMail);
         transport.close();
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -152,14 +153,12 @@ public class UserAccountImpl implements IUserAccount {
         egUser user = new egUser();
         if(value == null || value.isEmpty()) {
            user = userDao.selectEgUser(uid);
-           String userdns = portrait_dns + user.getPortrait();
-           user.setPortrait(userdns);
-           log.info("user:{}",user);
            if(user != null) {
                if(user.getPortrait() != null) {
-                   String pordns = portrait_dns = user.getPortrait();
+                   String pordns = portrait_dns + user.getPortrait();
                    user.setPortrait(pordns);
                }
+               log.info("user:{}",user);
                Map<String, String> redis = Maps.newHashMap();
                redis.put("uid", String.valueOf(user.getUid()));
                redis.put("username", user.getUsername()==null?"":user.getUsername());
@@ -188,4 +187,32 @@ public class UserAccountImpl implements IUserAccount {
         log.info("dubboTest:{}=======================================================================",str);
         return "ok";
     }
+
+    public EgResult tokenVerti(String token){
+        long uid = getUid(token);
+        String uKey = UID_TOKEN + String.valueOf(uid);
+        String tokenRet = (String) redisClientTemplate.getRedis(uKey);
+        if(!tokenRet.equals(token) || tokenRet == null){
+            return EgResult.error(1005,"token is error");
+        }
+        return EgResult.ok();
+    }
+
+
+    public EgResult userLogout(long uid){
+        String uKey = UID_TOKEN + String.valueOf(uid);
+        redisClientTemplate.del(uKey);
+        return EgResult.ok();
+    }
+
+
+    public long getUid(String session){
+        if(session == null || session.length() == 0){
+            return 0;
+        }
+        String[] line = session.split(";");
+        long uid = Long.parseLong(line[0]);
+        return uid;
+    }
+
 }

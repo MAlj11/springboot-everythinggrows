@@ -21,11 +21,11 @@ public class CommentDao {
     public List<Comment> getCommentList(long aid){
         Map<String,Object> dataMap = Maps.newHashMap();
         dataMap.put("tableName", "eg_comment_" + DBUtils.getTableKey(aid));
-        dataMap.put("id",aid);
+        dataMap.put("aid",aid);
         int DBkey = DBUtils.getDBKey(aid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        List<Comment> comments = blogSqlSession.selectList("CommentDao.selectComment");
+        List<Comment> comments = blogSqlSession.selectList("CommentDao.selectComment",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return comments;
     }
@@ -33,11 +33,11 @@ public class CommentDao {
     public int insertComment(Comment comment){
         Map<String,Object> dataMap = beanUtils.bean2map(comment);
         dataMap.put("tableName", "eg_comment_" + DBUtils.getTableKey(comment.getAid()));
-        dataMap.put("id",comment.getAid());
+        dataMap.put("aid",comment.getAid());
         int DBkey = DBUtils.getDBKey(comment.getAid());
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = blogSqlSession.insert("CommentDao.insertComment");
+        int i = blogSqlSession.insert("CommentDao.insertComment",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

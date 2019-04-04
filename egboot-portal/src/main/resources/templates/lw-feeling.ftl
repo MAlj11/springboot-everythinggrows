@@ -42,7 +42,7 @@
       <li><a href="/type/Internet.html">互联网      </a></li>
       <li><a href="/type/media.html">影音      </a></li>
       <li class="am-active.html"><a href="/type/feeling">感悟      </a></li>
-        <#if token?exists>
+        <#if tokenVertify>
           <li class="am-active">
               <a href="/myArticle.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的文章</a>
           </li>

@@ -10,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -30,5 +32,16 @@ public class UidArticleDao {
             return i;
     }
 
+    public List<egUidArticle> selectArticles(long uid){
+        Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
+        dataMap.put("uid",uid);
+        int DBkey = DBUtils.getDBKey(uid);
+        DatabaseType type = DatabaseType.getType(DBkey);
+        DatabaseContextHolder.setDatabaseType(type);
+        List<egUidArticle> egUidArticles = blogSqlSession.selectList("UidArticleDao.selectUidArticle",dataMap);
+        DatabaseContextHolder.clearDatabaseType();
+        return egUidArticles;
+    }
 
 }

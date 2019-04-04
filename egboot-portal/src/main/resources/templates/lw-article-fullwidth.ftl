@@ -11,15 +11,15 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="static/assets/i/favicon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="枝丫"/>
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="static/assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileImage" content="static/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="static/assets/css/app.css">
 </head>
 
 <body id="blog-article-sidebar">
@@ -32,9 +32,6 @@
 <!-- header end -->
 <hr>
 
-<!-- nav start -->
-<!-- nav end -->
-<hr>
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
@@ -42,7 +39,7 @@
             <div class="am-article-hd">
                 <h1 class="am-article-title blog-text-center">${articleDetail.articleName}</h1>
                 <p class="am-article-meta blog-text-center">
-                    <span><a href="#">${articleDetail.username}</a></span>-
+                    <span><a href="#">${user.username}</a></span>-
                     <span><a href="#">${articleDetail.createAt}</a></span>
                 </p>
             </div>
@@ -54,47 +51,35 @@
             </div>
         </article>
 
-##        <div class="am-g blog-article-widget blog-article-margin">
-##            <div class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
-##                <span class="am-icon-tags"> &nbsp;</span><a href="#">标签</a> , <a href="#">TAG</a> , <a href="#">啦啦</a>
-##                <hr>
-##                <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
-##                <a href=""><span class="am-icon-wechat am-icon-fw blog-icon"></span></a>
-##                <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
-##            </div>
-##        </div>
 
         <hr>
         <div class="am-g blog-author blog-article-margin">
             <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
-                <img src="${userDetetail.portrait}" alt="" class="blog-author-img am-circle">
+                <img src="${user.portrait}" alt="" class="blog-author-img am-circle">
             </div>
             <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
-                <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">${userDetetail.username}</span></h3>
-##                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">${user.username}</span></h3>
             </div>
         </div>
         <hr>
-##        <ul class="am-pagination blog-article-margin">
-##            <li class="am-pagination-prev"><a href="#" class="">&laquo; 一切的回顾</a></li>
-##            <li class="am-pagination-next"><a href="">不远的未来 &raquo;</a></li>
-##        </ul>
 
         <hr>
 
-        <form class="am-form am-g">
+
+          <#if tokenVertify>
+        <form class="am-form am-g" action="/article/comment">
             <h3 class="blog-comment">评论</h3>
             <fieldset>
-                <div class="am-form-group am-u-sm-4 blog-clear-left">
-                    <input type="text" class="" placeholder="名字">
-                </div>
-                <div class="am-form-group am-u-sm-4">
-                    <input type="email" class="" placeholder="邮箱">
-                </div>
+                <#--<div class="am-form-group am-u-sm-4 blog-clear-left">-->
+                    <#--<input type="text" class="" placeholder="用户名">-->
+                <#--</div>-->
+                <#--<div class="am-form-group am-u-sm-4">-->
+                    <#--<input type="email" class="" placeholder="邮箱">-->
+                <#--</div>-->
 
-                <div class="am-form-group am-u-sm-4 blog-clear-right">
-                    <input type="password" class="" placeholder="网站">
-                </div>
+                <#--<div class="am-form-group am-u-sm-4 blog-clear-right">-->
+                    <#--<input type="password" class="" placeholder="网站">-->
+                <#--</div>-->
 
                 <div class="am-form-group">
                     <textarea class="" rows="5" placeholder="一字千金"></textarea>
@@ -103,9 +88,12 @@
                 <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
             </fieldset>
         </form>
-
+          <#else>
+          <p><button type="button" class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</button></p>
+          </#if>
         <hr>
-      #foreach($item in $commentDetail)
+
+      <#list commentDetail as item>
         <div class="am-g blog-author blog-article-margin">
             <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
                 <img src="${item.portrait}" alt="" class="blog-author-img am-circle">
@@ -115,7 +103,7 @@
                 <p>${item.content}</p>
             </div>
         </div>
-        #end
+      </#list>
 
     </div>
 </div>
@@ -139,14 +127,14 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
+<script src="static/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="static/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
+<script src="static/assets/js/amazeui.min.js"></script>
 <!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>

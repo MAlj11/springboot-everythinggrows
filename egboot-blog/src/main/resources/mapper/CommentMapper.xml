@@ -21,7 +21,7 @@
         (
         #{aid,jdbcType=BIGINT},
         #{cid,jdbcType=BIGINT},
-        #{content,jdbcType=VARCHAR}
+        #{content,jdbcType=VARCHAR},
         #{uid,jdbcType=BIGINT},
         #{portrait,jdbcType=VARCHAR},
         #{username,jdbcType=VARCHAR},

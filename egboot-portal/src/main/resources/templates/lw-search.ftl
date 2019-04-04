@@ -9,24 +9,24 @@
     <title>搜索结果</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="icon" type="image/png" href="static/assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="static/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="static/assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileImage" content="static/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="static/assets/css/app.css">
 </head>
 
 <body id="blog-article-sidebar">
 <!-- header start -->
 <header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
     <div class="am-u-sm-8 am-u-sm-centered">
-        <img width="200" src="assets/i/logo.jpg"/>
+        <img width="200" src="static/assets/i/logo.jpg"/>
         <h2 class="am-hide-sm-only">枝丫</h2>
     </div>
 </header>
@@ -45,12 +45,14 @@
         <div class="timeline-year">
             <hr>
             <ul>
+                <#list searchList as article>
                 <hr>
                 <li>
-                    <span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/18</span>
-                    <span class="am-u-sm-8 am-u-md-6"><a href="#">君埋泉下泥销骨，我寄人间雪满头</a></span>
-                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">风又起</span>
+                    <span class="am-u-sm-4 am-u-md-2 timeline-span">${article.createAt}</span>
+                    <span class="am-u-sm-8 am-u-md-6"><a href="/index/article/detail/${article.id}">${article.title}</a></span>
+                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">${article.auther}</span>
                 </li>
+                </#list>
             </ul>
             <br>
         </div>
@@ -80,14 +82,14 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
+<script src="staticassets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="static/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
+<script src="static/assets/js/amazeui.min.js"></script>
 <!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>

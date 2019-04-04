@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.form-container {
+    height: 600px ;
+    background: #FFFF00 url( "/images/sign-bg.jpg") no-repeat  center ;
+    background-size: cover ;
+}
+
+.form-container .form-wrapper {
+    width: 30% ;
+    min-width: 400px ;
+    margin-top: 80px ;
+    margin-left: 60%;
+    box-shadow: 0 0 6px 5px #DFDFDF ;
+    border-radius: 5px ;
+    border:1px solid #dddddd;
+    background: #FFFFFF;
+}
+
+.form-container .form-wrapper .form-title { display: block ; text-align: center ; font-size: 22px ; line-height: 80px ;  }
+
+.form-container .form-wrapper .form-row ,
+.form-container .form-wrapper .form-identity {
+    border: 1px solid #b6b6b6 ;
+    border-radius: 5px ;
+    margin: 10px 10px ;
+}
+
+.form-container .form-wrapper .form-row:hover ,
+.form-container .form-wrapper .form-identity:hover {
+    border-color: #0002ff ;
+}
+
+.form-container .form-wrapper .form-row span ,
+.form-container .form-wrapper .form-identity span{
+    height: 60px ;
+    line-height: 60px ;
+}
+
+.form-container .form-wrapper .form-row .left {
+    text-align: center ;
+}
+
+.form-container .form-wrapper .form-row .right input {
+    width: 95%;
+    font-size: 18px ;
+    letter-spacing: 0.15em ;
+    border: none ;
+    outline: none ;
+    font-family: 微软雅黑 ;
+    background: transparent ;
+}
+
+.form-container .form-wrapper .form-identity .left { text-align: center ; }
+
+.form-container .form-wrapper .form-identity .left input {
+    font: 18px/1.5em "Microsoft YaHei",SansSerif ;
+    width: 95% ;
+    text-align: center ;
+    border: none ;
+    outline: none ;
+    background: transparent;
+}
+
+.form-container .form-wrapper .form-identity .right { text-align: center ; }
+
+.form-container .form-wrapper .form-identity .right img {   margin-top: 4px ;  border: 1px solid #F4F4F4 ; }
+
+.form-container .form-wrapper .form-buttons {
+    margin: 10px 10px ;
+}
+.form-container .form-wrapper .form-buttons .left { text-align: left ; }
+
+.form-container .form-wrapper .form-buttons .right { text-align: right ; }
+
+.form-container .form-wrapper .form-buttons input {
+    width: 98% ;
+    height: 50px ;
+    font-size: 18px ;
+    letter-spacing: 0.25em ;
+}
+

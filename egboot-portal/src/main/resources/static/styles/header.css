@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.header-container { background: #F4F4F4 ; box-shadow: 0 0 3px 2px #dedede ; }
+
+.header-container .header { width: 80% ; margin: 0 auto ;  }
+
+.header-container .header>div { line-height: 40px ; }
+
+.header-container .header>div:last-child { text-align: right ; }
+
+.logo-container .logo { width: 80% ; margin: 0 auto ; }
+
+.logo-container .logo a { display: block ; width: 200px ; height: 80px ; margin: 10px 0 ; background: #b6b6b6 ; }

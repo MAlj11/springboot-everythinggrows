@@ -38,6 +38,8 @@ public class ArticleController {
 
     @Value("${blog_coverPic}")
     String blog_coverPic;
+    @Value("${blog_coverPic_dns}")
+    String blog_coverPic_dns;
 
 
     @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
@@ -47,6 +49,7 @@ public class ArticleController {
                                   @RequestParam(value = "type",defaultValue = "1") int type,
                                   @RequestParam(value = "title",defaultValue = "") String title,
                                   @RequestHeader(value = "x-eg-session") String session){
+        log.info("artcleName:{},content:{}",articleName,content);
         long uid = getUid(session);
         String coverPic = getRandomCoverPic();
         egArticle egArticle = new egArticle();
@@ -96,7 +99,7 @@ public class ArticleController {
     @RequestMapping(value = "/blog/article/get/{aid}")
     public EgResult getArticle(@PathVariable(value = "aid") long aid){
         egArticle article = indexDao.getArtcleOne(aid);
-        String coverdns = blog_coverPic + article.getCoverPic();
+        String coverdns = blog_coverPic_dns + article.getCoverPic();
         article.setCoverPic(coverdns);
         Map<String,Object> data = new HashMap<>();
         data.put("article",article);
@@ -117,6 +120,18 @@ public class ArticleController {
            return EgResult.systemError();
        }
 
+    }
+
+    @RequestMapping(value = "/blog/article/myarticle/{uid}")
+    public EgResult getMyArticle(@PathVariable(value = "uid") long uid){
+        List<egUidArticle> egUidArticles = uidArticleDao.selectArticles(uid);
+        for(egUidArticle article : egUidArticles){
+            String coverdns = blog_coverPic_dns + article.getCoverPic();
+            article.setCoverPic(coverdns);
+        }
+        Map<String,Object> data = new HashMap<>();
+        data.put("egUidArticles",egUidArticles);
+        return EgResult.ok(data);
     }
 
     public String getRandomCoverPic(){

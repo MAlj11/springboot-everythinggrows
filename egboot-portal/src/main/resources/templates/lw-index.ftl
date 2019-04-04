@@ -37,7 +37,7 @@
 
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
-      <li class="am-active"><a href="lw-index.vmlw-index.html">首页      </a></li>
+      <li class="am-active"><a href="/ index.html">首页      </a></li>
         <li><a href="/type/Photography.html">摄影      </a></li>
         <li><a href="/type/Internet.html">互联网      </a></li>
         <li><a href="/type/media.html">影音      </a></li>
@@ -46,13 +46,13 @@
         <li><a href="/type/ganwu">      </a></li>
         <li><a href="/type/ganwu">     </a></li>
         <li><a href="/type/ganwu">      </a></li>
-        <#if token?exists>
+        <#if tokenVertify>
           <li class="am-active">
               <a href="/myArticle.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的文章</a>
           </li>
-          <li class="am-active">
-              <a href="/member.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">个人中心</a>
-          </li>
+          <#--<li class="am-active">-->
+              <#--<a href="/member.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">个人中心</a>-->
+          <#--</li>-->
           <li class="am-active">
               <a href="/logout.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">注销</a>
           </li>
@@ -67,9 +67,9 @@
     </#if>
 
     </ul>
-    <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
+    <form class="am-topbar-form am-topbar-right am-form-inline" role="search" action="/search.html" >
       <div class="am-form-group">
-        <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+        <input type="text" class="am-form-field am-input-sm" name="searchCon" placeholder="搜索">
       </div>
     </form>
   </div>
@@ -108,10 +108,10 @@
                 <span><a href="" class="blog-color">${item.typeString} &nbsp;</a></span>
                 <span> &nbsp;</span>
                 <span>${item.createAt}</span>
-                <h1><a href="/index/article/detail/${item.id}.html">${item.articleName}</a></h1>
+                <h1><a href="/index/article/detail/${item.id}">${item.articleName}</a></h1>
                 <p>${item.title}
                 </p>
-                <p><a href="/index/article/detail/${item.id}.html" class="blog-continue">continue reading</a></p>
+                <p><a href="/index/article/detail/${item.id}" class="blog-continue">continue reading</a></p>
             </div>
         </article>
  </#list>
@@ -145,7 +145,7 @@
             <h2 class="blog-title"><span>文章推荐</span></h2>
             <ul class="am-list">
              <#list recommendList as reitem>
-                 <li><a href="/index/article/detail/${reitem.id}.html">${reitem.articleName}</a></li>
+                 <li><a href="/index/article/detail/${reitem.id}">${reitem.articleName}</a></li>
              </#list>
             </ul>
         </div>

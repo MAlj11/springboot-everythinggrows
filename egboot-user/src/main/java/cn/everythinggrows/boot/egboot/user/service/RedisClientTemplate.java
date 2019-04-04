@@ -48,6 +48,11 @@ public class RedisClientTemplate {
         }
     }
 
+    public boolean del(String key){
+         jedisClusterConfig.getJedisCluster().del(key);
+        return true;
+    }
+
     public Map<String,String> hgetAll(String key){
         Map<String,String> ret = jedisClusterConfig.getJedisCluster().hgetAll(key);
         return ret;

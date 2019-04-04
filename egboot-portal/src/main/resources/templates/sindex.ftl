@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="static/assets/css/main.css" />
     <link rel="icon" type="image/png" href="static/assets/i/favicon.png">
+    <bgsound src="static/bgmusic.mp3" autostart=true loop="-1" />
 </head>
 <body>
 

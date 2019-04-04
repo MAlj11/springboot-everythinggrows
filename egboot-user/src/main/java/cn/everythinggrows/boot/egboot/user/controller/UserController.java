@@ -62,4 +62,24 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/user/token/vertify",method = RequestMethod.POST)
+    public EgResult tokenVer(@RequestParam(value = "token")String token){
+        return userAccount.tokenVerti(token);
+    }
+
+    @RequestMapping(value = "/user/logout")
+    public EgResult logout(@RequestParam(value = "uid") long uid){
+        return userAccount.userLogout(uid);
+    }
+
+    public long getUid(String session){
+        if(session == null || session.length() == 0){
+            return 0;
+        }
+        String[] line = session.split(";");
+        long uid = Long.parseLong(line[0]);
+        return uid;
+    }
+
+
 }

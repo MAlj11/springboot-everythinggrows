@@ -45,7 +45,7 @@
         <li><a href="/type/ganwu">      </a></li>
         <li><a href="/type/ganwu">     </a></li>
         <li><a href="/type/ganwu">      </a></li>
-        <#if token?exists>
+        <#if tokenVertify>
           <li class="am-active">
               <a href="/myArticle.html" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的文章</a>
           </li>
