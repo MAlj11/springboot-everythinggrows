@@ -1,12 +1,10 @@
 package cn.everythinggrows.boot.egboot.blog.service;
 
-import cn.everythinggrows.boot.egboot.blog.Utils.ArticleUtils;
 import cn.everythinggrows.boot.egboot.blog.dao.CommentDao;
-import cn.everythinggrows.boot.egboot.blog.dubboapi.IUserAccount;
 import cn.everythinggrows.boot.egboot.blog.model.Comment;
 import cn.everythinggrows.boot.egboot.blog.model.egUser;
-import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +19,15 @@ public class CommentService {
     @Autowired
     private HttpRequestToUser httpRequestToUser;
 
+    @Value("${portrait_dns}")
+    String portraicdns;
 
     public List<Comment> getCommentWithAid(long aid){
         List<Comment> comments = commentDao.getCommentList(aid);
+        for(Comment comment : comments){
+            String portraitTrue = portraicdns + comment.getPortrait();
+            comment.setPortrait(portraitTrue);
+        }
         return comments;
     }
 
@@ -35,7 +39,13 @@ public class CommentService {
         comment.setAid(aid);
         comment.setContent(content);
         comment.setUid(uid);
-        comment.setPortrait(user.getPortrait());
+        //http://localhost:8080/static/uploadImages/portrait/13.jpg
+
+        String portrairDns = user.getPortrait();
+        String[] line = portrairDns.split("/");
+        int lastIndex = line.length - 1;
+        String portrait = line[lastIndex];
+        comment.setPortrait(portrait);
         comment.setUsername(user.getUsername());
         int i = commentDao.insertComment(comment);
         return i;

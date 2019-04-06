@@ -74,10 +74,6 @@
             <artifactId>lombok</artifactId>
             <version>1.16.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
         <!-- alibaba的druid数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -170,5 +166,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

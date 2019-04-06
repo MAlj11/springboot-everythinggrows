@@ -34,12 +34,12 @@
 
 <!-- content srart -->
 <br>
-<h1>文章发布成功</h1>
+<h1>评论发布成功</h1>
 <br>
 <hr>
 <a href="/index.html">返回首页</a>
 <br>
-<a href="/myArticle.html">查看自己的文章</a>
+<a href="/index/article/detail/${articleid}">返回文章</a>
 <!-- content end -->
 
 <footer class="blog-footer">

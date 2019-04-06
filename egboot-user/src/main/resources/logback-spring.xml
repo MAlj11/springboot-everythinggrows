@@ -3,7 +3,7 @@
 
     <contextName>logbackdemo</contextName>
 
-    <property name="logback.logdir" value="I:/logs/user"/>
+    <property name="logback.logdir" value="/mnt/logs/user"/>
     <property name="logback.appname" value="bootuser"/>
 
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">

@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <!--导入simditor的样式-->
-    <link rel="stylesheet"  href="static/simditor/styles/simditor.css" type="text/css">
+    <link rel="stylesheet"  href="/static/simditor/styles/simditor.css" type="text/css">
     <!-- 导入 simditor 的 JavaScript 库 -->
-    <script type="text/javascript" src="static/simditor/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="static/simditor/scripts/module.min.js"></script>
-    <script type="text/javascript" src="static/simditor/scripts/hotkeys.min.js"></script>
-    <script type="text/javascript" src="static/simditor/scripts/uploader.min.js"></script>
-    <script type="text/javascript" src="static/simditor/scripts/simditor.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/module.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/hotkeys.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/uploader.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/simditor.min.js"></script>
 
     <!-- 导入我们自己的通用样式库 -->
-    <link rel="stylesheet" href="static/styles/generic.css">
+    <link rel="stylesheet" href="/static/styles/generic.css">
     <!-- 导入 Font Awesome 样式库-->
-    <link rel="stylesheet" href="static/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="static/styles/header.css" >
-    <link rel="stylesheet" href="static/styles/publish.css" >
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/styles/header.css" >
+    <link rel="stylesheet" href="/static/styles/publish.css" >
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -28,15 +28,15 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="static/assets/i/favicon.png">
+    <link rel="icon" sizes="192x192" href="/static/assets/i/favicon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="枝丫"/>
-    <link rel="apple-touch-icon-precomposed" href="static/assets/i/favicon.png">
-    <meta name="msapplication-TileImage" content="static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/favicon.png">
+    <meta name="msapplication-TileImage" content="/static/assets/i/favicon.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="static/assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="static/assets/css/app.css">
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
 
 </head>
 
@@ -44,7 +44,7 @@
 
 <header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
     <div class="am-u-sm-8 am-u-sm-centered">
-        <img width="200" src="static/assets/i/logo.jpg"/>
+        <img width="200" src="http://139.199.36.66:8080/static/assets/i/logo.jpg"/>
         <h2 class="am-hide-sm-only">枝丫</h2>
     </div>
 </header>

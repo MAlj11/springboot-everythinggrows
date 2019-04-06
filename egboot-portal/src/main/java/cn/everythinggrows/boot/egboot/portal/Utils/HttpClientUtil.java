@@ -193,7 +193,7 @@ public class HttpClientUtil {
 					paramList.add(new BasicNameValuePair(key, param.get(key)));
 				}
 				// 模拟表单
-				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList);
+				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList,"UTF-8");
 				httpPost.setEntity(entity);
 			}
 			httpPost.setHeader(handerName,handerValue);

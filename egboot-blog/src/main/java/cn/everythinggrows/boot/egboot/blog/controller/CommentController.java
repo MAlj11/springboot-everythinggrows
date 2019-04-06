@@ -26,9 +26,9 @@ public class CommentController {
     }
 
     @NeedSession
-    @RequestMapping(value = "/blog/comment/insert")
+    @RequestMapping(value = "/blog/comment/insert",method = RequestMethod.POST)
     public EgResult insertComment(@RequestParam(value = "aid") long aid,
-                                   @RequestParam(value = "contnet")String content,
+                                   @RequestParam(value = "content")String content,
                                     @RequestHeader(value = "x-eg-session") String session){
         long uid = getUid(session);
         int i = commentService.insertComment(aid,uid,content);

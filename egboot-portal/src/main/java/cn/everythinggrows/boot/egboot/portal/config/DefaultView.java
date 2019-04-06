@@ -27,6 +27,7 @@ public class DefaultView extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/type").addResourceLocations("classpath:/");
         registry.addResourceHandler("/index/article/detail/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/blog/article/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/article/static/**").addResourceLocations("classpath:/static/");
     }
 
 }

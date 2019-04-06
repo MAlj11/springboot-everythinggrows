@@ -10,6 +10,9 @@ import cn.everythinggrows.boot.egboot.blog.event.ArticleList;
 import cn.everythinggrows.boot.egboot.blog.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egArticle;
 import cn.everythinggrows.boot.egboot.blog.model.egUidArticle;
+import cn.everythinggrows.boot.egboot.blog.model.egUser;
+import cn.everythinggrows.boot.egboot.blog.service.HttpRequestToSearch;
+import cn.everythinggrows.boot.egboot.blog.service.HttpRequestToUser;
 import cn.everythinggrows.boot.egboot.blog.service.IndexService;
 import cn.everythinggrows.boot.egboot.blog.service.RedisClientTemplate;
 import com.alibaba.fastjson.JSONObject;
@@ -35,11 +38,17 @@ public class ArticleController {
     private RedisClientTemplate redisClientTemplate;
     @Autowired
     private ArticleList articleList;
+    @Autowired
+    private HttpRequestToSearch httpRequestToSearch;
+    @Autowired
+    private HttpRequestToUser httpRequestToUser;
 
     @Value("${blog_coverPic}")
     String blog_coverPic;
     @Value("${blog_coverPic_dns}")
     String blog_coverPic_dns;
+    @Value("${SEARCH_BASE_URL}")
+    String SEARCH_BASE_URL;
 
 
     @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
@@ -93,8 +102,15 @@ public class ArticleController {
         articleList.insertArtilceListRedis(String.valueOf(aid));
         redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
         redisClientTemplate.delRedisByte(IndexService.TYPE_ARTICLE_CACHE.getBytes());
-        return EgResult.ok();
-    }
+
+        //将文章插入es
+        try {
+            egUser user = httpRequestToUser.getUser(uid);
+            httpRequestToSearch.saveEs(aid, title, user.getUsername());
+        }finally {
+            return EgResult.ok();
+        }
+        }
 
     @RequestMapping(value = "/blog/article/get/{aid}")
     public EgResult getArticle(@PathVariable(value = "aid") long aid){
