@@ -69,7 +69,10 @@
              <h1><a href="/index/article/detail/${item.aid}.html">${item.articleName}</a></h1>
              <p>${item.title}
              </p>
-             <p><a href="/index/article/detail/${item.aid}.html" class="blog-continue">continue reading</a></p>
+             <p> <a href="/delete/article/${item.aid}">删除文章</a></p>
+             <p><a href="/index/article/detail/${item.aid}.html" class="blog-continue">continue reading</a>
+             </p>
+
          </div>
      </article>
  </#list>

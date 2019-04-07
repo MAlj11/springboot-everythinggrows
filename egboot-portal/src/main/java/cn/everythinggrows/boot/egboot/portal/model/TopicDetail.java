@@ -11,6 +11,7 @@ public class TopicDetail {
     private String username;
     private String portrait;
     private String extend;
+    private Boolean isMe;
     private Integer createAt;
 
 
@@ -100,5 +101,13 @@ public class TopicDetail {
 
     public void setCreateAt(Integer createAt) {
         this.createAt = createAt;
+    }
+
+    public Boolean getMe() {
+        return isMe;
+    }
+
+    public void setMe(Boolean me) {
+        isMe = me;
     }
 }

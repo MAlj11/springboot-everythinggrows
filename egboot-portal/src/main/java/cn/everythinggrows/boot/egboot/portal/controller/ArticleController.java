@@ -7,8 +7,11 @@ import cn.everythinggrows.boot.egboot.portal.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.portal.model.egUidArticle;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +27,7 @@ import java.util.Map;
 
 @Controller
 public class ArticleController {
+    private Logger logger = LoggerFactory.getLogger(ArticleController.class);
     @Value("${BLOG_BASE_URL}")
     String BLOG_BASE_URL;
 
@@ -76,10 +80,28 @@ public class ArticleController {
         JSONObject myartJson = HttpRequsetUtil.requestGet(myArtUrl,null);
         String myartList = myartJson.getString("egUidArticles");
         List<egUidArticle> egUidArticleList = JSONObject.parseArray(myartList, egUidArticle.class);
+        logger.info("myarticle:{}",egUidArticleList);
         session.setAttribute("myArticles",egUidArticleList);
         return "lw-myArticle";
     }
 
+    @RequestMapping("/delete/article/{aid}")
+    public String deleteArticle(@PathVariable(value = "aid") long aid,
+                                HttpServletRequest request) throws UnsupportedEncodingException {
+        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
+        if(tokenVal == null || tokenVal.length() == 0){
+            return "lw-log";
+        }
+        tokenVal = URLDecoder.decode(tokenVal,"utf-8");
+        String delUrl = BLOG_BASE_URL + "/article/delete/" + String.valueOf(aid);
+        String ret = HttpClientUtil.doGetWithHander(delUrl,null,"x-eg-session",tokenVal);
+        JSONObject json = JSON.parseObject(ret);
+        Map dataMap = JSONObject.toJavaObject(json, Map.class);
+        if((Integer)dataMap.get("status")==200){
+            return "delSuccess";
+        }
+        return "lw-myArticle";
+    }
 
     public long getUid(String session){
         if(session == null || session.length() == 0){

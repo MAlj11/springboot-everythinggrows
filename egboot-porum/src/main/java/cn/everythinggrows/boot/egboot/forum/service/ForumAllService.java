@@ -80,11 +80,15 @@ public class ForumAllService {
     public int insertTopic(long uid, String content){
         egUser user = httpRequestToUser.getUser(uid);
         long tid = redisClientTemplate.tidGeneration();
+        String portrairDns = user.getPortrait();
+        String[] line = portrairDns.split("/");
+        int lastIndex = line.length - 1;
+        String portrait = line[lastIndex];
         Topic topic = new Topic();
         topic.setTid(tid);
         topic.setContent(content);
         topic.setUid(user.getUid());
-        topic.setPortrait(user.getPortrait());
+        topic.setPortrait(portrait);
         topic.setUsername(user.getUsername());
         topic.setExtend("");
         int createAt = (int)(System.currentTimeMillis() / 1000);

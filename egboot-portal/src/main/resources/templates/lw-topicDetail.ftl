@@ -31,76 +31,59 @@
 </header>
 <!-- header end -->
 <hr>
+<!-- nav start -->
+<nav class="am-g am-g-fixed blog-fixed blog-nav">
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
+    <div class="am-collapse am-topbar-collapse" id="blog-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav">
+            <li><a href="/index.html">首页      </a></li>
+            <li><a href="/type/Photography.html">摄影      </a></li>
+            <li><a href="/type/Internet.html">互联网      </a></li>
+            <li><a href="/type/media.html">影音      </a></li>
+            <li><a href="/type/feeling.html">感悟      </a></li>
+            <li class="am-active"><a href="/forum/index?perPage=1">论坛      </a></li>
+            <li><a href="/type/ganwu">      </a></li>
+            <li><a href="/type/ganwu">     </a></li>
+            <li><a href="/type/ganwu">      </a></li>
+        <#if tokenVertify>
+          <li class="am-active">
+              <a href="/topic/detail/write/${topicTidd}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">添加回复</a>
+          </li>
+        <#else>
+          <li class="am-active">
+              <a href="/loginPage.html" class="layout-user-downmenu-link">立即登录</a>
+          </li>
+          <li class="am-active">
+              <a href="/registerPage.html" target="_blank" class="layout-user-downmenu-link"
+                 data-mtype="wmz_public_grzx_register">立即注册</a>
+          </li>
+        </#if>
+
+        </ul>
+        <form class="am-topbar-form am-topbar-right am-form-inline" role="search" action="/search.html" >
+            <div class="am-form-group">
+                <input type="text" class="am-form-field am-input-sm" name="searchCon" placeholder="搜索">
+            </div>
+        </form>
+    </div>
+</nav>
+<hr>
+<!-- nav end -->
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
-        <article class="am-article blog-article-p">
-            <div class="am-article-hd">
-                <h1 class="am-article-title blog-text-center">${articleDetail.articleName}</h1>
-                <p class="am-article-meta blog-text-center">
-                    <span><a href="#">${user.username}</a></span>-
-                    <span><a href="#">${articleDetail.createAt}</a></span>
-                </p>
-            </div>
-            <div class="am-article-bd">
-                <img src="${articleDetail.coverPic}" alt="" class="blog-entry-img blog-article-margin">
-                <p class="class="am-article-lead"">
-                ${articleDetail.content}
-                </p>
-            </div>
-        </article>
-
-
-        <hr>
+    <#list topicDetailList as topicDetail>
         <div class="am-g blog-author blog-article-margin">
             <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
-                <img src="${user.portrait}" alt="" class="blog-author-img am-circle">
+                <img src="${topicDetail.portrait}" alt="" class="blog-author-img am-circle">
             </div>
             <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
-                <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">${user.username}</span></h3>
+                <h3><span class="blog-color">${topicDetail.username}</span></h3>
+                <p>${topicDetail.content}</p>
             </div>
         </div>
         <hr>
-
-        <hr>
-
-
-          <#if tokenVertify>
-        <form class="am-form am-g" action="/article/comment" method="get">
-            <h3 class="blog-comment">评论</h3>
-            <fieldset>
-
-                <div class="am-form-group am-u-sm-4">
-                    <input type="hidden" class="" placeholder="文章id" name="aid" value="${articleDetail.id}">
-                </div>
-
-                <#--<div class="am-form-group am-u-sm-4 blog-clear-right">-->
-                    <#--<input type="password" class="" placeholder="网站">-->
-                <#--</div>-->
-
-                <div class="am-form-group">
-                    <textarea class="" rows="5" placeholder="一字千金" name="content"></textarea>
-                </div>
-
-                <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
-            </fieldset>
-        </form>
-          <#else>
-          <p><button type="button" class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</button></p>
-          </#if>
-        <hr>
-
-      <#list commentDetail as item>
-        <div class="am-g blog-author blog-article-margin">
-            <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
-                <img src="${item.portrait}" alt="" class="blog-author-img am-circle">
-            </div>
-            <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
-                <h3><span class="blog-color">${item.username}</span></h3>
-                <p>${item.content}</p>
-            </div>
-        </div>
       </#list>
 
     </div>

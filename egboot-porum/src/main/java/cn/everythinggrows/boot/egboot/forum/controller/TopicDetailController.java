@@ -11,7 +11,10 @@ import cn.everythinggrows.boot.egboot.forum.service.HttpRequestToUser;
 import cn.everythinggrows.boot.egboot.forum.service.TopicService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,6 +23,9 @@ import java.util.Map;
 
 @RestController
 public class TopicDetailController {
+    private static Logger log = LoggerFactory.getLogger(TopicDetailController.class);
+    @Value("${portrait_dns}")
+    String portraicdns;
 
     @Autowired
     private Topicdao topicdao;
@@ -37,6 +43,11 @@ public class TopicDetailController {
     @RequestMapping(value = "/forum/topic/detail/{tid}")
     public EgResult getTopicDetailWithTid(@PathVariable("tid") long tid){
         List<TopicDetail> topicDetails = topicService.getTopicDetailLsit(tid);
+        for(TopicDetail topicDetail : topicDetails){
+            String pordns = portraicdns + topicDetail.getPortrait();
+            topicDetail.setPortrait(pordns);
+            log.info("fprum pot : {}",pordns);
+        }
         Map<String,Object> ret = Maps.newHashMap();
         ret.put("topicDetails",topicDetails);
         return EgResult.ok(ret);
@@ -79,7 +90,7 @@ public class TopicDetailController {
     @NeedSession
     @RequestMapping(value = "/forum/topic/detail/delete")
     public EgResult deleteTopicDetail(@RequestParam(value = "id") long id,
-                                        @RequestParam(value = "tid") long tid){
+                                      @RequestParam(value = "tid") long tid){
         int i = topicService.deleteTopicDetail(id,tid);
         return EgResult.ok();
     }

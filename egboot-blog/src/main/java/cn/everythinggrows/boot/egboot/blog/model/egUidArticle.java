@@ -74,5 +74,17 @@ public class egUidArticle {
         this.createAt = createAt;
     }
 
-
+    @Override
+    public String toString() {
+        return "egUidArticle{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", aid=" + aid +
+                ", articleName='" + articleName + '\'' +
+                ", title='" + title + '\'' +
+                ", coverPic='" + coverPic + '\'' +
+                ", type=" + type +
+                ", createAt=" + createAt +
+                '}';
+    }
 }

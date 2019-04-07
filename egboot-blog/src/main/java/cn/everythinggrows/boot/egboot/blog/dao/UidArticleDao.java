@@ -44,4 +44,17 @@ public class UidArticleDao {
         return egUidArticles;
     }
 
+    public int delUidArticle(long uid,long aid){
+        Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("uid",uid);
+        dataMap.put("aid",aid);
+        dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
+        int DBkey = DBUtils.getDBKey(uid);
+        DatabaseType type = DatabaseType.getType(DBkey);
+        DatabaseContextHolder.setDatabaseType(type);
+        int i = blogSqlSession.delete("UidArticleDao.deleteUidArticle",dataMap);
+        DatabaseContextHolder.clearDatabaseType();
+        return i;
+    }
+
 }

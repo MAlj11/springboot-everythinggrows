@@ -18,12 +18,16 @@ public class TopicService {
     private Topicdao topicdao;
 
     public int insertTopicDetail(egUser user, String content, long tid){
+        String portrairDns = user.getPortrait();
+        String[] line = portrairDns.split("/");
+        int lastIndex = line.length - 1;
+        String portrait = line[lastIndex];
         TopicDetail topicDetail = new TopicDetail();
         topicDetail.setTid(tid);
         topicDetail.setContent(content);
         topicDetail.setUid(user.getUid());
         topicDetail.setUsername(user.getUsername());
-        topicDetail.setPortrait(user.getPortrait());
+        topicDetail.setPortrait(portrait);
         topicDetail.setToUid(0L);
         topicDetail.setToUsername("");
         topicDetail.setToPortrait("");

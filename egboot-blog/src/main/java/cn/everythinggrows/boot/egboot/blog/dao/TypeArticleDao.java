@@ -8,6 +8,8 @@ import com.google.common.collect.Maps;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,17 @@ public class TypeArticleDao {
         List<EgTypeArticle> egTypeArticleList = blogSqlSession.selectList("TypeArticleDao.selectArticle",dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return egTypeArticleList;
+    }
+
+    public int deleteTypeArticle(int type,long aid){
+        Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("tableName", "eg_type_article_" + String.valueOf(type));
+        dataMap.put("aid",aid);
+        DatabaseType dbtype = DatabaseType.getType(0);
+        DatabaseContextHolder.setDatabaseType(dbtype);
+        int i = blogSqlSession.delete("TypeArticleDao.deleteTypeArticle",dataMap);
+        DatabaseContextHolder.clearDatabaseType();
+        return i;
     }
 
 }

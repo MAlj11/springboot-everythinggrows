@@ -101,12 +101,13 @@ public class ArticleController {
         //将文章id插入redis
         articleList.insertArtilceListRedis(String.valueOf(aid));
         redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
-        redisClientTemplate.delRedisByte(IndexService.TYPE_ARTICLE_CACHE.getBytes());
+        String typeKey = IndexService.TYPE_ARTICLE_CACHE + String.valueOf(type);
+        redisClientTemplate.delRedisByte(typeKey.getBytes());
 
         //将文章插入es
         try {
             egUser user = httpRequestToUser.getUser(uid);
-            httpRequestToSearch.saveEs(aid, title, user.getUsername());
+            httpRequestToSearch.saveEs(aid, articleName, user.getUsername());
         }finally {
             return EgResult.ok();
         }
@@ -125,12 +126,19 @@ public class ArticleController {
 
     @RequestMapping(value = "/blog/article/delete/{aid}")
     @NeedSession
-    public EgResult deleteArticle(@PathVariable(value = "aid") long aid){
+    public EgResult deleteArticle(@PathVariable(value = "aid") long aid,
+                                  @RequestHeader(value = "x-eg-session") String session){
+        egArticle article = indexDao.getArtcleOne(aid);
+        articleList.deleteArticle(aid);
+        String typeKey = IndexService.TYPE_ARTICLE_CACHE + String.valueOf(article.getType());
        int i = indexDao.deleteArticle(aid);
+       long uid = getUid(session);
+       uidArticleDao.delUidArticle(uid,aid);
+       typeArticleDao.deleteTypeArticle(article.getType(),aid);
+       articleList.deleteArticle(aid);
        if(i>0){
-           articleList.deleteArticle(aid);
+           redisClientTemplate.delRedisByte(typeKey.getBytes());
            redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
-           redisClientTemplate.delRedisByte(IndexService.TYPE_ARTICLE_CACHE.getBytes());
            return EgResult.ok();
        }else{
            return EgResult.systemError();
@@ -145,6 +153,7 @@ public class ArticleController {
             String coverdns = blog_coverPic_dns + article.getCoverPic();
             article.setCoverPic(coverdns);
         }
+        log.info("myarticle:{}",egUidArticles);
         Map<String,Object> data = new HashMap<>();
         data.put("egUidArticles",egUidArticles);
         return EgResult.ok(data);

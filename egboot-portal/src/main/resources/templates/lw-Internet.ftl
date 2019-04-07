@@ -41,7 +41,8 @@
         <li><a href="/type/Photography.html">摄影      </a></li>
         <li class="am-active.html"><a href="/type/Internet.html">互联网      </a></li>
         <li><a href="/type/media.html">影音      </a></li>
-        <li><a href="/type/feeling">感悟      </a></li>
+        <li><a href="/type/feeling.html">感悟      </a></li>
+        <li><a href="/forum/index?perPage=1">论坛      </a></li>
         <li><a href="/type/ganwu">      </a></li>
         <li><a href="/type/ganwu">     </a></li>
         <li><a href="/type/ganwu">      </a></li>
@@ -93,7 +94,7 @@
     <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>枝丫</span></h2>
-            <img src="http://139.199.36.66:8080/static/assets/i/f14.jpg" alt="about me" class="blog-entry-img" >
+            <img src="/static/assets/i/f14.jpg" alt="about me" class="blog-entry-img" >
             <p>将记忆绑在风里,犹记起乡音的口吻,在黄昏与星辰的游荡间,你牵着我的手,顺着枝桠的方向,指向时光.</p>
         </div>
         <div class="blog-sidebar-widget blog-bor">

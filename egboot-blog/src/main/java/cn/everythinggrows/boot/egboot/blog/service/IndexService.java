@@ -126,7 +126,8 @@ public class IndexService {
     }
 
      public EgResult getArticleWithType(int type) throws IOException, ClassNotFoundException {
-         byte[] data = redisClientTemplate.getRedisByte(TYPE_ARTICLE_CACHE.getBytes());
+        String typeKey = TYPE_ARTICLE_CACHE + String.valueOf(type);
+         byte[] data = redisClientTemplate.getRedisByte(typeKey.getBytes());
          List<EgTypeArticle> egTypeArticleList = new ArrayList<>();
          if(data == null || data.length == 0){
              egTypeArticleList = typeArticleDao.getTypeArticleList(type);
@@ -135,7 +136,7 @@ public class IndexService {
                  String artidns = blog_coverPic_dns + egTypeArticle.getCoverPic();
                  egTypeArticle.setCoverPic(artidns);
              }
-             redisClientTemplate.setRedisByte(TYPE_ARTICLE_CACHE.getBytes(),SerializeUtil.serialize(egTypeArticleList));
+             redisClientTemplate.setRedisByte(typeKey.getBytes(),SerializeUtil.serialize(egTypeArticleList));
          }else{
              egTypeArticleList = (List<EgTypeArticle>)SerializeUtil.deserialize(data);
          }

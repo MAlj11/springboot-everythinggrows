@@ -50,29 +50,16 @@
 </header>
 
 <div class="publish-container">
-    <h2>发表文章</h2>
+    <h2>写回复</h2>
     <div class="publish">
 
-        <form action="/blog/article/publish.html" method="post">
-            <div class="title-container">
-                <input type="text" name="articleName" placeholder="请输入文章的题目">
-            </div>
-            <div class="title-container">
-                <input type="text" name="title" placeholder="请输入文章的标题"><br/>
-            </div>
-            <div>
-                    请选择文章类型？
-                    <label><input name="type" type="radio" value="1" />摄影 </label>
-                    <label><input name="type" type="radio" value="2" />互联网 </label>
-                    <label><input name="type" type="radio" value="3" />影音 </label>
-                    <label><input name="type" type="radio" value="4" />感悟 </label>
-            </div>
+        <form action="topic/detail/insert/${topicTidw}" method="post">
             <div class="content-container">
                 <textarea name="content" id="content"></textarea>
                 <script type="text/javascript">
                     var editor = new Simditor( {
                         textarea : $('#content'),
-                        placeholder : '请输入你的文章正文...',
+                        placeholder : '请输入你的回复...',
                         toolbar : true
                     } );
                 </script>

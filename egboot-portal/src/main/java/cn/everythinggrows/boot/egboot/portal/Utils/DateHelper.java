@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 这是一个用来操作日期的工具类
@@ -110,6 +111,11 @@ public final class DateHelper {
 			System.out.println( "解析 " + source + " 为 日期时发生错误，它可能不符合 " +  DATE_PATTERN + " 模式");
 		}
 		return date ;
+	}
+	public static Date stampToDate(String s){
+		long lt = new Long(s);
+		Date date = new Date(lt);
+		return date;
 	}
 	
 }

@@ -1,0 +1,55 @@
+2019-04-07 11:10:42,900 [main] INFO  c.e.b.e.p.EgbootPortalApplication 50 - Starting EgbootPortalApplication on DESKTOP-6KL1BNP with PID 13704 (I:\IdeaProjects\springboot-everythinggrows\egboot-portal\target\classes started by MA in I:\IdeaProjects\springboot-everythinggrows\egboot-portal)
+2019-04-07 11:10:42,916 [main] INFO  c.e.b.e.p.EgbootPortalApplication 675 - No active profile set, falling back to default profiles: default
+2019-04-07 11:10:43,660 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-07 11:10:43,676 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-07 11:10:43,691 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-04-07 11:10:44,199 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-04-07 11:10:44,199 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:10:44,214 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-04-07 11:10:44,214 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-04-07 11:10:44,214 [main] INFO  o.a.c.core.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\software\xshell\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;I:\redis\;I:\zookepper\zookeeper-3.3.6\bin;I:\zookepper\zookeeper-3.3.6\conf;D:\software\edius\EDIUS 9\QTSystem\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Users\MA\AppData\Local\Microsoft\WindowsApps;;.]
+2019-04-07 11:10:44,370 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-04-07 11:10:44,370 [main] INFO  o.s.web.context.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1392 ms
+2019-04-07 11:10:45,064 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:10:45,080 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 204 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-04-07 11:10:45,080 [main] INFO  c.e.b.e.p.EgbootPortalApplication 59 - Started EgbootPortalApplication in 2.868 seconds (JVM running for 4.459)
+2019-04-07 11:11:03,956 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-07 11:11:03,956 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-04-07 11:11:03,967 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 11 ms
+2019-04-07 11:11:07,985 [http-nio-8080-exec-2] INFO  c.e.b.e.p.controller.indexController 55 - 进入index====================================
+2019-04-07 11:11:27,103 [http-nio-8080-exec-4] INFO  c.e.b.e.p.controller.indexController 55 - 进入index====================================
+2019-04-07 11:13:21,393 [http-nio-8080-exec-6] INFO  c.e.b.e.p.controller.indexController 55 - 进入index====================================
+2019-04-07 11:13:59,559 [main] INFO  c.e.b.e.p.EgbootPortalApplication 50 - Starting EgbootPortalApplication on DESKTOP-6KL1BNP with PID 16016 (I:\IdeaProjects\springboot-everythinggrows\egboot-portal\target\classes started by MA in I:\IdeaProjects\springboot-everythinggrows\egboot-portal)
+2019-04-07 11:13:59,559 [main] INFO  c.e.b.e.p.EgbootPortalApplication 675 - No active profile set, falling back to default profiles: default
+2019-04-07 11:14:00,304 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-07 11:14:00,304 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-07 11:14:00,335 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-04-07 11:14:00,999 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-04-07 11:14:01,022 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:14:01,034 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-04-07 11:14:01,034 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-04-07 11:14:01,043 [main] INFO  o.a.c.core.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\software\xshell\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;I:\redis\;I:\zookepper\zookeeper-3.3.6\bin;I:\zookepper\zookeeper-3.3.6\conf;D:\software\edius\EDIUS 9\QTSystem\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Users\MA\AppData\Local\Microsoft\WindowsApps;;.]
+2019-04-07 11:14:01,231 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-04-07 11:14:01,231 [main] INFO  o.s.web.context.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1610 ms
+2019-04-07 11:14:02,652 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:14:02,683 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 204 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-04-07 11:14:02,699 [main] INFO  c.e.b.e.p.EgbootPortalApplication 59 - Started EgbootPortalApplication in 3.879 seconds (JVM running for 7.747)
+2019-04-07 11:14:28,739 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-07 11:14:28,740 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-04-07 11:14:28,749 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 9 ms
+2019-04-07 11:14:43,849 [http-nio-8080-exec-1] INFO  c.e.b.e.p.controller.indexController 55 - 进入index====================================
+2019-04-07 11:23:06,059 [main] INFO  c.e.b.e.p.EgbootPortalApplication 50 - Starting EgbootPortalApplication on DESKTOP-6KL1BNP with PID 12280 (I:\IdeaProjects\springboot-everythinggrows\egboot-portal\target\classes started by MA in I:\IdeaProjects\springboot-everythinggrows\egboot-portal)
+2019-04-07 11:23:06,059 [main] INFO  c.e.b.e.p.EgbootPortalApplication 675 - No active profile set, falling back to default profiles: default
+2019-04-07 11:23:06,818 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-07 11:23:06,820 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-07 11:23:06,845 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 16ms. Found 0 repository interfaces.
+2019-04-07 11:23:07,315 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-04-07 11:23:07,342 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:23:07,351 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-04-07 11:23:07,351 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-04-07 11:23:07,357 [main] INFO  o.a.c.core.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\software\xshell\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;I:\redis\;I:\zookepper\zookeeper-3.3.6\bin;I:\zookepper\zookeeper-3.3.6\conf;D:\software\edius\EDIUS 9\QTSystem\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Users\MA\AppData\Local\Microsoft\WindowsApps;;.]
+2019-04-07 11:23:07,518 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-04-07 11:23:07,518 [main] INFO  o.s.web.context.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1396 ms
+2019-04-07 11:23:08,329 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-04-07 11:23:08,345 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 204 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-04-07 11:23:08,360 [main] INFO  c.e.b.e.p.EgbootPortalApplication 59 - Started EgbootPortalApplication in 2.986 seconds (JVM running for 6.349)

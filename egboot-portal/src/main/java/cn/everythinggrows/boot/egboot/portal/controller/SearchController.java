@@ -3,6 +3,8 @@ package cn.everythinggrows.boot.egboot.portal.controller;
 import cn.everythinggrows.boot.egboot.portal.Utils.HttpRequsetUtil;
 import cn.everythinggrows.boot.egboot.portal.model.Article;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 @Controller
 public class SearchController {
+    private Logger logger = LoggerFactory.getLogger(SearchController.class);
 
     @Value("${SEARCH_BASE_URL}")
     String SEARCH_BASE_URL;
@@ -29,6 +32,7 @@ public class SearchController {
         JSONObject typeJson = HttpRequsetUtil.requestGet(url,param);
         String seaList = typeJson.getString("SearchList");
         List<Article> searchList = JSONObject.parseArray(seaList, Article.class);
+        logger.info("searchList:{}",searchList);
         HttpSession session = request.getSession();
         session.setAttribute("searchList",searchList);
         return "lw-search";

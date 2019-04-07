@@ -15,18 +15,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="枝丫"/>
-    <link rel="apple-touch-icon-precomposed" href="http://192.168.0.158:8080/static/assets/i/favicon.png">
-    <meta name="msapplication-TileImage" content="http://192.168.0.158:8080/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/favicon.png">
+    <meta name="msapplication-TileImage" content="/static/assets/i/favicon.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="http://192.168.0.158:8080/static/assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="http://192.168.0.158:8080/static/assets/css/app.css">
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
 </head>
 
 <body id="blog">
 
 <header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
     <div class="am-u-sm-8 am-u-sm-centered">
-        <img width="200" src="http://192.168.0.158:8080/static/assets/i/logo.jpg"/>
+        <img width="200" src="/static/assets/i/logo.jpg"/>
         <h2 class="am-hide-sm-only">枝丫</h2>
     </div>
 </header>
@@ -34,12 +34,12 @@
 
 <!-- content srart -->
 <br>
-<h1>评论发布成功</h1>
+<h1>文章删除成功</h1>
 <br>
 <hr>
 <a href="/index.html">返回首页</a>
 <br>
-<a href="/index/article/detail/${articleid}">返回文章</a>
+<a href="/myArticle.html">查看自己的文章</a>
 <!-- content end -->
 
 <footer class="blog-footer">
@@ -65,13 +65,13 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="http://192.168.0.158:8080/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="http://192.168.0.158:8080/static/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/static/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="http://192.168.0.158:8080/static/assets/js/amazeui.min.js"></script>
+<script src="/static/assets/js/amazeui.min.js"></script>
 </body>
 </html>
