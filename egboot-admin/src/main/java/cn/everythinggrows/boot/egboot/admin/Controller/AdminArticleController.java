@@ -34,6 +34,11 @@ public class AdminArticleController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/admin-index.html")
+    public String adminIndex(){
+        return "admin-index";
+    }
+
     @RequestMapping(value = "/admin/index/article")
     public String adminArticle(HttpServletRequest request){
         HttpSession session = request.getSession();

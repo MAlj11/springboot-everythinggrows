@@ -42,20 +42,17 @@
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
         <h1 class="blog-text-center">-- 所有文章 --</h1>
+           <#list articleList as article>
         <div class="timeline-year">
             <hr>
-            <ul>
-                <#list articleList as article>
-                <hr>
                 <li>
                     <span class="am-u-sm-4 am-u-md-2 timeline-span">${article.articleName}</span>
                     <span class="am-u-sm-8 am-u-md-6"><a href="/admin/article/detail/${article.aid}">${article.title}</a></span>
-                    <a href="/admin/article/delete/${article.aid}">
+                    <a href="/admin/article/delete/${article.aid}">删除</a>
                 </li>
-                </#list>
-            </ul>
             <br>
         </div>
+           </#list>
         <hr>
     </div>
 </div>

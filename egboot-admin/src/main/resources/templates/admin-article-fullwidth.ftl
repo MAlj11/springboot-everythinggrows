@@ -11,15 +11,15 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="http://192.168.0.158:8080/static/assets/i/favicon.png">
+    <link rel="icon" sizes="192x192" href="http://192.168.0.158:9900/static/assets/i/favicon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="枝丫"/>
-    <link rel="apple-touch-icon-precomposed" href="http://192.168.0.158:8080/static/assets/i/app-icon72x72@2x.png">
-    <meta name="msapplication-TileImage" content="http://192.168.0.158:8080/static/assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="http://192.168.0.158:9900/static/assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileImage" content="http://192.168.0.158:9900/static/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="http://192.168.0.158:8080/static/assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="http://192.168.0.158:8080/static/assets/css/app.css">
+    <link rel="stylesheet" href="http://192.168.0.158:9900/static/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="http://192.168.0.158:9900/static/assets/css/app.css">
 </head>
 
 <body id="blog-article-sidebar">
@@ -100,14 +100,14 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="http://192.168.0.158:8080/static/assets/js/jquery.min.js"></script>
+<script src="http://192.168.0.158:9900/static/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="http://192.168.0.158:8080/static/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="http://192.168.0.158:9900/static/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="http://192.168.0.158:8080/static/assets/js/amazeui.min.js"></script>
+<script src="http://192.168.0.158:9900/static/assets/js/amazeui.min.js"></script>
 <!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>

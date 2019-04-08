@@ -50,7 +50,7 @@
                     <span class="am-u-sm-4 am-u-md-2 timeline-span">${topic.createDate}</span>
                     <span class="am-u-sm-8 am-u-md-6"><a href="">${topic.content}</a></span>
                     <br>
-                    <h4><a href="/admin/forum/delete/{topic.tid}">删除</a></h4>
+                    <h4><a href="/admin/forum/delete/${topic.tid}">删除</a></h4>
                 </li>
             </ul>
             <br>
