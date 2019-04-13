@@ -8,15 +8,13 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * 
  * Cookie 工具类
- *
  */
 public final class CookieUtils {
 
     /**
      * 得到Cookie的值, 不编码
-     * 
+     *
      * @param request
      * @param cookieName
      * @return
@@ -27,7 +25,7 @@ public final class CookieUtils {
 
     /**
      * 得到Cookie的值,
-     * 
+     *
      * @param request
      * @param cookieName
      * @return
@@ -57,7 +55,7 @@ public final class CookieUtils {
 
     /**
      * 得到Cookie的值,
-     * 
+     *
      * @param request
      * @param cookieName
      * @return
@@ -76,7 +74,7 @@ public final class CookieUtils {
                 }
             }
         } catch (UnsupportedEncodingException e) {
-        	 e.printStackTrace();
+            e.printStackTrace();
         }
         return retValue;
     }
@@ -131,7 +129,7 @@ public final class CookieUtils {
 
     /**
      * 设置Cookie的值，并使其在指定时间内生效
-     * 
+     *
      * @param cookieMaxage cookie生效的最大秒数
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
@@ -146,22 +144,22 @@ public final class CookieUtils {
             if (cookieMaxage > 0)
                 cookie.setMaxAge(cookieMaxage);
             if (null != request) {// 设置域名的cookie
-            	String domainName = getDomainName(request);
-            	System.out.println(domainName);
+                String domainName = getDomainName(request);
+                System.out.println(domainName);
                 if (!"localhost".equals(domainName)) {
-                	cookie.setDomain(domainName);
+                    cookie.setDomain(domainName);
                 }
             }
             cookie.setPath("/");
             response.addCookie(cookie);
         } catch (Exception e) {
-        	 e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     /**
      * 设置Cookie的值，并使其在指定时间内生效
-     * 
+     *
      * @param cookieMaxage cookie生效的最大秒数
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
@@ -176,16 +174,16 @@ public final class CookieUtils {
             if (cookieMaxage > 0)
                 cookie.setMaxAge(cookieMaxage);
             if (null != request) {// 设置域名的cookie
-            	String domainName = getDomainName(request);
-            	System.out.println(domainName);
+                String domainName = getDomainName(request);
+                System.out.println(domainName);
                 if (!"localhost".equals(domainName)) {
-                	cookie.setDomain(domainName);
+                    cookie.setDomain(domainName);
                 }
             }
             cookie.setPath("/");
             response.addCookie(cookie);
         } catch (Exception e) {
-        	 e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

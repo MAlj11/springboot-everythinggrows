@@ -33,16 +33,18 @@
 <hr>
 <!-- nav start -->
 <nav class="am-g am-g-fixed blog-fixed blog-nav">
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
+            data-am-collapse="{target: '#blog-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
 
     <div class="am-collapse am-topbar-collapse" id="blog-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav">
-            <li ><a href="/index.html">首页      </a></li>
-            <li><a href="/type/Photography.html">摄影      </a></li>
-            <li><a href="/type/Internet.html">互联网      </a></li>
-            <li><a href="/type/media.html">影音      </a></li>
-            <li><a href="/type/feeling.html">感悟      </a></li>
-            <li class="am-active.html"><a href="/forum/index?perPage=1">论坛      </a></li>
+            <li><a href="/index.html">首页 </a></li>
+            <li><a href="/type/Photography.html">摄影 </a></li>
+            <li><a href="/type/Internet.html">互联网 </a></li>
+            <li><a href="/type/media.html">影音 </a></li>
+            <li><a href="/type/feeling.html">感悟 </a></li>
+            <li class="am-active.html"><a href="/forum/index?perPage=1">论坛 </a></li>
         <#if tokenVertify>
           <li class="am-active">
               <a href="/forum/insert" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">添加话题</a>
@@ -80,7 +82,8 @@
                 <hr>
                 <li>
                     <span class="am-u-sm-4 am-u-md-2 timeline-span">${topic.createDate}</span>
-                    <span class="am-u-sm-8 am-u-md-6"><a href="/index/forum/detail/${topic.tid}">${topic.content}</a></span>
+                    <span class="am-u-sm-8 am-u-md-6"><a
+                            href="/index/forum/detail/${topic.tid}">${topic.content}</a></span>
                 </li>
             </ul>
             <br>
@@ -99,21 +102,29 @@
 <footer class="blog-footer">
     <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-            <h3>关于<枝丫></h3>
-            <p class="am-text-sm"><枝丫>包含着很多你喜欢的内容，我们希望每一个来到<枝丫>的朋友都会有所收获。</p>
+            <h3>关于
+                <枝丫>
+            </h3>
+            <p class="am-text-sm">
+                <枝丫>包含着很多你喜欢的内容，我们希望每一个来到
+                    <枝丫>的朋友都会有所收获。
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
             </p>
-            <p>我们追求卓越，然时间、经验、能力有限。<枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！</p>
+            <p>我们追求卓越，然时间、经验、能力有限。
+                <枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
 
         </div>
     </div>
-    <div class="blog-text-center"><枝丫></div>
+    <div class="blog-text-center">
+        <枝丫>
+    </div>
     <div class="blog-text-center">京ICP备19009766号</div>
 </footer>
-
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->

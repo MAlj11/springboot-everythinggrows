@@ -22,10 +22,11 @@ public class DateUtils {
     /**
      * 将时间戳转换为时间
      */
-    public static String stampToDate(String s){
+    public static String stampToDate(String s) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lt = new Long(s);
+        lt = lt * 1000L;
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
         return res;

@@ -1,25 +1,61 @@
 @charset "UTF-8";
 
-.publish-container { margin: 5px 0 ; box-shadow: 0 0 3px 2px #dedede ; }
+.publish-container {
+    margin: 5px 0;
+    box-shadow: 0 0 3px 2px #dedede;
+}
 
 .publish-container .publish {
-    width: 80% ; margin: 0 auto ; min-height: 500px ;
+    width: 80%;
+    margin: 0 auto;
+    min-height: 500px;
 }
 
-.publish-container>h2 { width: 80% ; margin: 0px auto ; font: 20px/4em "Microsoft YaHei" ;}
+.publish-container > h2 {
+    width: 80%;
+    margin: 0px auto;
+    font: 20px/4em "Microsoft YaHei";
+}
 
-.publish-container .publish .title-container { margin: 10px 10px ;  border: 1px solid #dedede ; border-radius: 5px ; height: 50px ; line-height: 50px ; }
+.publish-container .publish .title-container {
+    margin: 10px 10px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    height: 50px;
+    line-height: 50px;
+}
 
-.publish-container .publish .title-container input { margin-left: 1% ; font-size: 18px ; width: 95% ;  border: none ; outline: none ; background: transparent ;  }
+.publish-container .publish .title-container input {
+    margin-left: 1%;
+    font-size: 18px;
+    width: 95%;
+    border: none;
+    outline: none;
+    background: transparent;
+}
 
-.publish-container .publish .content-container { margin: 10px 10px ; border: 1px solid #dedede ; border-radius: 5px ; }
+.publish-container .publish .content-container {
+    margin: 10px 10px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+}
 
-.publish-container .publish .content-container .simditor { border: none ; border-radius: 5px ; }
+.publish-container .publish .content-container .simditor {
+    border: none;
+    border-radius: 5px;
+}
 
 .publish-container .publish input[type=submit] {
-    height: 50px ; width: 90% ; display: block ; margin: 5px auto 15px auto ; background: #0002ff ; color: #FFFFFF ;
-    border: 1px solid #0002ff ;
-    outline: none ;
+    height: 50px;
+    width: 90%;
+    display: block;
+    margin: 5px auto 15px auto;
+    background: #0002ff;
+    color: #FFFFFF;
+    border: 1px solid #0002ff;
+    outline: none;
 }
 
-.publish-container .publish input[type=submit]:hover { background: green ; }
+.publish-container .publish input[type=submit]:hover {
+    background: green;
+}

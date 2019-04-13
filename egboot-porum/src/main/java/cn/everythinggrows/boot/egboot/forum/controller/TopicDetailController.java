@@ -37,19 +37,20 @@ public class TopicDetailController {
 
     /**
      * 根据tid查询该标题的所有内容
+     *
      * @param tid
      * @return
      */
     @RequestMapping(value = "/forum/topic/detail/{tid}")
-    public EgResult getTopicDetailWithTid(@PathVariable("tid") long tid){
+    public EgResult getTopicDetailWithTid(@PathVariable("tid") long tid) {
         List<TopicDetail> topicDetails = topicService.getTopicDetailLsit(tid);
-        for(TopicDetail topicDetail : topicDetails){
+        for (TopicDetail topicDetail : topicDetails) {
             String pordns = portraicdns + topicDetail.getPortrait();
             topicDetail.setPortrait(pordns);
-            log.info("fprum pot : {}",pordns);
+            log.info("fprum pot : {}", pordns);
         }
-        Map<String,Object> ret = Maps.newHashMap();
-        ret.put("topicDetails",topicDetails);
+        Map<String, Object> ret = Maps.newHashMap();
+        ret.put("topicDetails", topicDetails);
         return EgResult.ok(ret);
 
     }
@@ -57,6 +58,7 @@ public class TopicDetailController {
 
     /**
      * 向该标题插入一条内容
+     *
      * @param tid
      * @param content
      * @param session
@@ -64,18 +66,17 @@ public class TopicDetailController {
      */
     @NeedSession
     @RequestMapping(value = "/forum/topic/detail/insert")
-    public EgResult inseretTopicDetail(@RequestParam(value = "tid",defaultValue = "0") long tid,
-                                       @RequestParam(value = "content",defaultValue = "") String content,
-                                       @RequestHeader(value = "x-eg-session") String session){
+    public EgResult inseretTopicDetail(@RequestParam(value = "tid", defaultValue = "0") long tid,
+                                       @RequestParam(value = "content", defaultValue = "") String content,
+                                       @RequestHeader(value = "x-eg-session") String session) {
 
 //        String token = String.valueOf(uid) + ";" + uuid;
         long uid = getUid(session);
         egUser user = httpRequestToUser.getUser(uid);
-        int i = topicService.insertTopicDetail(user,content,tid);
-        if (i > 0){
+        int i = topicService.insertTopicDetail(user, content, tid);
+        if (i > 0) {
             return EgResult.ok();
-        }
-        else {
+        } else {
             return EgResult.systemError();
         }
     }
@@ -83,6 +84,7 @@ public class TopicDetailController {
 
     /**
      * 删除论坛话题的某一条内容
+     *
      * @param id
      * @param tid
      * @return
@@ -90,13 +92,13 @@ public class TopicDetailController {
     @NeedSession
     @RequestMapping(value = "/forum/topic/detail/delete")
     public EgResult deleteTopicDetail(@RequestParam(value = "id") long id,
-                                      @RequestParam(value = "tid") long tid){
-        int i = topicService.deleteTopicDetail(id,tid);
+                                      @RequestParam(value = "tid") long tid) {
+        int i = topicService.deleteTopicDetail(id, tid);
         return EgResult.ok();
     }
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

@@ -42,7 +42,9 @@
 <body>
 <header>
     <div class="log-re">
-        <button type="button" class="am-btn am-btn-default am-radius log-button" onclick="window.location.href='/loginPage.html'">登 录</button>
+        <button type="button" class="am-btn am-btn-default am-radius log-button"
+                onclick="window.location.href='/loginPage.html'">登 录
+        </button>
     </div>
 </header>
 
@@ -53,63 +55,72 @@
             <br>
             <form class="am-form" id="re-form" action="/register.html" method="post">
                 <div class="am-input-group am-radius am-animation-slide-left">
-                    <input type="text" id="reEmail" name="reEmail" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
+                    <input type="text" id="reEmail" name="reEmail" class="am-radius" data-validation-message="请输入正确邮箱地址"
+                           placeholder="邮箱" required/>
+                    <span class="am-input-group-label log-icon am-radius"><i
+                            class="am-icon-user am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>
                 <div class="am-input-group am-animation-slide-left log-animation-delay">
-                    <input type="username" id="reUsername" name="reUsername" class="am-form-field am-radius log-input" placeholder="用户名"/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
+                    <input type="username" id="reUsername" name="reUsername" class="am-form-field am-radius log-input"
+                           placeholder="用户名"/>
+                    <span class="am-input-group-label log-icon am-radius"><i
+                            class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>
                 <div class="am-input-group am-animation-slide-left log-animation-delay">
-                    <input type="password" id="rePassword" name="rePassword" class="am-form-field am-radius log-input" placeholder="密码"/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
+                    <input type="password" id="rePassword" name="rePassword" class="am-form-field am-radius log-input"
+                           placeholder="密码"/>
+                    <span class="am-input-group-label log-icon am-radius"><i
+                            class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
                 </div>
-                <#--<br>-->
-                <#--<div class="am-input-group am-animation-slide-left log-animation-delay-a">-->
-                    <#--<input type="password" data-equal-to="#rePassword" class="am-form-field am-radius log-input" placeholder="确认密码" data-validation-message="请确认密码一致" required>-->
-                    <#--<span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>-->
-                <#--</div>-->
+            <#--<br>-->
+            <#--<div class="am-input-group am-animation-slide-left log-animation-delay-a">-->
+            <#--<input type="password" data-equal-to="#rePassword" class="am-form-field am-radius log-input" placeholder="确认密码" data-validation-message="请确认密码一致" required>-->
+            <#--<span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>-->
+            <#--</div>-->
                 <br>
                 <div class="am-input-group am-animation-slide-left log-animation-delay">
-                    <input type="text" id="reVerify" name="reVerify" class="am-form-field am-radius log-input" placeholder="请输入验证码"/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
+                    <input type="text" id="reVerify" name="reVerify" class="am-form-field am-radius log-input"
+                           placeholder="请输入验证码"/>
+                    <span class="am-input-group-label log-icon am-radius"><i
+                            class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>
-                <button type="button" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b" id="verify_but" onclick="sendemail()">获取验证码</button>
+                <button type="button"
+                        class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b"
+                        id="verify_but" onclick="sendemail()">获取验证码
+                </button>
                 <br>
-                <input type="submit" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b" value="注册"/>
+                <input type="submit"
+                       class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b"
+                       value="注册"/>
             </form>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-function sendemail() {
-    var emaildoc = document.getElementById("reEmail");
-    var remail = emaildoc.value;
-    var url = "/emailVerify.html?reEmail=" + remail + "&t=";
-    var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            alert("邮件已发送，请到邮箱查收");
+    function sendemail() {
+        var emaildoc = document.getElementById("reEmail");
+        var remail = emaildoc.value;
+        var url = "/emailVerify.html?reEmail=" + remail + "&t=";
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
         }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                alert("邮件已发送，请到邮箱查收");
+            }
+        }
+        xmlhttp.open("GET", url + Math.random(), true);
+        xmlhttp.send();
+        alert("邮件已发送，请到邮箱查收")
     }
-    xmlhttp.open("GET",url + Math.random(),true);
-    xmlhttp.send();
-    alert("邮件已发送，请到邮箱查收")
-}
 </script>
 
 <!--[if (gte IE 9)|!(IE)]><!-->

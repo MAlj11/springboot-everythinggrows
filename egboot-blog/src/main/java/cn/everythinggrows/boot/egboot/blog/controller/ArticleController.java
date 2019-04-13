@@ -51,20 +51,20 @@ public class ArticleController {
     String SEARCH_BASE_URL;
 
 
-    @RequestMapping(value = "/blog/article/insert",method = RequestMethod.POST)
+    @RequestMapping(value = "/blog/article/insert", method = RequestMethod.POST)
     @NeedSession
-    public EgResult InsertArticle(@RequestParam(value = "articleName",defaultValue = "") String articleName,
-                                  @RequestParam(value = "content",defaultValue = "") String content,
-                                  @RequestParam(value = "type",defaultValue = "1") int type,
-                                  @RequestParam(value = "title",defaultValue = "") String title,
-                                  @RequestHeader(value = "x-eg-session") String session){
-        log.info("artcleName:{},content:{}",articleName,content);
+    public EgResult InsertArticle(@RequestParam(value = "articleName", defaultValue = "") String articleName,
+                                  @RequestParam(value = "content", defaultValue = "") String content,
+                                  @RequestParam(value = "type", defaultValue = "1") int type,
+                                  @RequestParam(value = "title", defaultValue = "") String title,
+                                  @RequestHeader(value = "x-eg-session") String session) {
+        log.info("artcleName:{},content:{}", articleName, content);
         long uid = getUid(session);
         String coverPic = getRandomCoverPic();
         egArticle egArticle = new egArticle();
         long aid = redisClientTemplate.aidGeneration();
-        Calendar calendar=Calendar.getInstance();
-        int month=calendar.get(Calendar.MONTH)+1;
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String today = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
@@ -108,18 +108,18 @@ public class ArticleController {
         try {
             egUser user = httpRequestToUser.getUser(uid);
             httpRequestToSearch.saveEs(aid, articleName, user.getUsername());
-        }finally {
+        } finally {
             return EgResult.ok();
         }
-        }
+    }
 
     @RequestMapping(value = "/blog/article/get/{aid}")
-    public EgResult getArticle(@PathVariable(value = "aid") long aid){
+    public EgResult getArticle(@PathVariable(value = "aid") long aid) {
         egArticle article = indexDao.getArtcleOne(aid);
         String coverdns = blog_coverPic_dns + article.getCoverPic();
         article.setCoverPic(coverdns);
-        Map<String,Object> data = new HashMap<>();
-        data.put("article",article);
+        Map<String, Object> data = new HashMap<>();
+        data.put("article", article);
         return EgResult.ok(data);
     }
 
@@ -127,47 +127,56 @@ public class ArticleController {
     @RequestMapping(value = "/blog/article/delete/{aid}")
     @NeedSession
     public EgResult deleteArticle(@PathVariable(value = "aid") long aid,
-                                  @RequestHeader(value = "x-eg-session") String session){
+                                  @RequestHeader(value = "x-eg-session") String session) {
         egArticle article = indexDao.getArtcleOne(aid);
         articleList.deleteArticle(aid);
         String typeKey = IndexService.TYPE_ARTICLE_CACHE + String.valueOf(article.getType());
-       int i = indexDao.deleteArticle(aid);
-       long uid = getUid(session);
-       uidArticleDao.delUidArticle(uid,aid);
-       typeArticleDao.deleteTypeArticle(article.getType(),aid);
-       articleList.deleteArticle(aid);
-       if(i>0){
-           redisClientTemplate.delRedisByte(typeKey.getBytes());
-           redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
-           return EgResult.ok();
-       }else{
-           return EgResult.systemError();
-       }
+        int i = indexDao.deleteArticle(aid);
+        long uid = getUid(session);
+        uidArticleDao.delUidArticle(uid, aid);
+        typeArticleDao.deleteTypeArticle(article.getType(), aid);
+        articleList.deleteArticle(aid);
+        if (i > 0) {
+            redisClientTemplate.delRedisByte(typeKey.getBytes());
+            redisClientTemplate.delRedisByte(IndexService.INDEX_ARTICLE_CACHE.getBytes());
+            return EgResult.ok();
+        } else {
+            return EgResult.systemError();
+        }
 
     }
 
     @RequestMapping(value = "/blog/article/myarticle/{uid}")
-    public EgResult getMyArticle(@PathVariable(value = "uid") long uid){
+    public EgResult getMyArticle(@PathVariable(value = "uid") long uid) {
         List<egUidArticle> egUidArticles = uidArticleDao.selectArticles(uid);
-        for(egUidArticle article : egUidArticles){
+        for (egUidArticle article : egUidArticles) {
             String coverdns = blog_coverPic_dns + article.getCoverPic();
             article.setCoverPic(coverdns);
         }
-        log.info("myarticle:{}",egUidArticles);
-        Map<String,Object> data = new HashMap<>();
-        data.put("egUidArticles",egUidArticles);
+        log.info("myarticle:{}", egUidArticles);
+        Map<String, Object> data = new HashMap<>();
+        data.put("egUidArticles", egUidArticles);
         return EgResult.ok(data);
     }
 
-    public String getRandomCoverPic(){
+    @RequestMapping(value = "blog/article/getuid/{aid}")
+    public EgResult getUidWithAid(@PathVariable(value = "aid") long aid) {
+        egArticle article = indexDao.getArtcleOne(aid);
+        long uid = article.getUid();
+        Map<String, Object> data = new HashMap<>();
+        data.put("uid", uid);
+        return EgResult.ok(data);
+    }
+
+    public String getRandomCoverPic() {
         List<String> list = JSONObject.parseArray(blog_coverPic, String.class);
-        int random = new Random().nextInt(list.size()-1);
+        int random = new Random().nextInt(list.size() - 1);
         String coverPic = list.get(random);
         return coverPic;
     }
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

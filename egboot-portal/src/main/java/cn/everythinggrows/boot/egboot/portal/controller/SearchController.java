@@ -25,16 +25,16 @@ public class SearchController {
 
     @RequestMapping(value = "/search.html")
     public String searchArt(HttpServletRequest request,
-                            @RequestParam(value = "searchCon") String searchCon){
-       String url = SEARCH_BASE_URL + "/jest/get";
-        Map<String,String> param =  new HashMap<>();
-        param.put("content",searchCon);
-        JSONObject typeJson = HttpRequsetUtil.requestGet(url,param);
+                            @RequestParam(value = "searchCon") String searchCon) {
+        String url = SEARCH_BASE_URL + "/jest/get";
+        Map<String, String> param = new HashMap<>();
+        param.put("content", searchCon);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(url, param);
         String seaList = typeJson.getString("SearchList");
         List<Article> searchList = JSONObject.parseArray(seaList, Article.class);
-        logger.info("searchList:{}",searchList);
+        logger.info("searchList:{}", searchList);
         HttpSession session = request.getSession();
-        session.setAttribute("searchList",searchList);
+        session.setAttribute("searchList", searchList);
         return "lw-search";
     }
 }

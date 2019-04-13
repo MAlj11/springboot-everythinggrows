@@ -1,7 +1,6 @@
 package cn.everythinggrows.boot.egboot.admin.model;
 
 
-
 import java.io.Serializable;
 
 

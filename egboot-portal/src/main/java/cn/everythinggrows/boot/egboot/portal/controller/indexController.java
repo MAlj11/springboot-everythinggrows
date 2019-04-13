@@ -28,8 +28,7 @@ import java.util.Map;
  */
 @Controller
 public class indexController {
-  private Logger logger = LoggerFactory.getLogger(indexController.class);
-
+    private Logger logger = LoggerFactory.getLogger(indexController.class);
 
 
     @Value("${BLOG_BASE_URL}")
@@ -43,7 +42,7 @@ public class indexController {
     private UserService userService;
 
     @RequestMapping("/sindex.html")
-    public String getIndex(){
+    public String getIndex() {
         return "sindex";
     }
 
@@ -54,42 +53,42 @@ public class indexController {
         HttpSession session = request.getSession();
         logger.info("进入index====================================");
         String url = BLOG_BASE_URL + "/index/article";
-        JSONObject json = HttpRequsetUtil.requestGet(url,null);
+        JSONObject json = HttpRequsetUtil.requestGet(url, null);
         String artList = json.getString("articleList");
         List<egArticle> articleList = JSONObject.parseArray(artList, egArticle.class);
-        session.setAttribute("articleList",articleList);
+        session.setAttribute("articleList", articleList);
 
 
         String url2 = BLOG_BASE_URL + "/index/recommend/get";
-        JSONObject json2 = HttpRequsetUtil.requestGet(url2,null);
+        JSONObject json2 = HttpRequsetUtil.requestGet(url2, null);
         String recList = json2.getString("recommendList");
         List<RecommendArticle> recommendList = JSONObject.parseArray(recList, RecommendArticle.class);
-        session.setAttribute("recommendList",recommendList);
+        session.setAttribute("recommendList", recommendList);
 
 
         String url3 = BLOG_BASE_URL + "/index/banner/get";
-        JSONObject json3 = HttpRequsetUtil.requestGet(url3,null);
+        JSONObject json3 = HttpRequsetUtil.requestGet(url3, null);
         String banList = json3.getString("bannerList");
-        List<Banner> bannerList =  JSONObject.parseArray(banList, Banner.class);
-        session.setAttribute("bannerList",bannerList);
+        List<Banner> bannerList = JSONObject.parseArray(banList, Banner.class);
+        session.setAttribute("bannerList", bannerList);
 
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
         return "lw-index";
     }
 
 
     @RequestMapping(value = "/registerPage.html")
-    public String getRegisterPage(){
+    public String getRegisterPage() {
         return "lw-re";
     }
 
     @RequestMapping(value = "/loginPage.html")
-    public String getLoginPage(){
+    public String getLoginPage() {
         return "lw-log";
     }
 
@@ -98,15 +97,15 @@ public class indexController {
                                  ModelAndView modelAndView) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String typeUrl1 = BLOG_BASE_URL + "/type/1";
-        JSONObject typeJson1 = HttpRequsetUtil.requestGet(typeUrl1,null);
+        JSONObject typeJson1 = HttpRequsetUtil.requestGet(typeUrl1, null);
         String phtList = typeJson1.getString("articleWithTypeList");
         List<EgTypeArticle> PhotographyList = JSONObject.parseArray(phtList, EgTypeArticle.class);
-        session.setAttribute("PhotographyList",PhotographyList);
+        session.setAttribute("PhotographyList", PhotographyList);
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
         return "lw-Photography";
     }
@@ -116,16 +115,16 @@ public class indexController {
                               ModelAndView modelAndView) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/2";
-        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl, null);
         String phtList = typeJson.getString("articleWithTypeList");
         List<EgTypeArticle> InternetList = JSONObject.parseArray(phtList, EgTypeArticle.class);
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
-        session.setAttribute("InternetList",InternetList);
+        session.setAttribute("InternetList", InternetList);
         return "lw-Internet";
     }
 
@@ -134,16 +133,16 @@ public class indexController {
                            ModelAndView modelAndView) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/3";
-        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl, null);
         String phtList = typeJson.getString("articleWithTypeList");
         List<EgTypeArticle> mediaList = JSONObject.parseArray(phtList, EgTypeArticle.class);
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
-        session.setAttribute("mediaList",mediaList);
+        session.setAttribute("mediaList", mediaList);
         return "lw-media";
     }
 
@@ -152,16 +151,16 @@ public class indexController {
                              ModelAndView modelAndView) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String typeUrl = BLOG_BASE_URL + "/type/4";
-        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl,null);
+        JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl, null);
         String phtList = typeJson.getString("articleWithTypeList");
         List<EgTypeArticle> feelingList = JSONObject.parseArray(phtList, EgTypeArticle.class);
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
-        session.setAttribute("feelingList",feelingList);
+        session.setAttribute("feelingList", feelingList);
         return "lw-feeling";
     }
 
@@ -170,26 +169,26 @@ public class indexController {
                                    HttpServletRequest request) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String detailUrl = BLOG_BASE_URL + "/article/get/" + String.valueOf(aid);
-        JSONObject detailJson = HttpRequsetUtil.requestGet(detailUrl,null);
+        JSONObject detailJson = HttpRequsetUtil.requestGet(detailUrl, null);
         String detart = detailJson.getString("article");
         JSON artjson = JSONObject.parseObject(detart);
-        egArticle article = JSONObject.toJavaObject(artjson,egArticle.class);
-        session.setAttribute("articleDetail",article);
-        if(article.getUid() != 0){
+        egArticle article = JSONObject.toJavaObject(artjson, egArticle.class);
+        session.setAttribute("articleDetail", article);
+        if (article.getUid() != 0) {
             egUser user = userService.getUser(article.getUid());
-            logger.info("touxianag : {}",user.getPortrait());
-            session.setAttribute("user",user);
+            logger.info("touxianag : {}", user.getPortrait());
+            session.setAttribute("user", user);
         }
         String commentUrl = BLOG_BASE_URL + "/comment/" + String.valueOf(aid);
-        JSONObject comObj = HttpRequsetUtil.requestGet(commentUrl,null);
+        JSONObject comObj = HttpRequsetUtil.requestGet(commentUrl, null);
         String comList = comObj.getString("comments");
-        List<Comment> comments = JSONObject.parseArray(comList,Comment.class);
-        session.setAttribute("commentDetail",comments);
+        List<Comment> comments = JSONObject.parseArray(comList, Comment.class);
+        session.setAttribute("commentDetail", comments);
         boolean flag = userService.vertifyTokenToUser(request);
-        if(flag) {
-            session.setAttribute("tokenVertify",true);
-        }else {
-            session.setAttribute("tokenVertify",false);
+        if (flag) {
+            session.setAttribute("tokenVertify", true);
+        } else {
+            session.setAttribute("tokenVertify", false);
         }
         return "lw-article-fullwidth";
     }

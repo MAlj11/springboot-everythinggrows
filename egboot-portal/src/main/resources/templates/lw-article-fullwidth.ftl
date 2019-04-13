@@ -45,8 +45,8 @@
             </div>
             <div class="am-article-bd">
                 <img src="${articleDetail.coverPic}" alt="" class="blog-entry-img blog-article-margin">
-                <p class="class="am-article-lead"">
-                ${articleDetail.content}
+                <p class="class=" am-article-lead"">
+            ${articleDetail.content}
                 </p>
             </div>
         </article>
@@ -75,19 +75,23 @@
                     <input type="hidden" class="" placeholder="文章id" name="aid" value="${articleDetail.id}">
                 </div>
 
-                <#--<div class="am-form-group am-u-sm-4 blog-clear-right">-->
-                    <#--<input type="password" class="" placeholder="网站">-->
-                <#--</div>-->
+            <#--<div class="am-form-group am-u-sm-4 blog-clear-right">-->
+            <#--<input type="password" class="" placeholder="网站">-->
+            <#--</div>-->
 
                 <div class="am-form-group">
                     <textarea class="" rows="5" placeholder="一字千金" name="content"></textarea>
                 </div>
 
-                <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
+                <p>
+                    <button type="submit" class="am-btn am-btn-default">发表评论</button>
+                </p>
             </fieldset>
         </form>
           <#else>
-          <p><button type="button" class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</button></p>
+          <p>
+              <button type="button" class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</button>
+          </p>
           </#if>
         <hr>
 
@@ -109,17 +113,26 @@
 <footer class="blog-footer">
     <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-            <h3>关于<枝丫></h3>
-            <p class="am-text-sm"><枝丫>包含着很多你喜欢的内容，我们希望每一个来到<枝丫>的朋友都会有所收获。</p>
+            <h3>关于
+                <枝丫>
+            </h3>
+            <p class="am-text-sm">
+                <枝丫>包含着很多你喜欢的内容，我们希望每一个来到
+                    <枝丫>的朋友都会有所收获。
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
             </p>
-            <p>我们追求卓越，然时间、经验、能力有限。<枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！</p>
+            <p>我们追求卓越，然时间、经验、能力有限。
+                <枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
         </div>
     </div>
-    <div class="blog-text-center"><枝丫></div>
+    <div class="blog-text-center">
+        <枝丫>
+    </div>
     <div class="blog-text-center">京ICP备19009766号</div>
 </footer>
 

@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-  <title>forget</title>
+    <title>forget</title>
 </head>
 
 <body>
-<h1>忘记密码了？？  完了吧。。。登陆不了了吧。。。。</h1>
+<h1>忘记密码了？？ 完了吧。。。登陆不了了吧。。。。</h1>
 <br>
 <h1>但是这个功能还没开发。。</h1>
 <br>

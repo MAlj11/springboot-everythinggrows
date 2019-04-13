@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class WebConfig{
+public class WebConfig {
     private static Logger log = LoggerFactory.getLogger(WebConfig.class);
 
     /**
      * 配置过滤器
+     *
      * @return
      */
     @Bean

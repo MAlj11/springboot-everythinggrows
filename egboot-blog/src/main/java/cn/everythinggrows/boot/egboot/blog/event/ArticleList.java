@@ -14,17 +14,17 @@ public class ArticleList {
 
     public static final String EG_ARTICLE_LIST = "eg/boot/blog/article/list";
 
-    public void insertArtilceListRedis(String aid){
-        redisClientTemplate.lpush(EG_ARTICLE_LIST,aid);
-     }
+    public void insertArtilceListRedis(String aid) {
+        redisClientTemplate.lpush(EG_ARTICLE_LIST, aid);
+    }
 
 
-     public List<String> getArticleList(long start,long end){
-        List<String> list = redisClientTemplate.lrange(EG_ARTICLE_LIST,start,end);
+    public List<String> getArticleList(long start, long end) {
+        List<String> list = redisClientTemplate.lrange(EG_ARTICLE_LIST, start, end);
         return list;
-     }
+    }
 
-     public void deleteArticle(long aid){
-        redisClientTemplate.lrem(EG_ARTICLE_LIST,1,String.valueOf(aid));
-     }
+    public void deleteArticle(long aid) {
+        redisClientTemplate.lrem(EG_ARTICLE_LIST, 1, String.valueOf(aid));
+    }
 }

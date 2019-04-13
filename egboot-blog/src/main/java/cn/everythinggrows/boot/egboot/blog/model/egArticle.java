@@ -14,7 +14,6 @@ public class egArticle implements Serializable {
     private String typeString;
 
 
-
     public String getTypeString() {
         return typeString;
     }

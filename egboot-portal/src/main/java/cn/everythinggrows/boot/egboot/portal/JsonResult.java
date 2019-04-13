@@ -13,7 +13,10 @@ public class JsonResult {
     private Map<String, Object> data;
     //返回的数据
 
-    public JsonResult(){};
+    public JsonResult() {
+    }
+
+    ;
 
     public JsonResult(int code, String msg, Map<String, Object> data) {
         this.code = code;
@@ -24,6 +27,7 @@ public class JsonResult {
     public static String success() {
         return success(new HashMap<>(0));
     }
+
     public static String success(Map<String, Object> data) {
         return JSON.toJSONString(new JsonResult(0, "success", data));
     }
@@ -31,9 +35,11 @@ public class JsonResult {
     public static String failed() {
         return failed("failed");
     }
+
     public static String failed(String msg) {
         return failed(-1, msg);
     }
+
     public static String failed(int code, String msg) {
         return JSON.toJSONString(new JsonResult(code, msg, new HashMap<>(0)));
     }

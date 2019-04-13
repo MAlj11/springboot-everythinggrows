@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 public class SerializeUtil {
-    private static final Logger log=LoggerFactory.getLogger(SerializeUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(SerializeUtil.class);
+
     // 序列化
     public static byte[] serialize(Object object) {
 
@@ -19,7 +20,7 @@ public class SerializeUtil {
             oos.writeObject(object);
             bytes = baos.toByteArray();
         } catch (Exception e) {
-           log.error("{}---------------序列化失败",e.getMessage());
+            log.error("{}---------------序列化失败", e.getMessage());
         }
         return bytes;
     }
@@ -33,7 +34,7 @@ public class SerializeUtil {
             bais = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(bais);
         } catch (Exception e) {
-            log.error("{}---------------反列化失败",e.getMessage());
+            log.error("{}---------------反列化失败", e.getMessage());
         }
         return ois.readObject();
     }

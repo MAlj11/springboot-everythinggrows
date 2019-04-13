@@ -50,44 +50,44 @@ public class IndexService {
     public EgResult getArticleList() throws IOException, ClassNotFoundException {
         byte[] data = redisClientTemplate.getRedisByte(INDEX_ARTICLE_CACHE.getBytes());
         List<egArticle> articles = new ArrayList<>();
-        if(data == null || data.length == 0) {
-            List<String> aidlist = articleList.getArticleList(0,9);
-            for(String aid : aidlist){
+        if (data == null || data.length == 0) {
+            List<String> aidlist = articleList.getArticleList(0, 9);
+            for (String aid : aidlist) {
                 egArticle egArticle = indexDao.getArtcleOne(Long.parseLong(aid));
                 egArticle.setTypeString(ArticleUtils.getTypeWithInt(egArticle.getType()));
                 String coverdns = blog_coverPic_dns + egArticle.getCoverPic();
                 egArticle.setCoverPic(coverdns);
                 articles.add(egArticle);
-                }
-          redisClientTemplate.setRedisByte(INDEX_ARTICLE_CACHE.getBytes(),SerializeUtil.serialize(articles));
-        }else{
+            }
+            redisClientTemplate.setRedisByte(INDEX_ARTICLE_CACHE.getBytes(), SerializeUtil.serialize(articles));
+        } else {
             articles = (List<egArticle>) SerializeUtil.deserialize(data);
         }
-        HashMap<String,Object> ret = Maps.newHashMap();
-        ret.put("articleList",articles);
+        HashMap<String, Object> ret = Maps.newHashMap();
+        ret.put("articleList", articles);
         return EgResult.ok(ret);
     }
 
     public EgResult getRecommend() throws IOException, ClassNotFoundException {
         byte[] data = redisClientTemplate.getRedisByte(RECOMMEND_ARTICLE_CACHE.getBytes());
         List<RecommendArticle> list = new ArrayList<>();
-        if(data == null || data.length == 0){
+        if (data == null || data.length == 0) {
             list = recommendArticleDao.selectRecommendArticleList();
-            redisClientTemplate.setRedisByte(RECOMMEND_ARTICLE_CACHE.getBytes(),SerializeUtil.serialize(list));
-        }else{
+            redisClientTemplate.setRedisByte(RECOMMEND_ARTICLE_CACHE.getBytes(), SerializeUtil.serialize(list));
+        } else {
             list = (List<RecommendArticle>) SerializeUtil.deserialize(data);
         }
-        HashMap<String,Object> ret = Maps.newHashMap();
-        ret.put("recommendList",list);
+        HashMap<String, Object> ret = Maps.newHashMap();
+        ret.put("recommendList", list);
         return EgResult.ok(ret);
     }
 
-    public EgResult insertRecommendArticle(RecommendArticle recommendArticle){
+    public EgResult insertRecommendArticle(RecommendArticle recommendArticle) {
         int i = recommendArticleDao.insertRecommendArticle(recommendArticle);
-        if(i>0){
+        if (i > 0) {
             redisClientTemplate.delRedisByte(RECOMMEND_ARTICLE_CACHE.getBytes());
             return EgResult.ok();
-        }else{
+        } else {
             return EgResult.systemError();
         }
     }
@@ -95,56 +95,55 @@ public class IndexService {
     public EgResult getIndexBanner() throws IOException, ClassNotFoundException {
         byte[] data = redisClientTemplate.getRedisByte(BANNER_CACHE.getBytes());
         List<Banner> bannerList = new ArrayList<>();
-        if(data == null || data.length == 0){
+        if (data == null || data.length == 0) {
             bannerList = bannerDao.getBanner();
-            for(Banner banner : bannerList){
+            for (Banner banner : bannerList) {
                 String bannerdns = blog_coverPic_dns + banner.getBannerPic();
                 banner.setBannerPic(bannerdns);
 
             }
-            redisClientTemplate.setRedisByte(BANNER_CACHE.getBytes(),SerializeUtil.serialize(bannerList));
-        }else{
-            bannerList = (List<Banner>)SerializeUtil.deserialize(data);
+            redisClientTemplate.setRedisByte(BANNER_CACHE.getBytes(), SerializeUtil.serialize(bannerList));
+        } else {
+            bannerList = (List<Banner>) SerializeUtil.deserialize(data);
         }
-        Map<String,Object> ret = Maps.newHashMap();
-        ret.put("bannerList",bannerList);
+        Map<String, Object> ret = Maps.newHashMap();
+        ret.put("bannerList", bannerList);
         return EgResult.ok(ret);
     }
 
-    public EgResult insertBanner(String bannerPic,String bannerTitle,String bannerUrl){
+    public EgResult insertBanner(String bannerPic, String bannerTitle, String bannerUrl) {
         Banner banner = new Banner();
         banner.setBannerPic(bannerPic);
         banner.setBannerTitle(bannerTitle);
         banner.setBannerUrl(bannerUrl);
         int i = bannerDao.insertBanner(banner);
-        if(i > 0){
+        if (i > 0) {
             redisClientTemplate.delRedisByte(BANNER_CACHE.getBytes());
             return EgResult.ok();
-        }else{
+        } else {
             return EgResult.systemError();
         }
     }
 
-     public EgResult getArticleWithType(int type) throws IOException, ClassNotFoundException {
+    public EgResult getArticleWithType(int type) throws IOException, ClassNotFoundException {
         String typeKey = TYPE_ARTICLE_CACHE + String.valueOf(type);
-         byte[] data = redisClientTemplate.getRedisByte(typeKey.getBytes());
-         List<EgTypeArticle> egTypeArticleList = new ArrayList<>();
-         if(data == null || data.length == 0){
-             egTypeArticleList = typeArticleDao.getTypeArticleList(type);
-             for(EgTypeArticle egTypeArticle : egTypeArticleList){
-                 egTypeArticle.setTypeString(ArticleUtils.getTypeWithInt(type));
-                 String artidns = blog_coverPic_dns + egTypeArticle.getCoverPic();
-                 egTypeArticle.setCoverPic(artidns);
-             }
-             redisClientTemplate.setRedisByte(typeKey.getBytes(),SerializeUtil.serialize(egTypeArticleList));
-         }else{
-             egTypeArticleList = (List<EgTypeArticle>)SerializeUtil.deserialize(data);
-         }
-         Map<String,Object> ret = Maps.newHashMap();
-        ret.put("articleWithTypeList",egTypeArticleList);
+        byte[] data = redisClientTemplate.getRedisByte(typeKey.getBytes());
+        List<EgTypeArticle> egTypeArticleList = new ArrayList<>();
+        if (data == null || data.length == 0) {
+            egTypeArticleList = typeArticleDao.getTypeArticleList(type);
+            for (EgTypeArticle egTypeArticle : egTypeArticleList) {
+                egTypeArticle.setTypeString(ArticleUtils.getTypeWithInt(type));
+                String artidns = blog_coverPic_dns + egTypeArticle.getCoverPic();
+                egTypeArticle.setCoverPic(artidns);
+            }
+            redisClientTemplate.setRedisByte(typeKey.getBytes(), SerializeUtil.serialize(egTypeArticleList));
+        } else {
+            egTypeArticleList = (List<EgTypeArticle>) SerializeUtil.deserialize(data);
+        }
+        Map<String, Object> ret = Maps.newHashMap();
+        ret.put("articleWithTypeList", egTypeArticleList);
         return EgResult.ok(ret);
-     }
-
+    }
 
 
 }

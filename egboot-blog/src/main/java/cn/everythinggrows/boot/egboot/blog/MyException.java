@@ -1,12 +1,13 @@
 package cn.everythinggrows.boot.egboot.blog;
 
-public class MyException extends Throwable{
+public class MyException extends Throwable {
     private static final long serialVersionUID = 1L;
 
     private String code;
     private String msg;
 
-    public MyException() {}
+    public MyException() {
+    }
 
     public MyException(String code, String msg) {
         this.code = code;

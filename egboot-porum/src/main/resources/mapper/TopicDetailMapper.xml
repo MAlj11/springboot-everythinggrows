@@ -16,20 +16,20 @@
     </resultMap>
 
     <update id="createTable" parameterType="java.util.Map">
-          CREATE TABLE ${tableName} (
-         `id` bigint(20) NOT NULL AUTO_INCREMENT,
-         `tid` bigint(20) DEFAULT NULL,
-         `content` varchar(500) DEFAULT NULL,
-         `toUid` bigint(20) DEFAULT NULL,
-         `toUsername` varchar(50) DEFAULT NULL,
-         `toPortrait` varchar(50) DEFAULT NULL,
-         `uid` bigint(20) DEFAULT NULL,
-         `username` varchar(50) DEFAULT NULL,
-         `portrait` varchar(50) DEFAULT NULL,
-         `extend` varchar(100) DEFAULT NULL,
-         `createAt` int(11) DEFAULT NULL,
-          PRIMARY KEY (`id`)
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+        CREATE TABLE ${tableName} (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `tid` bigint(20) DEFAULT NULL,
+        `content` varchar(500) DEFAULT NULL,
+        `toUid` bigint(20) DEFAULT NULL,
+        `toUsername` varchar(50) DEFAULT NULL,
+        `toPortrait` varchar(50) DEFAULT NULL,
+        `uid` bigint(20) DEFAULT NULL,
+        `username` varchar(50) DEFAULT NULL,
+        `portrait` varchar(50) DEFAULT NULL,
+        `extend` varchar(100) DEFAULT NULL,
+        `createAt` int(11) DEFAULT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
     </update>
 
     <update id="dropTable" parameterType="java.util.Map">
@@ -63,14 +63,14 @@
         SELECT
         id,tid,content,toUid,toUsername,toPortrait,uid,username,portrait,extend,createAt
         FROM
-         ${tableName}
+        ${tableName}
         WHERE tid = #{tid}
     </select>
 
     <delete id="deleteTopicDetail" parameterType="java.util.Map">
-      DELETE
-      FROM ${tableName}
-      WHERE id = #{id}
+        DELETE
+        FROM ${tableName}
+        WHERE id = #{id}
     </delete>
 
 </mapper>

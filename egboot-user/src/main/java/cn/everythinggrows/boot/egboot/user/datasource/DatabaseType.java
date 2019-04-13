@@ -20,8 +20,8 @@ public enum DatabaseType {
     everythinggrows_6,
     everythinggrows_7;
 
-    public static DatabaseType getType(int order){
-        switch (order){
+    public static DatabaseType getType(int order) {
+        switch (order) {
             case 0:
                 return everythinggrows_0;
             case 1:
@@ -38,8 +38,8 @@ public enum DatabaseType {
                 return everythinggrows_6;
             case 7:
                 return everythinggrows_7;
-                default:
-                    return everythinggrows_0;
+            default:
+                return everythinggrows_0;
         }
     }
 }

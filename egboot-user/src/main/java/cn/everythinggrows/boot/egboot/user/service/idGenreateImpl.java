@@ -10,7 +10,7 @@ public class idGenreateImpl implements idGenreate {
 
     @Override
     public long uidGeneration() {
-        long uid  = redisClientTemplate.incrUid();
+        long uid = redisClientTemplate.incrUid();
         return uid;
     }
 }

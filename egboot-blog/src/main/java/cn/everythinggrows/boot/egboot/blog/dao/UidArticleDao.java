@@ -20,39 +20,39 @@ public class UidArticleDao {
     private SqlSessionTemplate blogSqlSession;
 
 
-    public int insertUidArticle(egUidArticle egUidArticle){
-            Map<String,Object> dataMap = beanUtils.bean2map(egUidArticle);
-            long uid = egUidArticle.getUid();
-            dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
-            int DBkey = DBUtils.getDBKey(uid);
-            DatabaseType type = DatabaseType.getType(DBkey);
-            DatabaseContextHolder.setDatabaseType(type);
-            int i = blogSqlSession.insert("UidArticleDao.insertUidArticle", dataMap);
-            DatabaseContextHolder.clearDatabaseType();
-            return i;
-    }
-
-    public List<egUidArticle> selectArticles(long uid){
-        Map<String,Object> dataMap = new HashMap<>();
+    public int insertUidArticle(egUidArticle egUidArticle) {
+        Map<String, Object> dataMap = beanUtils.bean2map(egUidArticle);
+        long uid = egUidArticle.getUid();
         dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
-        dataMap.put("uid",uid);
         int DBkey = DBUtils.getDBKey(uid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        List<egUidArticle> egUidArticles = blogSqlSession.selectList("UidArticleDao.selectUidArticle",dataMap);
+        int i = blogSqlSession.insert("UidArticleDao.insertUidArticle", dataMap);
+        DatabaseContextHolder.clearDatabaseType();
+        return i;
+    }
+
+    public List<egUidArticle> selectArticles(long uid) {
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
+        dataMap.put("uid", uid);
+        int DBkey = DBUtils.getDBKey(uid);
+        DatabaseType type = DatabaseType.getType(DBkey);
+        DatabaseContextHolder.setDatabaseType(type);
+        List<egUidArticle> egUidArticles = blogSqlSession.selectList("UidArticleDao.selectUidArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return egUidArticles;
     }
 
-    public int delUidArticle(long uid,long aid){
-        Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("uid",uid);
-        dataMap.put("aid",aid);
+    public int delUidArticle(long uid, long aid) {
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("uid", uid);
+        dataMap.put("aid", aid);
         dataMap.put("tableName", "eg_uid_article_alt_" + DBUtils.getTableKey(uid));
         int DBkey = DBUtils.getDBKey(uid);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = blogSqlSession.delete("UidArticleDao.deleteUidArticle",dataMap);
+        int i = blogSqlSession.delete("UidArticleDao.deleteUidArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

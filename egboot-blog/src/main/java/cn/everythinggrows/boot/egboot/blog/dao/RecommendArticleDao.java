@@ -18,19 +18,19 @@ public class RecommendArticleDao {
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    public int insertRecommendArticle(RecommendArticle recommendArticle){
-        Map<String,Object> dataMap = beanUtils.bean2map(recommendArticle);
-        dataMap.put("tableName", "eg_recomment_article" );
+    public int insertRecommendArticle(RecommendArticle recommendArticle) {
+        Map<String, Object> dataMap = beanUtils.bean2map(recommendArticle);
+        dataMap.put("tableName", "eg_recomment_article");
         DatabaseType type = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = sqlSessionTemplate.insert("RecommendArticleDao.insertRecommendArticle",dataMap);
+        int i = sqlSessionTemplate.insert("RecommendArticleDao.insertRecommendArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }
 
-    public List<RecommendArticle> selectRecommendArticleList(){
-        Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("tableName", "eg_recomment_article" );
+    public List<RecommendArticle> selectRecommendArticleList() {
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("tableName", "eg_recomment_article");
         DatabaseType type = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(type);
         List<RecommendArticle> list = sqlSessionTemplate.selectList("RecommendArticleDao.selectRecommendArticle");

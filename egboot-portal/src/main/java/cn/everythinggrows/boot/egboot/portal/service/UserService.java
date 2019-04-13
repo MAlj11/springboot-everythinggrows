@@ -25,37 +25,37 @@ public class UserService {
     String USER_BASE_URL;
 
     public boolean vertifyTokenToUser(HttpServletRequest request) throws UnsupportedEncodingException {
-        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
-        if(tokenVal == null || tokenVal.length() == 0){
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        if (tokenVal == null || tokenVal.length() == 0) {
             return false;
         }
         String tokenverUrl = USER_BASE_URL + "/token/vertify";
-        tokenVal = URLDecoder.decode(tokenVal,"utf-8");
-        logger.info("service tokenVal:{}",tokenVal);
-        Map<String,String> postParam = new HashMap<>();
-        postParam.put("token",tokenVal);
-        String ret = HttpClientUtil.doPost(tokenverUrl,postParam);
+        tokenVal = URLDecoder.decode(tokenVal, "utf-8");
+        logger.info("service tokenVal:{}", tokenVal);
+        Map<String, String> postParam = new HashMap<>();
+        postParam.put("token", tokenVal);
+        String ret = HttpClientUtil.doPost(tokenverUrl, postParam);
         JSONObject tokenJson = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(tokenJson, Map.class);
-        if((Integer)dataMap.get("status")==200) {
+        if ((Integer) dataMap.get("status") == 200) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public egUser getUser(long uid){
+    public egUser getUser(long uid) {
 
         String url = USER_BASE_URL + "/detail/" + String.valueOf(uid);
         String ret = HttpClientUtil.doGet(url);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
         egUser user = new egUser();
-        if((Integer)dataMap.get("status")==200){
+        if ((Integer) dataMap.get("status") == 200) {
             JSONObject userdetailStr = (JSONObject) dataMap.get("data");
-            Map userdetailMap = JSONObject.toJavaObject(userdetailStr,Map.class);
+            Map userdetailMap = JSONObject.toJavaObject(userdetailStr, Map.class);
             JSONObject userStr = (JSONObject) userdetailMap.get("userDetail");
-            user = JSONObject.toJavaObject(userStr,egUser.class);
+            user = JSONObject.toJavaObject(userStr, egUser.class);
         }
         return user;
 

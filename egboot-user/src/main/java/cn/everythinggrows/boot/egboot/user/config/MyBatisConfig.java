@@ -22,31 +22,31 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 @Configuration
 public class MyBatisConfig {
-     @Autowired
-     private Environment env;
+    @Autowired
+    private Environment env;
 
-        /**
-          * 创建数据源(数据源的名称：方法名可以取为XXXDataSource(),XXX为数据库名称,该名称也就是数据源的名称)
-         */
-      @Bean
-     public DataSource everythinggrow0DataSource() throws Exception {
-                Properties props = new Properties();
-                props.put("driverClassName", env.getProperty("jdbc0.driverClassName"));
-                props.put("url", env.getProperty("jdbc0.url"));
-                props.put("username", env.getProperty("jdbc0.username"));
-                props.put("password", env.getProperty("jdbc0.password"));
-                return DruidDataSourceFactory.createDataSource(props);
-           }
+    /**
+     * 创建数据源(数据源的名称：方法名可以取为XXXDataSource(),XXX为数据库名称,该名称也就是数据源的名称)
+     */
+    @Bean
+    public DataSource everythinggrow0DataSource() throws Exception {
+        Properties props = new Properties();
+        props.put("driverClassName", env.getProperty("jdbc0.driverClassName"));
+        props.put("url", env.getProperty("jdbc0.url"));
+        props.put("username", env.getProperty("jdbc0.username"));
+        props.put("password", env.getProperty("jdbc0.password"));
+        return DruidDataSourceFactory.createDataSource(props);
+    }
 
-      @Bean
-      public DataSource everythinggrow1DataSource() throws Exception {
-                Properties props = new Properties();
-                props.put("driverClassName", env.getProperty("jdbc1.driverClassName"));
-                props.put("url", env.getProperty("jdbc1.url"));
-                props.put("username", env.getProperty("jdbc1.username"));
-                props.put("password", env.getProperty("jdbc1.password"));
-                return DruidDataSourceFactory.createDataSource(props);
-            }
+    @Bean
+    public DataSource everythinggrow1DataSource() throws Exception {
+        Properties props = new Properties();
+        props.put("driverClassName", env.getProperty("jdbc1.driverClassName"));
+        props.put("url", env.getProperty("jdbc1.url"));
+        props.put("username", env.getProperty("jdbc1.username"));
+        props.put("password", env.getProperty("jdbc1.password"));
+        return DruidDataSourceFactory.createDataSource(props);
+    }
 
     @Bean
     public DataSource everythinggrow2DataSource() throws Exception {
@@ -109,60 +109,59 @@ public class MyBatisConfig {
     }
 
 
+    /**
+     * @Primary 该注解表示在同一个接口有多个实现类可以注入的时候，默认选择哪一个，而不是让@autowire注解报错
+     * @Qualifier 根据名称进行注入，通常是在具有相同的多个类型的实例的一个注入（例如有多个DataSource类型的实例）
+     */
+    @Bean
+    @Primary
+    public DynamicDataSource dataSource(@Qualifier("everythinggrow0DataSource") DataSource everythinggrow0DataSource,
+                                        @Qualifier("everythinggrow1DataSource") DataSource everythinggrow1DataSource,
+                                        @Qualifier("everythinggrow2DataSource") DataSource everythinggrow2DataSource,
+                                        @Qualifier("everythinggrow3DataSource") DataSource everythinggrow3DataSource,
+                                        @Qualifier("everythinggrow4DataSource") DataSource everythinggrow4DataSource,
+                                        @Qualifier("everythinggrow5DataSource") DataSource everythinggrow5DataSource,
+                                        @Qualifier("everythinggrow6DataSource") DataSource everythinggrow6DataSource,
+                                        @Qualifier("everythinggrow7DataSource") DataSource everythinggrow7DataSource) {
+        Map<Object, Object> targetDataSources = new HashMap<>();
+        targetDataSources.put(DatabaseType.everythinggrows_0, everythinggrow0DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_1, everythinggrow1DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_2, everythinggrow2DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_3, everythinggrow3DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_4, everythinggrow4DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_5, everythinggrow5DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_6, everythinggrow6DataSource);
+        targetDataSources.put(DatabaseType.everythinggrows_7, everythinggrow7DataSource);
+
+        DynamicDataSource dataSource = new DynamicDataSource();
+        dataSource.setTargetDataSources(targetDataSources);
+        // 该方法是AbstractRoutingDataSource的方法
+        dataSource.setDefaultTargetDataSource(everythinggrow0DataSource);
+        // 默认的datasource设置为myTestDbDataSource
+        return dataSource;
+    }
 
     /**
-        * @Primary 该注解表示在同一个接口有多个实现类可以注入的时候，默认选择哪一个，而不是让@autowire注解报错
-        * @Qualifier 根据名称进行注入，通常是在具有相同的多个类型的实例的一个注入（例如有多个DataSource类型的实例）
-        */
-      @Bean
-     @Primary
-      public DynamicDataSource dataSource(@Qualifier("everythinggrow0DataSource") DataSource everythinggrow0DataSource,
-                                          @Qualifier("everythinggrow1DataSource") DataSource everythinggrow1DataSource,
-                                          @Qualifier("everythinggrow2DataSource") DataSource everythinggrow2DataSource,
-                                          @Qualifier("everythinggrow3DataSource") DataSource everythinggrow3DataSource,
-                                          @Qualifier("everythinggrow4DataSource") DataSource everythinggrow4DataSource,
-                                          @Qualifier("everythinggrow5DataSource") DataSource everythinggrow5DataSource,
-                                          @Qualifier("everythinggrow6DataSource") DataSource everythinggrow6DataSource,
-                                          @Qualifier("everythinggrow7DataSource") DataSource everythinggrow7DataSource) {
-                Map<Object, Object> targetDataSources = new HashMap<>();
-                targetDataSources.put(DatabaseType.everythinggrows_0, everythinggrow0DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_1, everythinggrow1DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_2, everythinggrow2DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_3, everythinggrow3DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_4, everythinggrow4DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_5, everythinggrow5DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_6, everythinggrow6DataSource);
-                targetDataSources.put(DatabaseType.everythinggrows_7, everythinggrow7DataSource);
+     * 根据数据源创建SqlSessionFactory
+     */
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DynamicDataSource ds) throws Exception {
+        SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+        fb.setDataSource(ds);
+        // 指定数据源(这个必须有，否则报错)
+        // 下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
+        fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
+        // 指定基包
+        fb.setMapperLocations(
+                new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
+        return fb.getObject();
+    }
 
-                DynamicDataSource dataSource = new DynamicDataSource();
-                dataSource.setTargetDataSources(targetDataSources);
-                // 该方法是AbstractRoutingDataSource的方法
-                dataSource.setDefaultTargetDataSource(everythinggrow0DataSource);
-                // 默认的datasource设置为myTestDbDataSource
-                return dataSource;
-             }
-
-      /**
-       * 根据数据源创建SqlSessionFactory
-       */
-       @Bean
-      public SqlSessionFactory sqlSessionFactory(DynamicDataSource ds) throws Exception {
-                 SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-                 fb.setDataSource(ds);
-                 // 指定数据源(这个必须有，否则报错)
-                 // 下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
-                 fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
-                 // 指定基包
-                 fb.setMapperLocations(
-                 new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
-                 return fb.getObject();
-             }
-
-       /**
-        * 配置事务管理器
-        */
-       @Bean
-      public DataSourceTransactionManager transactionManager(DynamicDataSource dataSource) throws Exception {
-                 return new DataSourceTransactionManager(dataSource);
-             }
+    /**
+     * 配置事务管理器
+     */
+    @Bean
+    public DataSourceTransactionManager transactionManager(DynamicDataSource dataSource) throws Exception {
+        return new DataSourceTransactionManager(dataSource);
+    }
 }

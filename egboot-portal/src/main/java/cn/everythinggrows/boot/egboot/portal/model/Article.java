@@ -1,7 +1,6 @@
 package cn.everythinggrows.boot.egboot.portal.model;
 
 
-
 import java.io.Serializable;
 
 

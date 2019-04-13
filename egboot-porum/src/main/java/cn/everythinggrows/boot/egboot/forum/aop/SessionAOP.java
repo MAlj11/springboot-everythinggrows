@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 @Aspect
 public class SessionAOP {
     private static Logger log = LoggerFactory.getLogger(SessionAOP.class);
+
     @Around(value = "@annotation(cn.everythinggrows.boot.egboot.forum.aop.NeedSession)")
     public Object aroundManager(ProceedingJoinPoint pj) throws Exception {
         HttpServletRequest request = SysContent.getRequest();
@@ -45,9 +46,9 @@ public class SessionAOP {
             if (isUser || isManager || isUserOrManager) {
                 return pj.proceed();
             } else { // 会话过期或是session中没用户
-                if(request.getHeader("x-eg-session") == null){
+                if (request.getHeader("x-eg-session") == null) {
                     response.sendRedirect(basePath + "/nosession");
-                }else{
+                } else {
                     response.sendRedirect(basePath + "/NoAuthEnergy");
                 }
 //                if (request.getHeader("x-eg-session") != null

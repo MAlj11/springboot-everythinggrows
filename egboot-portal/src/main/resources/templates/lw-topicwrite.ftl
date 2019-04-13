@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <!--导入simditor的样式-->
-    <link rel="stylesheet"  href="/static/simditor/styles/simditor.css" type="text/css">
+    <link rel="stylesheet" href="/static/simditor/styles/simditor.css" type="text/css">
     <!-- 导入 simditor 的 JavaScript 库 -->
     <script type="text/javascript" src="/static/simditor/scripts/jquery.min.js"></script>
     <script type="text/javascript" src="/static/simditor/scripts/module.min.js"></script>
@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="/static/styles/generic.css">
     <!-- 导入 Font Awesome 样式库-->
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/static/styles/header.css" >
-    <link rel="stylesheet" href="/static/styles/publish.css" >
+    <link rel="stylesheet" href="/static/styles/header.css">
+    <link rel="stylesheet" href="/static/styles/publish.css">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -57,11 +57,11 @@
             <div class="content-container">
                 <textarea name="content" id="content"></textarea>
                 <script type="text/javascript">
-                    var editor = new Simditor( {
-                        textarea : $('#content'),
-                        placeholder : '请输入你的回复...',
-                        toolbar : true
-                    } );
+                    var editor = new Simditor({
+                        textarea: $('#content'),
+                        placeholder: '请输入你的回复...',
+                        toolbar: true
+                    });
                 </script>
             </div>
             <div class="x-row">

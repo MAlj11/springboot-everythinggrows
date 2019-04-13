@@ -1,0 +1,84 @@
+2019-04-08 17:31:10,774 [main] INFO  c.e.b.e.user.EgbootUserApplication 50 - Starting EgbootUserApplication on DESKTOP-6KL1BNP with PID 15732 (I:\IdeaProjects\springboot-everythinggrows\egboot-user\target\classes started by MA in I:\IdeaProjects\springboot-everythinggrows\egboot-user)
+2019-04-08 17:31:10,774 [main] INFO  c.e.b.e.user.EgbootUserApplication 675 - No active profile set, falling back to default profiles: default
+2019-04-08 17:31:12,133 [main] WARN  o.m.s.mapper.ClassPathMapperScanner 44 - No MyBatis mapper was found in '[cn.everythinggrows.boot.egboot.user]' package. Please check your configuration.
+2019-04-08 17:31:12,195 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-08 17:31:12,211 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-08 17:31:12,226 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-04-08 17:31:12,242 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-08 17:31:12,242 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-08 17:31:12,258 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 0ms. Found 0 repository interfaces.
+2019-04-08 17:31:12,695 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker 330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2c6679b0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-08 17:31:13,244 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8083 (http)
+2019-04-08 17:31:13,260 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8083"]
+2019-04-08 17:31:13,260 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-04-08 17:31:13,260 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-04-08 17:31:13,276 [main] INFO  o.a.c.core.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\software\xshell\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;I:\redis\;I:\zookepper\zookeeper-3.3.6\bin;I:\zookepper\zookeeper-3.3.6\conf;D:\software\edius\EDIUS 9\QTSystem\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Users\MA\AppData\Local\Microsoft\WindowsApps;;.]
+2019-04-08 17:31:13,697 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-04-08 17:31:13,697 [main] INFO  o.s.web.context.ContextLoader 296 - Root WebApplicationContext: initialization completed in 2845 ms
+2019-04-08 17:31:14,178 [main] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-1} inited
+2019-04-08 17:31:14,310 [main] INFO  o.h.jpa.internal.util.LogHelper 31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-08 17:31:14,357 [main] INFO  org.hibernate.Version 46 - HHH000412: Hibernate Core {5.3.7.Final}
+2019-04-08 17:31:14,357 [main] INFO  org.hibernate.cfg.Environment 213 - HHH000206: hibernate.properties not found
+2019-04-08 17:31:14,466 [main] INFO  o.h.annotations.common.Version 49 - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-04-08 17:31:14,576 [main] INFO  org.hibernate.dialect.Dialect 157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-04-08 17:31:14,716 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean 415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-08 17:31:15,154 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-04-08 17:31:15,201 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration 236 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-04-08 17:31:15,688 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8083"]
+2019-04-08 17:31:15,719 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 204 - Tomcat started on port(s): 8083 (http) with context path ''
+2019-04-08 17:31:15,719 [main] INFO  c.e.b.e.user.EgbootUserApplication 59 - Started EgbootUserApplication in 5.689 seconds (JVM running for 7.54)
+2019-04-08 17:32:53,791 [http-nio-8083-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-08 17:32:53,792 [http-nio-8083-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-04-08 17:32:53,799 [http-nio-8083-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2019-04-08 17:32:54,084 [http-nio-8083-exec-1] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{}..............................................................
+2019-04-08 17:32:54,140 [http-nio-8083-exec-1] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-2} inited
+2019-04-08 17:32:54,174 [http-nio-8083-exec-1] INFO  c.e.b.e.user.service.UserAccountImpl 161 - user:egUser{uid=501, username='MA', password='123456', email='1020854430@qq.com', portrait='http://192.168.0.158:8080/static/uploadImages/portrait/14.jpg', createAt='1554607156', extend='null'}
+2019-04-08 17:33:18,750 [http-nio-8083-exec-2] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{}..............................................................
+2019-04-08 17:33:18,757 [http-nio-8083-exec-2] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-3} inited
+2019-04-08 17:33:18,768 [http-nio-8083-exec-2] INFO  c.e.b.e.user.service.UserAccountImpl 161 - user:egUser{uid=502, username='MA', password='7c4a8d09ca3762af61e59520943dc26494f8941b', email='1020854430@qq.com', portrait='http://192.168.0.158:8080/static/uploadImages/portrait/3.jpg', createAt='1554607545', extend='null'}
+2019-04-08 17:33:29,655 [http-nio-8083-exec-3] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{extend=, uid=502, password=7c4a8d09ca3762af61e59520943dc26494f8941b, portrait=http://192.168.0.158:8080/static/uploadImages/portrait/3.jpg, email=1020854430@qq.com, createAt=1554607545, username=MA}..............................................................
+2019-04-08 17:36:03,713 [http-nio-8083-exec-4] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{}..............................................................
+2019-04-08 17:36:03,728 [http-nio-8083-exec-4] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-4} inited
+2019-04-08 17:36:03,822 [http-nio-8083-exec-4] INFO  c.e.b.e.user.service.UserAccountImpl 161 - user:egUser{uid=2, username='ma', password='123456', email='1020854430@qq.com', portrait='http://192.168.0.158:8080/static/uploadImages/portrait/portrait', createAt='1554104950', extend='null'}
+2019-04-08 17:36:21,031 [http-nio-8083-exec-6] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{extend=, uid=2, password=123456, portrait=http://192.168.0.158:8080/static/uploadImages/portrait/portrait, createAt=1554104950, email=1020854430@qq.com, username=ma}..............................................................
+2019-04-08 17:42:55,545 [http-nio-8083-exec-7] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{}..............................................................
+2019-04-08 17:42:55,593 [http-nio-8083-exec-7] INFO  c.e.b.e.user.service.UserAccountImpl 161 - user:egUser{uid=502, username='MA', password='7c4a8d09ca3762af61e59520943dc26494f8941b', email='1020854430@qq.com', portrait='http://192.168.0.158:8080/static/uploadImages/portrait/3.jpg', createAt='1554607545', extend='null'}
+2019-04-08 18:21:30,668 [main] INFO  c.e.b.e.user.EgbootUserApplication 50 - Starting EgbootUserApplication on DESKTOP-6KL1BNP with PID 9360 (I:\IdeaProjects\springboot-everythinggrows\egboot-user\target\classes started by MA in I:\IdeaProjects\springboot-everythinggrows\egboot-user)
+2019-04-08 18:21:30,683 [main] INFO  c.e.b.e.user.EgbootUserApplication 675 - No active profile set, falling back to default profiles: default
+2019-04-08 18:21:31,509 [main] WARN  o.m.s.mapper.ClassPathMapperScanner 44 - No MyBatis mapper was found in '[cn.everythinggrows.boot.egboot.user]' package. Please check your configuration.
+2019-04-08 18:21:31,559 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-08 18:21:31,559 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-08 18:21:31,574 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-04-08 18:21:31,590 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-04-08 18:21:31,590 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-04-08 18:21:31,606 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate 182 - Finished Spring Data repository scanning in 0ms. Found 0 repository interfaces.
+2019-04-08 18:21:31,934 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker 330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$adbe7b51] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-08 18:21:32,269 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8083 (http)
+2019-04-08 18:21:32,285 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8083"]
+2019-04-08 18:21:32,285 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-04-08 18:21:32,285 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-04-08 18:21:32,303 [main] INFO  o.a.c.core.AprLifecycleListener 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\software\xshell\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;I:\redis\;I:\zookepper\zookeeper-3.3.6\bin;I:\zookepper\zookeeper-3.3.6\conf;D:\software\edius\EDIUS 9\QTSystem\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Users\MA\AppData\Local\Microsoft\WindowsApps;;.]
+2019-04-08 18:21:32,582 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-04-08 18:21:32,582 [main] INFO  o.s.web.context.ContextLoader 296 - Root WebApplicationContext: initialization completed in 1836 ms
+2019-04-08 18:21:32,921 [main] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-1} inited
+2019-04-08 18:21:33,064 [main] INFO  o.h.jpa.internal.util.LogHelper 31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-08 18:21:33,118 [main] INFO  org.hibernate.Version 46 - HHH000412: Hibernate Core {5.3.7.Final}
+2019-04-08 18:21:33,120 [main] INFO  org.hibernate.cfg.Environment 213 - HHH000206: hibernate.properties not found
+2019-04-08 18:21:33,235 [main] INFO  o.h.annotations.common.Version 49 - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-04-08 18:21:33,470 [main] INFO  org.hibernate.dialect.Dialect 157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-04-08 18:21:33,777 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean 415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-08 18:21:34,233 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-04-08 18:21:34,269 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration 236 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-04-08 18:21:34,805 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8083"]
+2019-04-08 18:21:34,832 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 204 - Tomcat started on port(s): 8083 (http) with context path ''
+2019-04-08 18:21:34,835 [main] INFO  c.e.b.e.user.EgbootUserApplication 59 - Started EgbootUserApplication in 4.956 seconds (JVM running for 6.896)
+2019-04-08 18:22:23,065 [http-nio-8083-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-08 18:22:23,065 [http-nio-8083-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-04-08 18:22:23,065 [http-nio-8083-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 0 ms
+2019-04-08 18:22:23,336 [http-nio-8083-exec-2] INFO  c.e.b.e.user.service.UserAccountImpl 152 - value:{}..............................................................
+2019-04-08 18:22:23,382 [http-nio-8083-exec-2] INFO  c.alibaba.druid.pool.DruidDataSource 928 - {dataSource-2} inited
+2019-04-08 18:22:23,414 [http-nio-8083-exec-2] INFO  c.e.b.e.user.service.UserAccountImpl 161 - user:egUser{uid=501, username='MA', password='123456', email='1020854430@qq.com', portrait='http://192.168.0.158:8080/static/uploadImages/portrait/14.jpg', createAt='1554607156', extend='null'}

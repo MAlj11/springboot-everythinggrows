@@ -45,77 +45,76 @@ public class UserAccountImpl implements IUserAccount {
         Properties props = new Properties();
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.host","smtp.163.com");
+        props.put("mail.smtp.host", "smtp.163.com");
         // smtp服务器地址
 
         Session session = Session.getInstance(props);
         session.setDebug(true);
         Message msg = new MimeMessage(session);
-        String str="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
-        StringBuilder sb=new StringBuilder(6);
-        for(int i=0;i<6;i++)
-        {
-            char ch=str.charAt(new Random().nextInt(str.length()));
+        String str = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
+        StringBuilder sb = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            char ch = str.charAt(new Random().nextInt(str.length()));
             sb.append(ch);
         }
         String verify = sb.toString();
         try {
             msg.setSubject("<枝丫>注册验证");
 
-        msg.setText("欢迎注册<枝丫>，这是你的验证码：" + verify + "，输入时请区分大小写，有效时间为5分钟，请妥善保存。");
-        msg.setFrom(new InternetAddress("everythinggrows@163.com"));
-        //发件人邮箱
-        msg.setRecipient(Message.RecipientType.TO,
-                new InternetAddress(toMail));
-        //收件人邮箱
-        msg.saveChanges();
+            msg.setText("欢迎注册<枝丫>，这是你的验证码：" + verify + "，输入时请区分大小写，有效时间为5分钟，请妥善保存。");
+            msg.setFrom(new InternetAddress("everythinggrows@163.com"));
+            //发件人邮箱
+            msg.setRecipient(Message.RecipientType.TO,
+                    new InternetAddress(toMail));
+            //收件人邮箱
+            msg.saveChanges();
 
-        Transport transport = session.getTransport();
-        transport.connect("everythinggrows@163.com","egofficialmu123");
-        //发件人邮箱,授权码
+            Transport transport = session.getTransport();
+            transport.connect("everythinggrows@163.com", "egofficialmu123");
+            //发件人邮箱,授权码
 
-        transport.sendMessage(msg, msg.getAllRecipients());
+            transport.sendMessage(msg, msg.getAllRecipients());
 
-        System.out.println("邮件发送成功");
-        log.info("{}邮件发送成功============================",toMail);
-        transport.close();
+            System.out.println("邮件发送成功");
+            log.info("{}邮件发送成功============================", toMail);
+            transport.close();
         } catch (MessagingException e) {
             e.printStackTrace();
         }
         String key = EMAIL_VERIFY + toMail;
-        redisClientTemplate.setex(key,5*60,verify);
+        redisClientTemplate.setex(key, 5 * 60, verify);
         return verify;
     }
 
     @Override
     public EgResult ICreateUser(egUser user, String verfity) {
         long uid = redisClientTemplate.incrUid();
-        if(UserUtils.isOffcialUid(uid)){
+        if (UserUtils.isOffcialUid(uid)) {
             uid = redisClientTemplate.incrUid();
         }
         user.setUid(uid);
         String portrait = getRandomPortrait();
         user.setPortrait(portrait);
-        String redisVerify = (String) redisClientTemplate.getRedis(EMAIL_VERIFY+user.getEmail());
-        if(redisVerify == null){
+        String redisVerify = (String) redisClientTemplate.getRedis(EMAIL_VERIFY + user.getEmail());
+        if (redisVerify == null) {
             redisVerify = "";
         }
-        if(!redisVerify.equals(verfity)){
-            return EgResult.error(10002,"vertify is error");
+        if (!redisVerify.equals(verfity)) {
+            return EgResult.error(10002, "vertify is error");
         }
-        int time = (int)(System.currentTimeMillis()/1000);
+        int time = (int) (System.currentTimeMillis() / 1000);
         user.setCreateAt(String.valueOf(time));
         int i = userDao.insertUser(user);
-        Map<String,String> redisData = new HashMap<>();
-        redisData.put("password",user.getPassword());
-        redisData.put("uid",String.valueOf(uid));
-        redisClientTemplate.hmset(user.getEmail(),redisData);
-        if(i > 0){
+        Map<String, String> redisData = new HashMap<>();
+        redisData.put("password", user.getPassword());
+        redisData.put("uid", String.valueOf(uid));
+        redisClientTemplate.hmset(user.getEmail(), redisData);
+        if (i > 0) {
             String loRet = login(user);
-            Map<String,Object> data = new HashMap<>();
-            data.put("token",loRet);
+            Map<String, Object> data = new HashMap<>();
+            data.put("token", loRet);
             return EgResult.ok(data);
-        }else {
+        } else {
             return EgResult.systemError();
         }
     }
@@ -123,54 +122,54 @@ public class UserAccountImpl implements IUserAccount {
     @Override
     public String login(egUser user) {
         String email = user.getEmail();
-        Map<String,String> dataMap = redisClientTemplate.hgetAll(email);
+        Map<String, String> dataMap = redisClientTemplate.hgetAll(email);
         String redisPassword = dataMap.get("password");
         long uid = Long.parseLong(dataMap.get("uid"));
-        if(!user.getPassword().equals(redisPassword)){
+        if (!user.getPassword().equals(redisPassword)) {
             return "100004";
         }
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String token = String.valueOf(uid) + ";" + uuid;
         String key = UID_TOKEN + email;
         String uKey = UID_TOKEN + String.valueOf(uid);
-        redisClientTemplate.setex(uKey,7*24*60*60,token);
-        redisClientTemplate.setex(key,7*24*60*60,token);
+        redisClientTemplate.setex(uKey, 7 * 24 * 60 * 60, token);
+        redisClientTemplate.setex(key, 7 * 24 * 60 * 60, token);
         return token;
     }
 
-    public String getRandomPortrait(){
+    public String getRandomPortrait() {
         List<String> list = JSONObject.parseArray(portraitList, String.class);
-        int random = new Random().nextInt(list.size()-1);
+        int random = new Random().nextInt(list.size() - 1);
         String portrait = list.get(random);
         return portrait;
     }
 
     @Override
-    public egUser getUser(long uid){
+    public egUser getUser(long uid) {
         String key = USER_DETAIL + String.valueOf(uid);
-        Map<String,String> value = redisClientTemplate.hgetAll(key);
-        log.info("value:{}..............................................................",value);
+        Map<String, String> value = redisClientTemplate.hgetAll(key);
+        log.info("value:{}..............................................................", value);
         egUser user = new egUser();
-        if(value == null || value.isEmpty()) {
-           user = userDao.selectEgUser(uid);
-           if(user != null) {
-               if(user.getPortrait() != null) {
-                   String pordns = portrait_dns + user.getPortrait();
-                   user.setPortrait(pordns);
-               }
-               log.info("user:{}",user);
-               Map<String, String> redis = Maps.newHashMap();
-               redis.put("uid", String.valueOf(user.getUid()));
-               redis.put("username", user.getUsername()==null?"":user.getUsername());
-               redis.put("password", user.getPassword()==null?"":user.getPassword());
-               redis.put("email", user.getEmail()==null?"":user.getEmail());
-               redis.put("portrait", user.getPortrait()==null?"":user.getPortrait());
-               redis.put("createAt", user.getCreateAt()==null?"":user.getCreateAt());
-               redis.put("extend", user.getExtend()==null?"":user.getExtend());
-               redisClientTemplate.hmset(key, redis);
-               redisClientTemplate.expire(key, 5 * 60);
-           }
-           return user;
+        if (value == null || value.isEmpty()) {
+            user = userDao.selectEgUser(uid);
+            if (user != null) {
+                if (user.getPortrait() != null) {
+                    String pordns = portrait_dns + user.getPortrait();
+                    user.setPortrait(pordns);
+                }
+                log.info("user:{}", user);
+                Map<String, String> redis = Maps.newHashMap();
+                redis.put("uid", String.valueOf(user.getUid()));
+                redis.put("username", user.getUsername() == null ? "" : user.getUsername());
+                redis.put("password", user.getPassword() == null ? "" : user.getPassword());
+                redis.put("email", user.getEmail() == null ? "" : user.getEmail());
+                redis.put("portrait", user.getPortrait() == null ? "" : user.getPortrait());
+                redis.put("createAt", user.getCreateAt() == null ? "" : user.getCreateAt());
+                redis.put("extend", user.getExtend() == null ? "" : user.getExtend());
+                redisClientTemplate.hmset(key, redis);
+                redisClientTemplate.expire(key, 5 * 60);
+            }
+            return user;
         }
         user.setUid(uid);
         user.setUsername(value.get("username"));
@@ -184,30 +183,30 @@ public class UserAccountImpl implements IUserAccount {
 
     @Override
     public String dubbotest(String str) {
-        log.info("dubboTest:{}=======================================================================",str);
+        log.info("dubboTest:{}=======================================================================", str);
         return "ok";
     }
 
-    public EgResult tokenVerti(String token){
+    public EgResult tokenVerti(String token) {
         long uid = getUid(token);
         String uKey = UID_TOKEN + String.valueOf(uid);
         String tokenRet = (String) redisClientTemplate.getRedis(uKey);
-        if(!tokenRet.equals(token) || tokenRet == null){
-            return EgResult.error(1005,"token is error");
+        if (!tokenRet.equals(token) || tokenRet == null) {
+            return EgResult.error(1005, "token is error");
         }
         return EgResult.ok();
     }
 
 
-    public EgResult userLogout(long uid){
+    public EgResult userLogout(long uid) {
         String uKey = UID_TOKEN + String.valueOf(uid);
         redisClientTemplate.del(uKey);
         return EgResult.ok();
     }
 
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

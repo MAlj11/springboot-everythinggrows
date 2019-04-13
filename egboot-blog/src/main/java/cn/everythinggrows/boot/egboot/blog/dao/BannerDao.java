@@ -18,7 +18,7 @@ public class BannerDao {
     @Autowired
     private SqlSessionTemplate blogSqlSession;
 
-    public List<Banner> getBanner(){
+    public List<Banner> getBanner() {
         DatabaseType type = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(type);
         List<Banner> bannerList = blogSqlSession.selectList("BannerDao.selectBanner");
@@ -26,11 +26,11 @@ public class BannerDao {
         return bannerList;
     }
 
-    public int insertBanner(Banner banner){
-        Map<String,Object> dataMap = beanUtils.bean2map(banner);
+    public int insertBanner(Banner banner) {
+        Map<String, Object> dataMap = beanUtils.bean2map(banner);
         DatabaseType type = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = blogSqlSession.insert("BannerDao.insertBanner",dataMap);
+        int i = blogSqlSession.insert("BannerDao.insertBanner", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

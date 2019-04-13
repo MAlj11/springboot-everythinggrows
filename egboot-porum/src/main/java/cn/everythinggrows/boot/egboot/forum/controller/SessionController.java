@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 public class SessionController {
 
     @RequestMapping(value = "/nosession")
-    public String getSessionError(HttpServletRequest request){
-        request.setAttribute("error","please login first");
+    public String getSessionError(HttpServletRequest request) {
+        request.setAttribute("error", "please login first");
         return "error.html";
     }
 }

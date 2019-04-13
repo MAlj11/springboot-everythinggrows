@@ -10,8 +10,9 @@ public class TestController {
 
     @Autowired
     private ArticleController articleController;
+
     @RequestMapping("/covertest")
-    public String getCover(){
+    public String getCover() {
         String cover = articleController.getRandomCoverPic();
         return cover;
     }

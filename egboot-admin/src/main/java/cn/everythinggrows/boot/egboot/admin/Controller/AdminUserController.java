@@ -22,16 +22,16 @@ public class AdminUserController {
     @RequestMapping(value = "/admin/user/logup")
     public String logUp(@RequestParam(value = "email") String email,
                         @RequestParam(value = "password") String password,
-                        HttpServletRequest request){
+                        HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String sql="select * from eg_admin_user";
-        List<User> list=jdbcTemplate.query(sql,new Object[]{}, new BeanPropertyRowMapper<User>(User.class));
-        if(list.size() == 0){
+        String sql = "select * from eg_admin_user";
+        List<User> list = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<User>(User.class));
+        if (list.size() == 0) {
             return "logup";
         }
-        for(User user : list){
-            if(email.equals(user.getEmail()) && password.equals(user.getPassword())){
-                session.setAttribute("tokenVertify",1);
+        for (User user : list) {
+            if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+                session.setAttribute("tokenVertify", 1);
                 return "admin-index";
             }
         }
@@ -39,7 +39,7 @@ public class AdminUserController {
     }
 
     @RequestMapping(value = "/admin/user/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("tokenVertify");
         return "logup";

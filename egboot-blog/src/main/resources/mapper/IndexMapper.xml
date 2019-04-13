@@ -33,7 +33,7 @@
 
     <select id="selectArticle" parameterType="java.util.Map" resultMap="ResultMap">
         SELECT
-         id,articleName,uid,content,coverPic,type,title,createAt
+        id,articleName,uid,content,coverPic,type,title,createAt
         FROM
         ${tableName}
         WHERE id=${id};

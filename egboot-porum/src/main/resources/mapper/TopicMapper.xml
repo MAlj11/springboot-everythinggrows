@@ -34,13 +34,13 @@
         SELECT
         tid,content,uid,username,portrait,extend,createAt
         FROM
-         ${tableName}
+        ${tableName}
         WHERE tid = #{tid}
     </select>
 
     <delete id="deleteTopic" parameterType="java.util.Map">
-      DELETE
-      FROM ${tableName}
-      WHERE tid = #{tid}
+        DELETE
+        FROM ${tableName}
+        WHERE tid = #{tid}
     </delete>
 </mapper>

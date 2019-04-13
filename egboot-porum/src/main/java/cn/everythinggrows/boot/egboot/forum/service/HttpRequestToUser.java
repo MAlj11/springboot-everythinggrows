@@ -18,18 +18,18 @@ public class HttpRequestToUser {
     @Value("${USER_BASE_URL}")
     String userUrl;
 
-    public egUser getUser(long uid){
+    public egUser getUser(long uid) {
 
         String url = userUrl + "/detail/" + String.valueOf(uid);
         String ret = HttpClientUtil.doGet(url);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
         egUser user = new egUser();
-        if((Integer)dataMap.get("status")==200){
+        if ((Integer) dataMap.get("status") == 200) {
             JSONObject userdetailStr = (JSONObject) dataMap.get("data");
-            Map userdetailMap = JSONObject.toJavaObject(userdetailStr,Map.class);
+            Map userdetailMap = JSONObject.toJavaObject(userdetailStr, Map.class);
             JSONObject userStr = (JSONObject) userdetailMap.get("userDetail");
-            user = JSONObject.toJavaObject(userStr,egUser.class);
+            user = JSONObject.toJavaObject(userStr, egUser.class);
         }
         return user;
 

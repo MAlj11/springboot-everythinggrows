@@ -3,7 +3,7 @@
 //顶部导航鼠标经过出现内容
 function topNav() {
 
-    $('.layout-header-nav').on('mouseover','li',function (e) {
+    $('.layout-header-nav').on('mouseover', 'li', function (e) {
         var target = $(e.target);
         var $this = $('.layout-header-nav-child');
         var lw = $('.layout-header-nav-child-list li').width();
@@ -31,8 +31,6 @@ function topNav() {
 
     }
     */
-
-
 
 
 }//顶部导航鼠标经过出现内容 E
@@ -177,7 +175,7 @@ function allSelect() {
             aee = false;
         }
         $('.cart-col-select .mz-checkbox').each(function () {
-            if($(this).hasClass('checked')){
+            if ($(this).hasClass('checked')) {
                 checkedList.push($(this));
             }
         });
@@ -192,14 +190,14 @@ function allSelect() {
             i++;
             $('#totalPrice').html(fsPrice + '.00');
         }
-        var tos=0;
+        var tos = 0;
         $('.cart-col-select .mz-checkbox').each(function () {
-            if($(this).hasClass('checked')){
+            if ($(this).hasClass('checked')) {
                 tos++;
             }
         });
-        if(tos===0){
-            $('#totalPrice').html( '0.00');
+        if (tos === 0) {
+            $('#totalPrice').html('0.00');
         }
     });
 
@@ -216,7 +214,7 @@ function allSelect() {
 
         }
         $('.cart-col-select .mz-checkbox').each(function () {
-            if($(this).hasClass('checked')){
+            if ($(this).hasClass('checked')) {
                 checkedList.push($(this));
             }
         });
@@ -231,14 +229,14 @@ function allSelect() {
             i++;
             $('#totalPrice').html(fsPrice + '.00');
         }
-        var tos=0;
+        var tos = 0;
         $('.cart-col-select .mz-checkbox').each(function () {
-            if($(this).hasClass('checked')){
+            if ($(this).hasClass('checked')) {
                 tos++;
             }
         });
-        if(tos===0){
-            $('#totalPrice').html( '0.00');
+        if (tos === 0) {
+            $('#totalPrice').html('0.00');
         }
     })
 }
@@ -262,7 +260,6 @@ function cartAddMin() {
     $('#totalPrice').html(fsPrice + '.00');
 
 
-
     // 减少
     $('.mz-adder-subtract').click(function () {
         //检测操作的是哪个商品
@@ -275,10 +272,10 @@ function cartAddMin() {
         //获取当前小计
         var $proTotal = $(this).parents('.cart-product').find('.cart-product-price.total');
 
-        if(proNum <= 1){
+        if (proNum <= 1) {
             return
-        }else {
-            $numInput.val(proNum-1);
+        } else {
+            $numInput.val(proNum - 1);
             $proTotal.text(proPrice * $numInput.val() + '.00');
 
             var $maxText = $(this).parents('.cart-product').find('.cart-product-number-max');
@@ -288,12 +285,12 @@ function cartAddMin() {
             var $checked = $(this).parents('.cart-product').find('.mz-checkbox ');
             var totalPrice = parseInt($('#totalPrice').text());
             console.log($('#totalPrice').text());
-            if($checked.hasClass('checked')){
+            if ($checked.hasClass('checked')) {
                 $('#totalPrice').text(totalPrice - parseInt(proPrice) + '.00');
             }
 
             $(this).siblings('.mz-adder-add').removeClass('disabled');
-            if($numInput.val() == 1){
+            if ($numInput.val() == 1) {
                 $(this).addClass('disabled')
             }
         }
@@ -312,24 +309,24 @@ function cartAddMin() {
         //显示限购文本
         var $maxText = $(this).parents('.cart-product').find('.cart-product-number-max');
 
-        if(proNum >= 5){
+        if (proNum >= 5) {
             $maxText.addClass('show');
             $maxText.text("限购5件");
             return
-        }else {
+        } else {
 
-            $numInput.val(parseInt(proNum)+1);
+            $numInput.val(parseInt(proNum) + 1);
             $proTotal.text(proPrice * $numInput.val() + '.00');
 
             var $checked = $(this).parents('.cart-product').find('.mz-checkbox ');
             var totalPrice = parseInt($('#totalPrice').text());
             console.log($('#totalPrice').text());
-            if($checked.hasClass('checked')){
+            if ($checked.hasClass('checked')) {
                 $('#totalPrice').text(totalPrice + parseInt(proPrice) + '.00');
             }
 
             $(this).siblings('.mz-adder-subtract').removeClass('disabled');
-            if($numInput.val()==5){
+            if ($numInput.val() == 5) {
                 $(this).addClass('disabled');
             }
         }
@@ -426,7 +423,7 @@ function cartAddMin() {
         var proTotal = $(this).parents('.cart-product').find('.cart-product-price.total').text();
         var totalPrice = parseInt($('#totalPrice').text());
         console.log($('#totalPrice').text());
-        if($checked.hasClass('checked')){
+        if ($checked.hasClass('checked')) {
             $('#totalPrice').text(totalPrice - proTotal + '.00');
         }
         $(this).parents('.cart-product').remove();

@@ -38,7 +38,7 @@ public class CommentController {
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
         if ((Integer) dataMap.get("status") == 200) {
             HttpSession session = request.getSession();
-            session.setAttribute("articleid",aid);
+            session.setAttribute("articleid", aid);
             return "commentSuccess";
         }
         return "lw-article-fullwidth";

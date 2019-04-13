@@ -39,7 +39,7 @@
     </select>
 
     <delete id="deleteUidArticle" parameterType="java.util.Map">
-         DELETE FROM
+        DELETE FROM
         ${tableName}
         WHERE
         aid = ${aid};

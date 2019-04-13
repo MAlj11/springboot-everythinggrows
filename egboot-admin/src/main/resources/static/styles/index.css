@@ -1,19 +1,41 @@
 @charset "UTF-8";
 
-.topic-list-container { }
+.topic-list-container {
+}
 
-.topic-list-container .topic-list { width: 80% ; margin: 0 auto ; }
+.topic-list-container .topic-list {
+    width: 80%;
+    margin: 0 auto;
+}
 
-.topic-list-container .topic-list .topic-header { background: #608cff; }
+.topic-list-container .topic-list .topic-header {
+    background: #608cff;
+}
 
-.topic-list-container .topic-list .topic-header>b { line-height: 30px ; font-size: 16px ; text-align: center ; color: #FFFF00 ; }
+.topic-list-container .topic-list .topic-header > b {
+    line-height: 30px;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFF00;
+}
 
-.topic-list-container .topic-list .topic-item { line-height: 30px ;  }
+.topic-list-container .topic-list .topic-item {
+    line-height: 30px;
+}
 
-.topic-list-container .topic-list .topic-item>i { font-style: normal ; text-align: center ; }
+.topic-list-container .topic-list .topic-item > i {
+    font-style: normal;
+    text-align: center;
+}
 
-.topic-list-container .topic-list .topic-item:hover { background: #fffcb6;}
+.topic-list-container .topic-list .topic-item:hover {
+    background: #fffcb6;
+}
 
-.topic-list-container .topic-list .odd { background: #F4F4F4 ; }
+.topic-list-container .topic-list .odd {
+    background: #F4F4F4;
+}
 
-.topic-list-container .topic-list .even { background: #ffffe0;}
+.topic-list-container .topic-list .even {
+    background: #ffffe0;
+}

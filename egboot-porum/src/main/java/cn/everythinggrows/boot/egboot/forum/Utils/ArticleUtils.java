@@ -7,8 +7,9 @@ public class ArticleUtils {
     public static final String COMMENT_ID = "eg/blog/comment/id";
     @Autowired
     private static JedisCluster jedisCluster;
-    public static String getTypeWithInt(int type){
-        switch(type){
+
+    public static String getTypeWithInt(int type) {
+        switch (type) {
             case 1:
                 return "摄影";
             case 2:

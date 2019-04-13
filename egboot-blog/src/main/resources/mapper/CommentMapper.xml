@@ -33,7 +33,13 @@
         SELECT
         aid,cid,content,uid,portrait,username,createAt
         FROM
-         ${tableName}
+        ${tableName}
         WHERE aid = #{aid}
     </select>
+
+    <delete id="deleteComment" parameterType="java.util.Map">
+        DELETE FROM
+        ${tableName}
+        WHERE cid = #{cid}
+    </delete>
 </mapper>

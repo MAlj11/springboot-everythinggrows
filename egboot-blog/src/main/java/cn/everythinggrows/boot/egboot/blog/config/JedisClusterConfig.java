@@ -14,15 +14,15 @@ public class JedisClusterConfig {
     @Autowired
     private RedisProperties redisProperties;
 
-    public JedisCluster getJedisCluster(){
-        String [] serverArray=redisProperties.getClusterNodes().split(",");
-        Set<HostAndPort> nodes=new HashSet<>();
+    public JedisCluster getJedisCluster() {
+        String[] serverArray = redisProperties.getClusterNodes().split(",");
+        Set<HostAndPort> nodes = new HashSet<>();
 
-        for (String ipPort:serverArray){
-            String [] ipPortPair=ipPort.split(":");
-            nodes.add(new HostAndPort(ipPortPair[0].trim(),Integer.valueOf(ipPortPair[1].trim())));
+        for (String ipPort : serverArray) {
+            String[] ipPortPair = ipPort.split(":");
+            nodes.add(new HostAndPort(ipPortPair[0].trim(), Integer.valueOf(ipPortPair[1].trim())));
 
         }
-        return  new JedisCluster(nodes,redisProperties.getCommandTimeout());
+        return new JedisCluster(nodes, redisProperties.getCommandTimeout());
     }
 }

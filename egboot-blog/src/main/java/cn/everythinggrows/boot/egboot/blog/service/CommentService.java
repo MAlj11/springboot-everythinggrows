@@ -22,16 +22,16 @@ public class CommentService {
     @Value("${portrait_dns}")
     String portraicdns;
 
-    public List<Comment> getCommentWithAid(long aid){
+    public List<Comment> getCommentWithAid(long aid) {
         List<Comment> comments = commentDao.getCommentList(aid);
-        for(Comment comment : comments){
+        for (Comment comment : comments) {
             String portraitTrue = portraicdns + comment.getPortrait();
             comment.setPortrait(portraitTrue);
         }
         return comments;
     }
 
-    public int insertComment(long aid, long uid,String content){
+    public int insertComment(long aid, long uid, String content) {
         egUser user = httpRequestToUser.getUser(uid);
         Comment comment = new Comment();
         long cid = redisClientTemplate.cidGeneration();
@@ -49,6 +49,10 @@ public class CommentService {
         comment.setUsername(user.getUsername());
         int i = commentDao.insertComment(comment);
         return i;
+    }
+
+    public int deleteComment(long cid, long aid) {
+        return commentDao.deleteComment(cid, aid);
     }
 
 }

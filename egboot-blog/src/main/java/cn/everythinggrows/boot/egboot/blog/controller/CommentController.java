@@ -18,30 +18,36 @@ public class CommentController {
     private CommentService commentService;
 
     @RequestMapping(value = "/blog/comment/{aid}")
-    public EgResult getComment(@PathVariable("aid") long aid){
-       List<Comment> comments = commentService.getCommentWithAid(aid);
-        Map<String,Object> ret = Maps.newHashMap();
-        ret.put("comments",comments);
+    public EgResult getComment(@PathVariable("aid") long aid) {
+        List<Comment> comments = commentService.getCommentWithAid(aid);
+        Map<String, Object> ret = Maps.newHashMap();
+        ret.put("comments", comments);
         return EgResult.ok(ret);
     }
 
     @NeedSession
-    @RequestMapping(value = "/blog/comment/insert",method = RequestMethod.POST)
+    @RequestMapping(value = "/blog/comment/insert", method = RequestMethod.POST)
     public EgResult insertComment(@RequestParam(value = "aid") long aid,
-                                   @RequestParam(value = "content")String content,
-                                    @RequestHeader(value = "x-eg-session") String session){
+                                  @RequestParam(value = "content") String content,
+                                  @RequestHeader(value = "x-eg-session") String session) {
         long uid = getUid(session);
-        int i = commentService.insertComment(aid,uid,content);
-        if(i>0){
+        int i = commentService.insertComment(aid, uid, content);
+        if (i > 0) {
             return EgResult.ok();
-        }else{
-            return EgResult.error(10001,"system is error");
+        } else {
+            return EgResult.error(10001, "system is error");
         }
     }
 
+    @RequestMapping(value = "blog/comment/delete", method = RequestMethod.GET)
+    public EgResult deletecomment(@RequestParam(value = "cid") long cid,
+                                  @RequestParam(value = "aid") long aid) {
+        commentService.deleteComment(cid, aid);
+        return EgResult.ok();
+    }
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

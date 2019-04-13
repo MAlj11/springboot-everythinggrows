@@ -17,7 +17,7 @@ public class TopicService {
     @Autowired
     private Topicdao topicdao;
 
-    public int insertTopicDetail(egUser user, String content, long tid){
+    public int insertTopicDetail(egUser user, String content, long tid) {
         String portrairDns = user.getPortrait();
         String[] line = portrairDns.split("/");
         int lastIndex = line.length - 1;
@@ -31,33 +31,33 @@ public class TopicService {
         topicDetail.setToUid(0L);
         topicDetail.setToUsername("");
         topicDetail.setToPortrait("");
-        int createAt = (int)(System.currentTimeMillis() / 1000);
+        int createAt = (int) (System.currentTimeMillis() / 1000);
         topicDetail.setCreateAt(createAt);
         int i = topicdao.insertTopicDetail(topicDetail);
         return i;
     }
 
-    public List<TopicDetail> getTopicDetailLsit(long tid){
+    public List<TopicDetail> getTopicDetailLsit(long tid) {
         List<TopicDetail> topicDetails = Lists.newArrayList();
-        if(tid == 0){
+        if (tid == 0) {
             return topicDetails;
         }
         topicDetails = topicdao.getTopicDetailList(tid);
         return topicDetails;
     }
 
-    public int createTable(long tid){
+    public int createTable(long tid) {
         int i = topicdao.createTopicDetailTable(tid);
         return i;
     }
 
-    public int deleteTable(long tid){
+    public int deleteTable(long tid) {
         int i = topicdao.deleteTopicDetailTable(tid);
         return i;
     }
 
-    public int deleteTopicDetail(long id, long tid){
-         int i = topicdao.deleteTopicDetail(id,tid);
-         return i;
+    public int deleteTopicDetail(long id, long tid) {
+        int i = topicdao.deleteTopicDetail(id, tid);
+        return i;
     }
 }

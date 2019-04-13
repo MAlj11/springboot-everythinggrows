@@ -9,10 +9,10 @@ http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:application name="dubbo-provider-user"/>
 
     <!-- 注册中心配置，使用zookeeper注册中心暴露服务地址 -->
-    <dubbo:registry address="zookeeper://192.168.0.174:2181" timeout="60000" />
+    <dubbo:registry address="zookeeper://192.168.0.174:2181" timeout="60000"/>
 
     <!--关闭服务消费方所有服务的启动检查。dubbo缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止Spring初始化完成。-->
-    <dubbo:consumer check="false" />
+    <dubbo:consumer check="false"/>
 
     <!-- 使用注解方式暴露接口，会自动扫描package下所有包中dubbo相关的注解，这样就不用在xml中再针对每个服务接口配置dubbo:service interface-->
     <dubbo:annotation package="cn.everythinggrows.boot.egboot.user.service"/>

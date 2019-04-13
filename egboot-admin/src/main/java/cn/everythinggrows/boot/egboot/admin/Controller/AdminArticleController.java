@@ -35,37 +35,37 @@ public class AdminArticleController {
     private UserService userService;
 
     @RequestMapping(value = "/admin-index.html")
-    public String adminIndex(){
+    public String adminIndex() {
         return "admin-index";
     }
 
     @RequestMapping(value = "/admin/index/article")
-    public String adminArticle(HttpServletRequest request){
+    public String adminArticle(HttpServletRequest request) {
         HttpSession session = request.getSession();
-       List<EgTypeArticle> articleList = new ArrayList<>();
-        for(int i=1;i<=4;i++) {
+        List<EgTypeArticle> articleList = new ArrayList<>();
+        for (int i = 1; i <= 4; i++) {
             String typeUrl = BLOG_BASE_URL + "/type/" + String.valueOf(i);
             JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl, null);
             String phtList = typeJson.getString("articleWithTypeList");
             List<EgTypeArticle> typeList = JSONObject.parseArray(phtList, EgTypeArticle.class);
-            for(EgTypeArticle egTypeArticle : typeList){
+            for (EgTypeArticle egTypeArticle : typeList) {
                 articleList.add(egTypeArticle);
             }
         }
-        session.setAttribute("articleList",articleList);
+        session.setAttribute("articleList", articleList);
         return "lw-admin-article";
     }
 
     @RequestMapping(value = "/admin/article/delete/{aid}")
     public String adminDelete(@PathVariable(value = "aid") long aid,
                               HttpServletRequest request,
-                              HttpServletResponse response){
+                              HttpServletResponse response) {
         String uidUrl = BLOG_BASE_URL + "/article/getuid/" + String.valueOf(aid);
-        JSONObject data = HttpRequsetUtil.requestGet(uidUrl,null);
+        JSONObject data = HttpRequsetUtil.requestGet(uidUrl, null);
         String uid = data.getString("uid");
         String tokenVal = uid + ";safjkhaikfhidsfhidsk";
         String delUrl = BLOG_BASE_URL + "/article/delete/" + String.valueOf(aid);
-        String ret = HttpClientUtil.doGetWithHander(delUrl,null,"x-eg-session",tokenVal);
+        String ret = HttpClientUtil.doGetWithHander(delUrl, null, "x-eg-session", tokenVal);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
         return "delSuccess";
@@ -73,37 +73,37 @@ public class AdminArticleController {
 
     @RequestMapping(value = "/admin/article/detail/{aid}")
     public String adminArticleDetail(@PathVariable(value = "aid") long aid,
-                                     HttpServletRequest request){
+                                     HttpServletRequest request) {
         HttpSession session = request.getSession();
         String detailUrl = BLOG_BASE_URL + "/article/get/" + String.valueOf(aid);
-        JSONObject detailJson = HttpRequsetUtil.requestGet(detailUrl,null);
+        JSONObject detailJson = HttpRequsetUtil.requestGet(detailUrl, null);
         String detart = detailJson.getString("article");
         JSON artjson = JSONObject.parseObject(detart);
-        egArticle article = JSONObject.toJavaObject(artjson,egArticle.class);
-        session.setAttribute("adminarticleDetail",article);
-        if(article.getUid() != 0){
+        egArticle article = JSONObject.toJavaObject(artjson, egArticle.class);
+        session.setAttribute("adminarticleDetail", article);
+        if (article.getUid() != 0) {
             egUser user = userService.getUser(article.getUid());
-            session.setAttribute("adminuser",user);
+            session.setAttribute("adminuser", user);
         }
         String commentUrl = BLOG_BASE_URL + "/comment/" + String.valueOf(aid);
-        JSONObject comObj = HttpRequsetUtil.requestGet(commentUrl,null);
+        JSONObject comObj = HttpRequsetUtil.requestGet(commentUrl, null);
         String comList = comObj.getString("comments");
-        List<Comment> comments = JSONObject.parseArray(comList,Comment.class);
-        session.setAttribute("admincommentDetail",comments);
+        List<Comment> comments = JSONObject.parseArray(comList, Comment.class);
+        session.setAttribute("admincommentDetail", comments);
         return "admin-article-fullwidth";
     }
 
     @RequestMapping(value = "/admin/article/commit/delete")
     public String adminCommentDelete(@RequestParam(value = "cid") long cid,
                                      @RequestParam(value = "aid") long aid,
-                                     HttpServletRequest request){
+                                     HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         String comUrl = BLOG_BASE_URL + "/comment/delete";
-        Map<String,String> param = new HashMap<>();
-        param.put("cid",String.valueOf(cid));
-        param.put("aid",String.valueOf(aid));
-        String ret = HttpClientUtil.doGet(comUrl,param);
+        Map<String, String> param = new HashMap<>();
+        param.put("cid", String.valueOf(cid));
+        param.put("aid", String.valueOf(aid));
+        String ret = HttpClientUtil.doGet(comUrl, param);
         return "comdelSuccess";
     }
 }

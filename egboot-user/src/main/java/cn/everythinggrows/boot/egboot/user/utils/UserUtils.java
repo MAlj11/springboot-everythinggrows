@@ -7,7 +7,7 @@ public class UserUtils {
 //    static String officialUids;
 
 
-    public static boolean isOffcialUid(long uid){
+    public static boolean isOffcialUid(long uid) {
 //        String[] officislUidList = officialUids.split(",");
 //        for(int i=0;i<officislUidList.length;i++){
 //            if(uid == Long.parseLong(officislUidList[i])){

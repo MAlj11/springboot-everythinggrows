@@ -20,8 +20,8 @@ public class TypeArticleDao {
     @Autowired
     private SqlSessionTemplate blogSqlSession;
 
-    public int insertUidArticle(EgTypeArticle egTypeArticle){
-        Map<String,Object> dataMap = beanUtils.bean2map(egTypeArticle);
+    public int insertUidArticle(EgTypeArticle egTypeArticle) {
+        Map<String, Object> dataMap = beanUtils.bean2map(egTypeArticle);
         long id = egTypeArticle.getType();
         dataMap.put("tableName", "eg_type_article_" + String.valueOf(id));
         DatabaseType type = DatabaseType.getType(0);
@@ -31,23 +31,23 @@ public class TypeArticleDao {
         return i;
     }
 
-    public List<EgTypeArticle> getTypeArticleList(int type){
-        Map<String,Object> dataMap = Maps.newHashMap();
+    public List<EgTypeArticle> getTypeArticleList(int type) {
+        Map<String, Object> dataMap = Maps.newHashMap();
         dataMap.put("tableName", "eg_type_article_" + String.valueOf(type));
         DatabaseType dbtype = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(dbtype);
-        List<EgTypeArticle> egTypeArticleList = blogSqlSession.selectList("TypeArticleDao.selectArticle",dataMap);
+        List<EgTypeArticle> egTypeArticleList = blogSqlSession.selectList("TypeArticleDao.selectArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return egTypeArticleList;
     }
 
-    public int deleteTypeArticle(int type,long aid){
-        Map<String,Object> dataMap = new HashMap<>();
+    public int deleteTypeArticle(int type, long aid) {
+        Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("tableName", "eg_type_article_" + String.valueOf(type));
-        dataMap.put("aid",aid);
+        dataMap.put("aid", aid);
         DatabaseType dbtype = DatabaseType.getType(0);
         DatabaseContextHolder.setDatabaseType(dbtype);
-        int i = blogSqlSession.delete("TypeArticleDao.deleteTypeArticle",dataMap);
+        int i = blogSqlSession.delete("TypeArticleDao.deleteTypeArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }

@@ -45,23 +45,29 @@
 <footer class="blog-footer">
     <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-            <h3>关于<枝丫></h3>
-            <p class="am-text-sm"><枝丫>包含着很多你喜欢的内容，我们希望每一个来到<枝丫>的朋友都会有所收获。</p>
+            <h3>关于
+                <枝丫>
+            </h3>
+            <p class="am-text-sm">
+                <枝丫>包含着很多你喜欢的内容，我们希望每一个来到
+                    <枝丫>的朋友都会有所收获。
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
             </p>
-            <p>我们追求卓越，然时间、经验、能力有限。<枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！</p>
+            <p>我们追求卓越，然时间、经验、能力有限。
+                <枝丫>有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！
+            </p>
         </div>
         <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
 
         </div>
     </div>
-    <div class="blog-text-center"><枝丫></div>
+    <div class="blog-text-center">
+        <枝丫>
+    </div>
     <div class="blog-text-center">京ICP备19009766号</div>
 </footer>
-
-
-
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->

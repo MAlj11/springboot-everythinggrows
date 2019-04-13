@@ -9,6 +9,7 @@ public class emailUid implements Serializable {
     private Long hashid;
     private String email;
     private Long uid;
+
     public Long getHashid() {
         return hashid;
     }

@@ -36,12 +36,12 @@ public class EgResult {
         return new EgResult(status, msg, null);
     }
 
-    public static EgResult error(Integer status, String msg){
-        return new EgResult(status,msg,null);
+    public static EgResult error(Integer status, String msg) {
+        return new EgResult(status, msg, null);
     }
 
-    public static EgResult systemError(){
-        return EgResult.error(100000,"system error");
+    public static EgResult systemError() {
+        return EgResult.error(100000, "system error");
     }
 
     public EgResult(Integer status, String msg, Object data) {

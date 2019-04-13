@@ -15,7 +15,7 @@
         请输入密码：<input id="password" name="password" type="password"/>
         <br/>
         <hr>
-        <input type="submit" value="登陆" />
+        <input type="submit" value="登陆"/>
     </form>
 </div>
 </body>

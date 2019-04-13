@@ -1,4 +1,4 @@
-@charset "UTF-8" ;
+@charset "UTF-8";
 
 /* 使用通配符 选择页面上所有的元素 */
 * {
@@ -13,13 +13,15 @@ body {
 }
 
 /* 选择页面上所有的 img 标记 */
-img { border: none ; /*取消所有图片的边框*/ }
+img {
+    border: none; /*取消所有图片的边框*/
+}
 
 /* 选择页面上所有的 a 标记 */
 a {
-    text-decoration: none ; /*取消所有 超链接 的 下划线*/
+    text-decoration: none; /*取消所有 超链接 的 下划线*/
     blr: expression( this.onFocus=this.blur() ); /* 去除超链接周围的虚框 ( 针对早期IE 浏览器  )*/
-    outline: none ; /* 去除超链接周围的虚框 ( 针对 FireFox 、Chrome 等浏览器 ) */
+    outline: none; /* 去除超链接周围的虚框 ( 针对 FireFox 、Chrome 等浏览器 ) */
 }
 
 /* 用伪类 设置 a 元素在 鼠标悬浮时的样式 以及 激活链接时的状态*/
@@ -29,11 +31,19 @@ a:active {
 }
 
 /* 纤细字体 */
-.x-font-light { font-weight: lighter;}
+.x-font-light {
+    font-weight: lighter;
+}
+
 /* 正常字体 */
-.x-font-normal { font-weight: normal ; }
+.x-font-normal {
+    font-weight: normal;
+}
+
 /* 加粗字体 */
-.x-font-bold { font-weight: bold ; }
+.x-font-bold {
+    font-weight: bold;
+}
 
 /* 设置元素高度自动适应 (当元素内部包含浮动元素时使用) */
 .x-auto-height {
@@ -42,18 +52,30 @@ a:active {
 }
 
 /* 专门用来清除浮动  ( both 表示清除两侧浮动 )*/
-.x-clear { clear: both ;  }
+.x-clear {
+    clear: both;
+}
 
 /* 用 div 实现在页面上显示一个 只有一个像素的横线 */
-.x-line { display: block ; height: 0px; border-bottom: 1px solid #d3d3d3; margin: 0px auto; }
+.x-line {
+    display: block;
+    height: 0px;
+    border-bottom: 1px solid #d3d3d3;
+    margin: 0px auto;
+}
 
 /* 当需要 通栏 时使用 across ,
  * 它可以让 元素 从 页面最左边 抵达 页面 最右边 ,
  * 如果 元素 内部有浮动子元素,并且希望高度自动适应,则需要配合 .auto-height 一起使用
  * */
-.x-across { min-width: 900px;  clear: both; }
+.x-across {
+    min-width: 900px;
+    clear: both;
+}
 
-.x-center-container { text-align: center; /* 针对 IE 浏览器居中对齐 */ }
+.x-center-container {
+    text-align: center; /* 针对 IE 浏览器居中对齐 */
+}
 
 /*
  * 建议将 .x-center-container  和 .x-center  结合使用，比如:
@@ -84,43 +106,119 @@ a:active {
 *   </div>
 *    注意, 两部分 加起来, 刚好是 满行 ( 12 个格子的空间 )
 **/
-.x-row { display: block ; overflow: hidden; }
+.x-row {
+    display: block;
+    overflow: hidden;
+}
 
 /*设置栅格系统的浮动方式*/
-.x-cell-1,.x-cell-2,.x-cell-3,.x-cell-4,.x-cell-5,.x-cell-6,.x-cell-7,.x-cell-8,.x-cell-9,.x-cell-10,.x-cell-11{ float: left ; min-height: 1px ; }
+.x-cell-1, .x-cell-2, .x-cell-3, .x-cell-4, .x-cell-5, .x-cell-6, .x-cell-7, .x-cell-8, .x-cell-9, .x-cell-10, .x-cell-11 {
+    float: left;
+    min-height: 1px;
+}
 
 /* 假设每一行可以等分为12分,则每份占8.3333333333%  */
-.x-cell-1 {  width: 8.333333333% ; }
-.x-cell-2 {  width: 16.666666667% ; }
-.x-cell-3 {  width: 25% ; }
-.x-cell-4 {  width: 33.333333333% ; }
-.x-cell-5 {  width: 41.666666667% ; }
-.x-cell-6 {  width: 50% ; }
-.x-cell-7 {  width: 58.333333333% ; }
-.x-cell-8 {  width: 66.666666667% ; }
-.x-cell-9 {  width: 75% ; }
-.x-cell-10 {  width: 83.333333333% ; }
-.x-cell-11 {  width: 91.666666667% ; }
+.x-cell-1 {
+    width: 8.333333333%;
+}
+
+.x-cell-2 {
+    width: 16.666666667%;
+}
+
+.x-cell-3 {
+    width: 25%;
+}
+
+.x-cell-4 {
+    width: 33.333333333%;
+}
+
+.x-cell-5 {
+    width: 41.666666667%;
+}
+
+.x-cell-6 {
+    width: 50%;
+}
+
+.x-cell-7 {
+    width: 58.333333333%;
+}
+
+.x-cell-8 {
+    width: 66.666666667%;
+}
+
+.x-cell-9 {
+    width: 75%;
+}
+
+.x-cell-10 {
+    width: 83.333333333%;
+}
+
+.x-cell-11 {
+    width: 91.666666667%;
+}
 
 /* 为方便控制元素位置，以下 .x-offset-N 用来控制元素的左侧外边距 ，配合 .x-cell-N 使用效果更好，比如：
  *  <div class="x-row">
  *         <div class="x-offset-10 x-cell-2"> 这个 div 将在左侧闪出 10 个单元格的空白，而它本身仅占 2 个单元格 </div>
  * </div>
  **/
-.x-offset-1 { margin-left: 8.3333333333%;}
-.x-offset-2 { margin-left: 16.6666666667%;  }
-.x-offset-3 { margin-left: 25%;  }
-.x-offset-4 { margin-left: 33.3333333333%; }
-.x-offset-5 { margin-left: 41.6666666667%; }
-.x-offset-6 { margin-left: 50%; }
-.x-offset-7 { margin-left: 58.3333333333%; }
-.x-offset-8 { margin-left: 66.6666666667%; }
-.x-offset-9 { margin-left: 75%; }
-.x-offset-10 { margin-left: 83.3333333333%; }
-.x-offset-11 { margin-left: 91.6666666667%; }
+.x-offset-1 {
+    margin-left: 8.3333333333%;
+}
+
+.x-offset-2 {
+    margin-left: 16.6666666667%;
+}
+
+.x-offset-3 {
+    margin-left: 25%;
+}
+
+.x-offset-4 {
+    margin-left: 33.3333333333%;
+}
+
+.x-offset-5 {
+    margin-left: 41.6666666667%;
+}
+
+.x-offset-6 {
+    margin-left: 50%;
+}
+
+.x-offset-7 {
+    margin-left: 58.3333333333%;
+}
+
+.x-offset-8 {
+    margin-left: 66.6666666667%;
+}
+
+.x-offset-9 {
+    margin-left: 75%;
+}
+
+.x-offset-10 {
+    margin-left: 83.3333333333%;
+}
+
+.x-offset-11 {
+    margin-left: 91.6666666667%;
+}
 
 /* 定义一个边界( 用于辅助解决 上下外边距 重合 问题 ) */
-.x-boundary { display: block ; height: 1px ; background-color: transparent ; border: none ; clear: both ; }
+.x-boundary {
+    display: block;
+    height: 1px;
+    background-color: transparent;
+    border: none;
+    clear: both;
+}
 
 /** 如果某个区域的文字禁止选择复制,添加该样式即可*/
 .x-disable-select {
@@ -131,24 +229,32 @@ a:active {
     user-select: none;
 }
 
-
 /**  定义容器的 内发光效果 (用边框的内阴影实现) */
-.x-shadow-inset { border: 1px solid #d3d3d3; border-radius: 3px; box-shadow: 0px 0px 4px 3px #eeeeee inset; }
+.x-shadow-inset {
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 3px #eeeeee inset;
+}
 
 /**  定义容器的 外发光效果 (用边框的外阴影实现) */
-.x-shadow-outside { margin: 10px 10px; border: 1px solid #d3d3d3; border-radius: 3px; box-shadow: 0px 0px 5px 4px #eeeeee; }
+.x-shadow-outside {
+    margin: 10px 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px 4px #eeeeee;
+}
 
 /** 定义一个遮罩层的样式*/
 .x-mask {
-    display: none ; /* 默认是隐藏的，使用 JavaScript 来触发其显示 */
-    position:fixed; /* 使用 固定定位，让遮罩层不随页面滚动而滚动 */
-    left:0; /* 确定 遮罩层 的位置 */
-    top:0; /* 确定 遮罩层 的位置 */
-    width:100%; /* 确定 遮罩层 的宽度( 100% 表示覆盖整个浏览器窗口) */
-    height:100%;  /* 确定 遮罩层 的高度( 100% 表示覆盖整个浏览器窗口) */
-    z-index:2000; /* 确定 遮罩层 的显示层次 (数字越大越靠前) */
+    display: none; /* 默认是隐藏的，使用 JavaScript 来触发其显示 */
+    position: fixed; /* 使用 固定定位，让遮罩层不随页面滚动而滚动 */
+    left: 0; /* 确定 遮罩层 的位置 */
+    top: 0; /* 确定 遮罩层 的位置 */
+    width: 100%; /* 确定 遮罩层 的宽度( 100% 表示覆盖整个浏览器窗口) */
+    height: 100%; /* 确定 遮罩层 的高度( 100% 表示覆盖整个浏览器窗口) */
+    z-index: 2000; /* 确定 遮罩层 的显示层次 (数字越大越靠前) */
     background-color: rgba(239, 239, 239, 0.5); /* 设置遮罩层的背景颜色，rgba 的前三个参数确定颜色，第四个参数确定透明度(0表示完全透明，1表示完全不透明) */
-    filter:alpha(opacity=50);/*使用滤镜实现透明效果，其中 opacity 的取值是 0 到 100 之间 ( 0 表示完全透明，100表示完全不透明 ) */
+    filter: alpha(opacity=50); /*使用滤镜实现透明效果，其中 opacity 的取值是 0 到 100 之间 ( 0 表示完全透明，100表示完全不透明 ) */
 }
 
 

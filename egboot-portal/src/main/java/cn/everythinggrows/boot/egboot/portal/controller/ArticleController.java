@@ -32,9 +32,9 @@ public class ArticleController {
     String BLOG_BASE_URL;
 
     @RequestMapping(value = "/writearticle.html")
-    public String writeArticle(HttpServletRequest request){
-        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
-        if(tokenVal == null || tokenVal.length() == 0){
+    public String writeArticle(HttpServletRequest request) {
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        if (tokenVal == null || tokenVal.length() == 0) {
             return "lw-log";
         }
         return "lw-write";
@@ -48,17 +48,17 @@ public class ArticleController {
                               HttpServletRequest request) throws UnsupportedEncodingException {
 
         String insertArtUrl = BLOG_BASE_URL + "/article/insert";
-        Map<String,String> param = new HashMap<>();
-        param.put("articleName",articleName);
-        param.put("title",title);
-        param.put("type",String.valueOf(type));
-        param.put("content",content);
-        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
-        tokenVal = URLDecoder.decode(tokenVal,"utf-8");
-        String ret = HttpClientUtil.doPostWithHander(insertArtUrl,param,"x-eg-session",tokenVal);
+        Map<String, String> param = new HashMap<>();
+        param.put("articleName", articleName);
+        param.put("title", title);
+        param.put("type", String.valueOf(type));
+        param.put("content", content);
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        tokenVal = URLDecoder.decode(tokenVal, "utf-8");
+        String ret = HttpClientUtil.doPostWithHander(insertArtUrl, param, "x-eg-session", tokenVal);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
-        if((Integer)dataMap.get("status")==200){
+        if ((Integer) dataMap.get("status") == 200) {
             return "publishSuccess";
         }
         return "lw-write";
@@ -69,42 +69,42 @@ public class ArticleController {
 
     @RequestMapping(value = "/myArticle.html")
     public String getMyArticle(HttpServletRequest request) throws UnsupportedEncodingException {
-        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
-        if(tokenVal == null || tokenVal.length() == 0){
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        if (tokenVal == null || tokenVal.length() == 0) {
             return "lw-log";
         }
-        tokenVal = URLDecoder.decode(tokenVal,"utf-8");
+        tokenVal = URLDecoder.decode(tokenVal, "utf-8");
         HttpSession session = request.getSession();
         long uid = getUid(tokenVal);
         String myArtUrl = BLOG_BASE_URL + "/article/myarticle/" + String.valueOf(uid);
-        JSONObject myartJson = HttpRequsetUtil.requestGet(myArtUrl,null);
+        JSONObject myartJson = HttpRequsetUtil.requestGet(myArtUrl, null);
         String myartList = myartJson.getString("egUidArticles");
         List<egUidArticle> egUidArticleList = JSONObject.parseArray(myartList, egUidArticle.class);
-        logger.info("myarticle:{}",egUidArticleList);
-        session.setAttribute("myArticles",egUidArticleList);
+        logger.info("myarticle:{}", egUidArticleList);
+        session.setAttribute("myArticles", egUidArticleList);
         return "lw-myArticle";
     }
 
     @RequestMapping("/delete/article/{aid}")
     public String deleteArticle(@PathVariable(value = "aid") long aid,
                                 HttpServletRequest request) throws UnsupportedEncodingException {
-        String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
-        if(tokenVal == null || tokenVal.length() == 0){
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        if (tokenVal == null || tokenVal.length() == 0) {
             return "lw-log";
         }
-        tokenVal = URLDecoder.decode(tokenVal,"utf-8");
+        tokenVal = URLDecoder.decode(tokenVal, "utf-8");
         String delUrl = BLOG_BASE_URL + "/article/delete/" + String.valueOf(aid);
-        String ret = HttpClientUtil.doGetWithHander(delUrl,null,"x-eg-session",tokenVal);
+        String ret = HttpClientUtil.doGetWithHander(delUrl, null, "x-eg-session", tokenVal);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
-        if((Integer)dataMap.get("status")==200){
+        if ((Integer) dataMap.get("status") == 200) {
             return "delSuccess";
         }
         return "lw-myArticle";
     }
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

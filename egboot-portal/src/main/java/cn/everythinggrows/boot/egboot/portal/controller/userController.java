@@ -1,7 +1,6 @@
 package cn.everythinggrows.boot.egboot.portal.controller;
 
 
-
 import cn.everythinggrows.boot.egboot.portal.Utils.*;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -37,18 +36,18 @@ public class userController {
 
     @RequestMapping(value = "/emailVerify.html", method = RequestMethod.GET)
     public EgResult getEmailVerify(@RequestParam(value = "reEmail") String reEmail,
-                                   ModelAndView modelAndView){
-        if(reEmail == null){
-            return EgResult.error(10002,"email is null");
+                                   ModelAndView modelAndView) {
+        if (reEmail == null) {
+            return EgResult.error(10002, "email is null");
         }
         String url = USER_BASE_URL + "/send/email";
-        Map<String,String> paramMap = new HashMap<>();
-        paramMap.put("email",reEmail);
-        JSONObject json = HttpRequsetUtil.requestGet(url,paramMap);
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("email", reEmail);
+        JSONObject json = HttpRequsetUtil.requestGet(url, paramMap);
 
         String vertify = json.getString("vertify");
-        logger.info("{}的验证码：{}======================================================",reEmail,vertify);
-        modelAndView.addObject("vertify",vertify);
+        logger.info("{}的验证码：{}======================================================", reEmail, vertify);
+        modelAndView.addObject("vertify", vertify);
         return EgResult.ok();
     }
 
@@ -59,82 +58,82 @@ public class userController {
         HttpSession session = request.getSession();
         String reEmail = request.getParameter("reEmail");
         String rePassword = request.getParameter("rePassword");
-        String reVerify = request.getParameter( "reVerify" );
+        String reVerify = request.getParameter("reVerify");
         String reUsername = request.getParameter("reUsername");
 
-        String password = EncryptHelper.encrypt( rePassword.trim() , EncryptType.SHA1 );
-        Map<String,String> paramMap = new HashMap<>();
-        paramMap.put("email",reEmail);
-        paramMap.put("username",reUsername);
-        paramMap.put("password",password);
-        paramMap.put("vertify",reVerify);
+        String password = EncryptHelper.encrypt(rePassword.trim(), EncryptType.SHA1);
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("email", reEmail);
+        paramMap.put("username", reUsername);
+        paramMap.put("password", password);
+        paramMap.put("vertify", reVerify);
 
 
         String url = USER_BASE_URL + "/create";
-        JSONObject json = HttpRequsetUtil.requestPost(url,paramMap);
+        JSONObject json = HttpRequsetUtil.requestPost(url, paramMap);
         String token = json.getString("token");
 
-        logger.info("userController token:{}",token);
+        logger.info("userController token:{}", token);
 
         //将token存入浏览器的cookie中
-        Cookie cookie = new Cookie("eg_cookie_token",URLEncoder.encode(token, "utf-8"));
-        cookie.setMaxAge(7*24*60*60);
+        Cookie cookie = new Cookie("eg_cookie_token", URLEncoder.encode(token, "utf-8"));
+        cookie.setMaxAge(7 * 24 * 60 * 60);
         response.addCookie(cookie);
 
-        session.setAttribute("tokenVertify",true);
+        session.setAttribute("tokenVertify", true);
         return "lw-index";
     }
 
 
     @RequestMapping(value = "/login.html", method = RequestMethod.POST)
-    public  String Login(HttpServletRequest request,
-                         ModelAndView modelAndView,
-                         HttpServletResponse response) throws UnsupportedEncodingException {
+    public String Login(HttpServletRequest request,
+                        ModelAndView modelAndView,
+                        HttpServletResponse response) throws UnsupportedEncodingException {
         HttpSession session = request.getSession();
         String loEmail = request.getParameter("loEmail");
         String loPassword = request.getParameter("passwordLog");
-        String password = EncryptHelper.encrypt( loPassword.trim() , EncryptType.SHA1 );
+        String password = EncryptHelper.encrypt(loPassword.trim(), EncryptType.SHA1);
 
         String url = USER_BASE_URL + "/login";
-        Map<String,String> param = new HashMap<>();
-        param.put("email",loEmail);
-        param.put("password",password);
-        String ret = HttpClientUtil.doPost(url,param);
+        Map<String, String> param = new HashMap<>();
+        param.put("email", loEmail);
+        param.put("password", password);
+        String ret = HttpClientUtil.doPost(url, param);
         JSONObject json = JSON.parseObject(ret);
         Map dataMap = JSONObject.toJavaObject(json, Map.class);
-        if((Integer)dataMap.get("status")==200){
-            JSONObject dataStr  = (JSONObject) dataMap.get("data");
+        if ((Integer) dataMap.get("status") == 200) {
+            JSONObject dataStr = (JSONObject) dataMap.get("data");
             String token = dataStr.getString("token");
-            logger.info("token:{}",token);
+            logger.info("token:{}", token);
 
             //将token存入浏览器的cookie中
-            Cookie cookie = new Cookie("eg_cookie_token",URLEncoder.encode(token,"utf-8"));
-            cookie.setMaxAge(7*24*60*60);
+            Cookie cookie = new Cookie("eg_cookie_token", URLEncoder.encode(token, "utf-8"));
+            cookie.setMaxAge(7 * 24 * 60 * 60);
             response.addCookie(cookie);
 
             //session存入登陆成功验证
-            session.setAttribute("tokenVertify",true);
+            session.setAttribute("tokenVertify", true);
             return "lw-index";
-        }else if ((Integer)dataMap.get("status")==100004){
-            session.setAttribute("loginError","password is error");
-             return "lw-log";
-        }else{
-            session.setAttribute("loginError","other error");
+        } else if ((Integer) dataMap.get("status") == 100004) {
+            session.setAttribute("loginError", "password is error");
+            return "lw-log";
+        } else {
+            session.setAttribute("loginError", "other error");
             return "lw-log";
         }
     }
 
 
     @RequestMapping(value = "/logout.html")
-    public String logout(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 //         String tokenVal = CookieUtils.getCookieValue(request,"eg_cookie_token");
 //         tokenVal = URLDecoder.decode(tokenVal,"utf-8");
 //         long uid = getUid(tokenVal);
 //         String logoutUrl = USER_BASE_URL + "/logout" + "?uid=" + String.valueOf(uid);
 //         String ret = HttpClientUtil.doGet(logoutUrl);
 
-         //将cookie从浏览器中删除
-         Cookie[] cookies = request.getCookies();
+        //将cookie从浏览器中删除
+        Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 // 找到需要删除的Cookie
@@ -147,14 +146,14 @@ public class userController {
             }
         }
 
-         HttpSession session = request.getSession();
-         session.setAttribute("tokenVertify",false);
-         return "lw-index";
+        HttpSession session = request.getSession();
+        session.setAttribute("tokenVertify", false);
+        return "lw-index";
     }
 
 
-    public long getUid(String session){
-        if(session == null || session.length() == 0){
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
             return 0;
         }
         String[] line = session.split(";");

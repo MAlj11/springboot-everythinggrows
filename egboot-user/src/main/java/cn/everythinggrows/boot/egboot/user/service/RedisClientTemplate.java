@@ -12,65 +12,67 @@ import java.util.Map;
 @Service
 public class RedisClientTemplate {
 
-    private static final Logger log=LoggerFactory.getLogger(RedisClientTemplate.class);
+    private static final Logger log = LoggerFactory.getLogger(RedisClientTemplate.class);
     public static String EG_UID_PREFIX = "eg/uid/generation";
 
     @Autowired
     private JedisClusterConfig jedisClusterConfig;
 
-    public boolean setToRedis(String key,Object value){
+    public boolean setToRedis(String key, Object value) {
         try {
-            String str=jedisClusterConfig.getJedisCluster().set(key, String.valueOf(value));
-            if("OK".equals(str))
+            String str = jedisClusterConfig.getJedisCluster().set(key, String.valueOf(value));
+            if ("OK".equals(str))
                 return true;
-        }catch (Exception ex){
-            log.error("setToRedis:{Key:"+key+",value"+value+"}",ex);
+        } catch (Exception ex) {
+            log.error("setToRedis:{Key:" + key + ",value" + value + "}", ex);
         }
         return false;
     }
 
-    public Object getRedis(String key){
-        String str=null;
+    public Object getRedis(String key) {
+        String str = null;
         try {
-            str=jedisClusterConfig.getJedisCluster().get(key);
-        }catch (Exception ex){
-            log.error("getRedis:{Key:"+key+"}",ex);
+            str = jedisClusterConfig.getJedisCluster().get(key);
+        } catch (Exception ex) {
+            log.error("getRedis:{Key:" + key + "}", ex);
         }
         return str;
     }
 
-    public boolean setex(String key,int seconds,String value){
-        String ret = jedisClusterConfig.getJedisCluster().setex(key,seconds,value);
-        if("OK".equals(ret)){
+    public boolean setex(String key, int seconds, String value) {
+        String ret = jedisClusterConfig.getJedisCluster().setex(key, seconds, value);
+        if ("OK".equals(ret)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public boolean del(String key){
-         jedisClusterConfig.getJedisCluster().del(key);
+    public boolean del(String key) {
+        jedisClusterConfig.getJedisCluster().del(key);
         return true;
     }
 
-    public Map<String,String> hgetAll(String key){
-        Map<String,String> ret = jedisClusterConfig.getJedisCluster().hgetAll(key);
+    public Map<String, String> hgetAll(String key) {
+        Map<String, String> ret = jedisClusterConfig.getJedisCluster().hgetAll(key);
         return ret;
     }
 
-    public boolean expire(String key,int seconds){
-        Long str = jedisClusterConfig.getJedisCluster().expire(key,seconds);
-        if(str.equals("0") || str==null)
+    public boolean expire(String key, int seconds) {
+        Long str = jedisClusterConfig.getJedisCluster().expire(key, seconds);
+        if (str.equals("0") || str == null)
             return true;
         return false;
     }
-    public boolean hmset(String key,Map<String,String> map){
-        String str = jedisClusterConfig.getJedisCluster().hmset(key,map);
-        if("OK".equals(str))
+
+    public boolean hmset(String key, Map<String, String> map) {
+        String str = jedisClusterConfig.getJedisCluster().hmset(key, map);
+        if ("OK".equals(str))
             return true;
         return false;
     }
-    public long incrUid(){
+
+    public long incrUid() {
         long uid = 0;
         uid = jedisClusterConfig.getJedisCluster().incr(EG_UID_PREFIX);
         return uid;

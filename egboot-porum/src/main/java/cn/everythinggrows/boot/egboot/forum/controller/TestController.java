@@ -20,13 +20,13 @@ public class TestController {
     private HttpRequestToUser httpRequestToUser;
 
     @RequestMapping("/dubbotest")
-    public String test(@RequestParam(value = "str") String str){
+    public String test(@RequestParam(value = "str") String str) {
         iUserAccount.dubbotest(str);
         return "ok";
     }
 
     @RequestMapping(value = "/httpclienttest")
-    public EgResult httptest(@RequestParam(value = "uid") long uid){
+    public EgResult httptest(@RequestParam(value = "uid") long uid) {
         egUser user = httpRequestToUser.getUser(uid);
         return EgResult.ok(user);
     }

@@ -22,10 +22,10 @@ public class IndexDao {
     @Autowired
     private SqlSessionTemplate blogSqlSession;
 
-    public egArticle getArtcleOne(long id){
+    public egArticle getArtcleOne(long id) {
         Map<String, Object> dataMap = Maps.newHashMap();
         dataMap.put("tableName", "eg_article_" + DBUtils.getTableKey(id));
-        dataMap.put("id",id);
+        dataMap.put("id", id);
         int DBkey = DBUtils.getDBKey(id);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
@@ -34,32 +34,31 @@ public class IndexDao {
         return egArticle;
     }
 
-    public int insertArticle(egArticle egArticle){
-        Map<String,Object> dataMap = beanUtils.bean2map(egArticle);
+    public int insertArticle(egArticle egArticle) {
+        Map<String, Object> dataMap = beanUtils.bean2map(egArticle);
         long id = egArticle.getId();
         dataMap.put("tableName", "eg_article_" + DBUtils.getTableKey(id));
         int DBkey = DBUtils.getDBKey(id);
         DatabaseType type = DatabaseType.getType(DBkey);
         DatabaseContextHolder.setDatabaseType(type);
-        log.info("tableName:{}============================================",dataMap.get("tableName"));
-        log.info("databaseType:{}=====================================================",type);
+        log.info("tableName:{}============================================", dataMap.get("tableName"));
+        log.info("databaseType:{}=====================================================", type);
         int i = blogSqlSession.insert("blogIndexDao.insertArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }
 
-    public int deleteArticle(long aid){
-        Map<String,Object> dataMap = new HashMap<>();
+    public int deleteArticle(long aid) {
+        Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("tableName", "eg_article_" + DBUtils.getTableKey(aid));
-        dataMap.put("id",aid);
+        dataMap.put("id", aid);
         int dbKey = DBUtils.getDBKey(aid);
         DatabaseType type = DatabaseType.getType(dbKey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = blogSqlSession.delete("blogIndexDao.deleteArticle",dataMap);
+        int i = blogSqlSession.delete("blogIndexDao.deleteArticle", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }
-
 
 
 }

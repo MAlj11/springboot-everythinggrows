@@ -17,20 +17,20 @@ import java.util.Map;
 
 @Repository
 public class UserTestDao {
-    private static final org.slf4j.Logger log=LoggerFactory.getLogger(UserTestDao.class);
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(UserTestDao.class);
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    public int insertUser(egUser user){
-        Map<String,Object> dataMap = beanUtils.bean2map(user);
-        log.info("userdataMap ------------------- {}",dataMap);
-        dataMap.put("tableName","eg_user_" + DBUtils.getTableKey(user.getUid()));
+    public int insertUser(egUser user) {
+        Map<String, Object> dataMap = beanUtils.bean2map(user);
+        log.info("userdataMap ------------------- {}", dataMap);
+        dataMap.put("tableName", "eg_user_" + DBUtils.getTableKey(user.getUid()));
         int dbKey = DBUtils.getDBKey(user.getUid());
         DatabaseType type = DatabaseType.getType(dbKey);
         DatabaseContextHolder.setDatabaseType(type);
-        int i = sqlSessionTemplate.insert("userTestDao.insertUser",dataMap);
+        int i = sqlSessionTemplate.insert("userTestDao.insertUser", dataMap);
         DatabaseContextHolder.clearDatabaseType();
         return i;
     }
