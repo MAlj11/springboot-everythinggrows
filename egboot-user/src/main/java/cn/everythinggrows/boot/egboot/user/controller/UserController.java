@@ -18,11 +18,9 @@ public class UserController {
     private UserAccountImpl userAccount;
 
     @RequestMapping(value = "/user/detail/{uid}", method = RequestMethod.GET)
-    public EgResult getUserDetail(@PathVariable(value = "uid") long uid) {
+    public egUser getUserDetail(@PathVariable(value = "uid") long uid) {
         egUser user = userAccount.getUser(uid);
-        Map<String, Object> ret = Maps.newHashMap();
-        ret.put("userDetail", user);
-        return EgResult.ok(ret);
+        return user;
     }
 
     @RequestMapping("/user/send/email")

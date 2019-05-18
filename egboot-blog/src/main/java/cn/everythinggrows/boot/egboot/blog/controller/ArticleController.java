@@ -106,7 +106,7 @@ public class ArticleController {
 
         //将文章插入es
         try {
-            egUser user = httpRequestToUser.getUser(uid);
+            egUser user = httpRequestToUser.getUserWithCloud(uid);
             httpRequestToSearch.saveEs(aid, articleName, user.getUsername());
         } finally {
             return EgResult.ok();

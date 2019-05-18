@@ -33,12 +33,6 @@ public class SessionAOP {
             throw new Exception("The value of NeedSession is must.");
         }
 
-//        Object uobj = session.getAttribute("user");
-//        Object mobj = session.getAttribute("manager");
-//        boolean isUser = type == SessionType.USER && uobj != null;
-//        boolean isManager = type == SessionType.MANAGER && mobj != null;
-//        boolean isUserOrManager = type == SessionType.OR&& (mobj != null || uobj != null);
-
         boolean isUser = type == SessionType.USER;
         boolean isManager = type == SessionType.MANAGER;
         boolean isUserOrManager = type == SessionType.OR;
@@ -51,16 +45,6 @@ public class SessionAOP {
                 } else {
                     response.sendRedirect(basePath + "/NoAuthEnergy");
                 }
-//                if (request.getHeader("x-eg-session") != null
-//                        && request.getHeader("x-eg-session").equalsIgnoreCase(
-//                                //ajax处理
-//                        "XMLHttpRequest")) {
-//                    response.addHeader("sessionstatus", "timeout");
-//                    // 解决EasyUi问题
-//                    response.getWriter().print("{\"rows\":[],\"success\":false,\"total\":0}");
-//                }else{//http跳转处理
-//                    response.sendRedirect(basePath + "/nosession");
-//                }
             }
         } catch (Throwable e) {
             // TODO Auto-generated catch block

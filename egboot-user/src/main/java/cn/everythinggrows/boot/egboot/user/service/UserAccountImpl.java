@@ -109,6 +109,7 @@ public class UserAccountImpl implements IUserAccount {
         redisData.put("password", user.getPassword());
         redisData.put("uid", String.valueOf(uid));
         redisClientTemplate.hmset(user.getEmail(), redisData);
+        log.info("{}",redisClientTemplate.hgetAll(user.getEmail()));
         if (i > 0) {
             String loRet = login(user);
             Map<String, Object> data = new HashMap<>();

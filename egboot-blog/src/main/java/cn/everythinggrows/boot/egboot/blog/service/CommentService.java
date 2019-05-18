@@ -32,7 +32,7 @@ public class CommentService {
     }
 
     public int insertComment(long aid, long uid, String content) {
-        egUser user = httpRequestToUser.getUser(uid);
+        egUser user = httpRequestToUser.getUserWithCloud(uid);
         Comment comment = new Comment();
         long cid = redisClientTemplate.cidGeneration();
         comment.setCid(cid);

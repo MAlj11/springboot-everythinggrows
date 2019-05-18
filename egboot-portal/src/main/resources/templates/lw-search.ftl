@@ -44,22 +44,21 @@
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
         <h1 class="blog-text-center">-- 搜索结果 --</h1>
+         <#list searchList as article>
         <div class="timeline-year">
             <hr>
             <ul>
-                <#list searchList as article>
-                    <hr>
+             <hr>
                     <li>
                         <span class="am-u-sm-4 am-u-md-2 timeline-span">${article.createAt}</span>
                         <span class="am-u-sm-8 am-u-md-6"><a
                                 href="/index/article/detail/${article.id}">${article.title}</a></span>
                         <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">${article.auther}</span>
                     </li>
-                </#list>
-            </ul>
+             </ul>
             <br>
         </div>
-        <hr>
+         </#list>
     </div>
 </div>
 <!-- content end -->
