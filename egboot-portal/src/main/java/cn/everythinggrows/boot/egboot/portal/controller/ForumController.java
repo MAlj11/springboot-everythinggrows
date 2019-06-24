@@ -10,6 +10,7 @@ import cn.everythinggrows.boot.egboot.portal.model.TopicIndex;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,6 +78,11 @@ public class ForumController {
     @RequestMapping(value = "forum/forum/index/write", method = RequestMethod.POST)
     public String writeForum(@RequestParam(value = "content") String content,
                              HttpServletRequest request) throws UnsupportedEncodingException {
+        HttpSession session = request.getSession();
+        if(StringUtils.isEmpty(content)){
+            session.setAttribute("publishError", "话题信息不能为空");
+            return "publishisnull";
+        }
         String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
         if (tokenVal == null || tokenVal.length() == 0) {
             return "lw-log";

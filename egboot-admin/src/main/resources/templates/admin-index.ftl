@@ -67,6 +67,12 @@
         <h1 class="blog-text-center"><a href="/admin/index/article">文章管理</a></h1>
         <hr>
         <h1 class="blog-text-center"><a href="/admin/index/forum?perPage=1">论坛管理</a></h1>
+        <hr>
+        <h1 class="blog-text-center"><a href="/admin/index/user">用户管理</a></h1>
+        <hr>
+        <h1 class="blog-text-center"><a href="/admin/index/recommend">添加推荐</a></h1>
+        <hr>
+        <h1 class="blog-text-center"><a href="/admin/index/banner">添加banner</a></h1>
     </div>
 </div>
 <!-- content end -->

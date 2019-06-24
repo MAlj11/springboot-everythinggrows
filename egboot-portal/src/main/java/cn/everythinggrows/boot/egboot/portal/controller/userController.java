@@ -4,6 +4,7 @@ package cn.everythinggrows.boot.egboot.portal.controller;
 import cn.everythinggrows.boot.egboot.portal.Utils.*;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,6 +93,10 @@ public class userController {
         HttpSession session = request.getSession();
         String loEmail = request.getParameter("loEmail");
         String loPassword = request.getParameter("passwordLog");
+        if(StringUtils.isEmpty(loEmail) || StringUtils.isEmpty(loPassword)){
+            session.setAttribute("loginError", "用户名或密码不能为空");
+            return "lw-log";
+        }
         String password = EncryptHelper.encrypt(loPassword.trim(), EncryptType.SHA1);
 
         String url = USER_BASE_URL + "/login";
@@ -115,10 +120,10 @@ public class userController {
             session.setAttribute("tokenVertify", true);
             return "lw-index";
         } else if ((Integer) dataMap.get("status") == 100004) {
-            session.setAttribute("loginError", "password is error");
+            session.setAttribute("loginError", "密码错误");
             return "lw-log";
         } else {
-            session.setAttribute("loginError", "other error");
+            session.setAttribute("loginError", "用户不存在");
             return "lw-log";
         }
     }

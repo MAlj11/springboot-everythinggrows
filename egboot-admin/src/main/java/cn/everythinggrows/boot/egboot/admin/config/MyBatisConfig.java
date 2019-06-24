@@ -1,7 +1,8 @@
-package cn.everythinggrows.boot.egboot.blog.config;
+package cn.everythinggrows.boot.egboot.admin.config;
 
-import cn.everythinggrows.boot.egboot.blog.datasource.DatabaseType;
-import cn.everythinggrows.boot.egboot.blog.datasource.DynamicDataSource;
+
+import cn.everythinggrows.boot.egboot.admin.datasource.DatabaseType;
+import cn.everythinggrows.boot.egboot.admin.datasource.DynamicDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -29,7 +30,7 @@ public class MyBatisConfig {
     private Environment env;
 
     /**
-     * 创建数据源
+     * 创建数据源(数据源的名称：方法名可以取为XXXDataSource(),XXX为数据库名称,该名称也就是数据源的名称)
      */
     @Bean
     public DataSource everythinggrow0DataSource() throws Exception {

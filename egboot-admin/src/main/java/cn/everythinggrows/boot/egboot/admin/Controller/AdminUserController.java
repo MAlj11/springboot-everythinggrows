@@ -1,5 +1,6 @@
 package cn.everythinggrows.boot.egboot.admin.Controller;
 
+import cn.everythinggrows.boot.egboot.admin.dao.AdminUserDao;
 import cn.everythinggrows.boot.egboot.admin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,6 +18,8 @@ public class AdminUserController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private AdminUserDao adminUserDao;
 
 
     @RequestMapping(value = "/admin/user/logup")
@@ -24,8 +27,7 @@ public class AdminUserController {
                         @RequestParam(value = "password") String password,
                         HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String sql = "select * from eg_admin_user";
-        List<User> list = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<User>(User.class));
+        List<User> list = adminUserDao.selectAdmin();
         if (list.size() == 0) {
             return "logup";
         }

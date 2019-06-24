@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,6 +176,7 @@ public class indexController {
         egArticle article = JSONObject.toJavaObject(artjson, egArticle.class);
         session.setAttribute("articleDetail", article);
         if (article.getUid() != 0) {
+            logger.info("uid:{}",article.getUid());
             egUser user = userService.getUser(article.getUid());
             logger.info("touxianag : {}", user.getPortrait());
             session.setAttribute("user", user);
@@ -183,6 +185,14 @@ public class indexController {
         JSONObject comObj = HttpRequsetUtil.requestGet(commentUrl, null);
         String comList = comObj.getString("comments");
         List<Comment> comments = JSONObject.parseArray(comList, Comment.class);
+        String tokenVal = CookieUtils.getCookieValue(request, "eg_cookie_token");
+        tokenVal = URLDecoder.decode(tokenVal, "utf-8");
+        long uid = getUid(tokenVal);
+        for(Comment comment : comments){
+            if(uid == comment.getUid()){
+                comment.setLogin(true);
+            }
+        }
         session.setAttribute("commentDetail", comments);
         boolean flag = userService.vertifyTokenToUser(request);
         if (flag) {
@@ -193,4 +203,12 @@ public class indexController {
         return "lw-article-fullwidth";
     }
 
+    public long getUid(String session) {
+        if (session == null || session.length() == 0) {
+            return 0;
+        }
+        String[] line = session.split(";");
+        long uid = Long.parseLong(line[0]);
+        return uid;
+    }
 }

@@ -90,7 +90,7 @@
         </form>
           <#else>
           <p>
-              <button type="button" class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</button>
+              <a  class="am-btn am-btn-default" href="/loginPage.html">立即登陆，发表评论</a>
           </p>
           </#if>
         <hr>
@@ -103,6 +103,9 @@
             <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
                 <h3><span class="blog-color">${item.username}</span></h3>
                 <p>${item.content}</p>
+                <#if item.isLogin>
+                    <a href="">删除</a>
+                </#if>
             </div>
         </div>
       </#list>

@@ -51,6 +51,7 @@ public class RedisClientTemplate {
 
     public void setRedisByte(byte[] key, byte[] value) {
         jedisClusterConfig.getJedisCluster().set(key, value);
+        jedisClusterConfig.getJedisCluster().expire(key,5*60);
     }
 
     public void delRedisByte(byte[] key) {

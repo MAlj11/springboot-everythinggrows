@@ -48,15 +48,9 @@ public class UserService {
 
         String url = USER_BASE_URL + "/detail/" + String.valueOf(uid);
         String ret = HttpClientUtil.doGet(url);
+        logger.info("user:{}",ret);
         JSONObject json = JSON.parseObject(ret);
-        Map dataMap = JSONObject.toJavaObject(json, Map.class);
-        egUser user = new egUser();
-        if ((Integer) dataMap.get("status") == 200) {
-            JSONObject userdetailStr = (JSONObject) dataMap.get("data");
-            Map userdetailMap = JSONObject.toJavaObject(userdetailStr, Map.class);
-            JSONObject userStr = (JSONObject) userdetailMap.get("userDetail");
-            user = JSONObject.toJavaObject(userStr, egUser.class);
-        }
+        egUser user = JSONObject.toJavaObject(json, egUser.class);
         return user;
 
     }

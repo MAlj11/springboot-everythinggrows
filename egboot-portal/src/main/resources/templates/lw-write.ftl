@@ -53,12 +53,33 @@
     <h2>发表文章</h2>
     <div class="publish">
 
+        <div class="am-g am-g-fixed blog-fixed blog-content">
+            <form id="imageUploadForm" action="/fileUpload" method="post" enctype="multipart/form-data">
+                <h2>图片库</h2>
+                <br/>
+                <hr>
+                <input type="file" name="file" id="upload_pic"/>
+                <button type="submit" onclick="upload()">上传</button>
+            </form>
+            <figure data-am-widget="figure" class="am am-figure am-figure-default "   data-am-figure="{  pureview: 'true' }">
+            <div id="container">
+          <#list imageList as image>
+             <img  src="${image.picUrl}"><h5>地址：${image.picUrl}</h5>
+             <a href="/upload/delete?picUrl=${image.picUrl}">删除</a>
+          </#list>
+            </div>
+            </figure>
+        </div>
+
         <form action="/blog/article/publish.html" method="post">
             <div class="title-container">
                 <input type="text" name="articleName" placeholder="请输入文章的题目">
             </div>
             <div class="title-container">
                 <input type="text" name="title" placeholder="请输入文章的标题"><br/>
+            </div>
+            <div class="title-container">
+                <input type="text" name="coverPic" placeholder="选择封面图片"><br/>
             </div>
             <div>
                 请选择文章类型？
@@ -89,7 +110,32 @@
 
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#upload_pic").on("change", upload );
+    })
+    function upload(){
 
+        var self = this;
+        $.ajax({
+            url: "/fileUpload",
+            type: "post",
+            dataType: "json",
+            cache: false,
+            data: new FormData($("#imageUploadForm")[0]),
+            processData: false,// 不处理数据
+            contentType: false, // 不设置内容类型
+            success: function(data){
+               alert("上传成功")
+                /*
+                图片显示路径出错，没解决：反斜杠转义
+                $(self).parent().css({
+                     "background-image": "url("+data.path+")"
+                 })*/;
+            }
+        })
+    }
+</script>
 </body>
 
 </html>

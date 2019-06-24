@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>搜索结果</title>
+    <title>banner管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
@@ -43,22 +43,32 @@
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
-        <h1 class="blog-text-center">-- 所有文章 --</h1>
-           <#list articleList as article>
+        <h1 class="blog-text-center">-- banner管理 --</h1>
+           <#list bannerList as banner>
         <div class="timeline-year">
             <hr>
             <li>
-                <span class="am-u-sm-4 am-u-md-2 timeline-span">${article.articleName}</span>
-                <span class="am-u-sm-8 am-u-md-6"><a
-                        href="/admin/article/detail/${article.id}">${article.title}</a></span>
-                <a href="/admin/article/delete/${article.id}">删除</a>
+                <span class="am-u-sm-2 am-u-md-2 timeline-span">${banner.bannerPic}</span>
+                <span class="am-u-sm-4 am-u-md-4 timeline-span">${banner.bannerTitle}</span>
+                <span class="am-u-sm-4 am-u-md-4 timeline-span">${banner.bannerUrl}</span>
+                <span class="am-u-sm-2 am-u-md-2"><a href="/admin/banner/delete/${banner.id}">删除</a></span>
             </li>
             <br>
         </div>
            </#list>
         <hr>
-        <span class="am-u-sm-8 am-u-md-6">
-            <a href="/admin-index.html">返回首页</a></span>
+        <form action="/admin/banner/add" method="post">
+            <hr>
+            请输入banner图片：<input id="bannerPic" name="bannerPic" type="text"/>
+            <br/>
+            请输入banner标题：<input id="bannerTitle" name="bannerTitle" type="text"/>
+            <br/>
+            请输入bannerUrl：<input id="bannerUrl" name="bannerUrl" type="text"/>
+            <br/>
+            <input type="submit" value="添加"/>
+        </form>
+        <hr>
+        <span class="am-u-sm-2 am-u-md-2"><a href="/admin-index.html">返回首页</a></span>
     </div>
 </div>
 <!-- content end -->

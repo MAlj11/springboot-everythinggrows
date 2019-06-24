@@ -4,8 +4,12 @@ package cn.everythinggrows.boot.egboot.admin.Controller;
 import cn.everythinggrows.boot.egboot.admin.Utils.DateHelper;
 import cn.everythinggrows.boot.egboot.admin.Utils.HttpClientUtil;
 import cn.everythinggrows.boot.egboot.admin.Utils.HttpRequsetUtil;
+import cn.everythinggrows.boot.egboot.admin.dao.AdminTopicDao;
+import cn.everythinggrows.boot.egboot.admin.model.Topic;
 import cn.everythinggrows.boot.egboot.admin.model.TopicIndex;
+import cn.everythinggrows.boot.egboot.admin.model.egArticle;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,31 +28,23 @@ public class AdminForumController {
 
     @Value("${FORUM_BASE_URL}")
     String FORUM_BASE_URL;
+    @Autowired
+    private AdminTopicDao adminTopicDao;
 
 
     @RequestMapping(value = "/admin/index/forum")
     public String getForumIndex(@RequestParam(value = "perPage") String perPage,
                                 HttpServletRequest request) {
-        int pageSize = 30;
-        String url = FORUM_BASE_URL + "/index/all";
-        Map<String, String> param = new HashMap<>();
-        param.put("perPage", perPage);
-        param.put("pageSize", String.valueOf(pageSize));
-        JSONObject forumJson = HttpRequsetUtil.requestGet(url, param);
-        String artList = forumJson.getString("topicIndices");
-        String count = forumJson.getString("count");
-        int page = Integer.parseInt(count) / pageSize;
-        if (page < 1) {
-            page = 1;
-        }
-        List<TopicIndex> topicList = JSONObject.parseArray(artList, TopicIndex.class);
-        for (TopicIndex topicIndex : topicList) {
-            topicIndex.setCreateDate(DateHelper.dateFormat(DateHelper.stampToDate(String.valueOf(topicIndex.getCreateAt()))));
+        List<Topic> topicList = new ArrayList<>();
+        for(int i=0;i<=7;i++){
+            for(int j=0;j<=31;j++){
+                String tableName = "eg_topic_" + String.valueOf(j);
+                List<Topic> topics = adminTopicDao.selectTopic(i,tableName);
+                topicList.addAll(topics);
+            }
         }
         List<Integer> pageList = new ArrayList<>();
-        for (int i = 0; i < page; i++) {
-            pageList.add(i + 1);
-        }
+        pageList.add(1);
         HttpSession session = request.getSession();
         session.setAttribute("admintopicIndices", topicList);
         session.setAttribute("adminpageList", pageList);

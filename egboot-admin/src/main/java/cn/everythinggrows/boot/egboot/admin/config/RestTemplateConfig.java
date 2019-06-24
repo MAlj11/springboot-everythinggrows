@@ -1,4 +1,4 @@
-package cn.everythinggrows.boot.egboot.forum.config;
+package cn.everythinggrows.boot.egboot.admin.config;
 
 
 import org.springframework.context.annotation.Bean;

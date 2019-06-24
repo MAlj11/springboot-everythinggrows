@@ -3,6 +3,7 @@ package cn.everythinggrows.boot.egboot.admin.Controller;
 
 import cn.everythinggrows.boot.egboot.admin.Utils.HttpClientUtil;
 import cn.everythinggrows.boot.egboot.admin.Utils.HttpRequsetUtil;
+import cn.everythinggrows.boot.egboot.admin.dao.AdminArticleDao;
 import cn.everythinggrows.boot.egboot.admin.model.Comment;
 import cn.everythinggrows.boot.egboot.admin.model.EgTypeArticle;
 import cn.everythinggrows.boot.egboot.admin.model.egArticle;
@@ -33,6 +34,8 @@ public class AdminArticleController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AdminArticleDao adminArticleDao;
 
     @RequestMapping(value = "/admin-index.html")
     public String adminIndex() {
@@ -42,14 +45,12 @@ public class AdminArticleController {
     @RequestMapping(value = "/admin/index/article")
     public String adminArticle(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<EgTypeArticle> articleList = new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
-            String typeUrl = BLOG_BASE_URL + "/type/" + String.valueOf(i);
-            JSONObject typeJson = HttpRequsetUtil.requestGet(typeUrl, null);
-            String phtList = typeJson.getString("articleWithTypeList");
-            List<EgTypeArticle> typeList = JSONObject.parseArray(phtList, EgTypeArticle.class);
-            for (EgTypeArticle egTypeArticle : typeList) {
-                articleList.add(egTypeArticle);
+        List<egArticle> articleList = new ArrayList<>();
+        for(int i=0;i<=7;i++){
+            for(int j=0;j<=31;j++){
+                String tableName = "eg_article_" + String.valueOf(j);
+                List<egArticle> article = adminArticleDao.selectArticle(i,tableName);
+                articleList.addAll(article);
             }
         }
         session.setAttribute("articleList", articleList);

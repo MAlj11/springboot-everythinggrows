@@ -49,7 +49,7 @@
             <ul>
                 <hr>
                 <li>
-                    <span class="am-u-sm-4 am-u-md-2 timeline-span">${topic.createDate}</span>
+                    <span class="am-u-sm-4 am-u-md-2 timeline-span">${topic.createAt}</span>
                     <span class="am-u-sm-8 am-u-md-6"><a href="">${topic.content}</a></span>
                     <br>
                     <h4><a href="/admin/forum/delete/${topic.tid}">删除</a></h4>
@@ -64,6 +64,8 @@
             <li class="am-pagination-prev"><a href="/admin/index/forum?perPage=${page}">${page}</a></li>
         </ul>
         </#list>
+        <h4><a href="/admin-index.html">返回首页</a></h4>
+
     </div>
 </div>
 <!-- content end -->

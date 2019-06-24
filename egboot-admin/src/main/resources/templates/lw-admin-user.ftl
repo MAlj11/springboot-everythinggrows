@@ -43,22 +43,22 @@
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-sm-12">
-        <h1 class="blog-text-center">-- 所有文章 --</h1>
-           <#list articleList as article>
+        <h1 class="blog-text-center">-- 所有用户 --</h1>
+           <#list userList as user>
         <div class="timeline-year">
             <hr>
             <li>
-                <span class="am-u-sm-4 am-u-md-2 timeline-span">${article.articleName}</span>
-                <span class="am-u-sm-8 am-u-md-6"><a
-                        href="/admin/article/detail/${article.id}">${article.title}</a></span>
-                <a href="/admin/article/delete/${article.id}">删除</a>
+                <span class="am-u-sm-2 am-u-md-2 timeline-span">${user.uid}</span>
+                <span class="am-u-sm-3 am-u-md-3 timeline-span">${user.username}</span>
+                <span class="am-u-sm-3 am-u-md-3 timeline-span">${user.email}</span>
+                <span class="am-u-sm-2 am-u-md-2 timeline-span">${user.createAt}</span>
+                <span class="am-u-sm-2 am-u-md-2"><a href="/admin/user/delete/${user.uid}">删除</a></span>
             </li>
             <br>
         </div>
            </#list>
         <hr>
-        <span class="am-u-sm-8 am-u-md-6">
-            <a href="/admin-index.html">返回首页</a></span>
+        <span class="am-u-sm-2 am-u-md-2"><a href="/admin-index.html">返回首页</a></span>
     </div>
 </div>
 <!-- content end -->

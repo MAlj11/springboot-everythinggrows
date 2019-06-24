@@ -147,7 +147,7 @@
             <h2 class="blog-title"><span>文章推荐</span></h2>
             <ul class="am-list">
              <#list recommendList as reitem>
-                 <li><a href="/index/article/detail/${reitem.id}">${reitem.articleName}</a></li>
+                 <li><a href="/index/article/detail/${reitem.aid}">${reitem.articleName}</a></li>
              </#list>
             </ul>
         </div>
